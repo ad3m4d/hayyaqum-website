@@ -54,8 +54,10 @@ export const features = [
 export const PRIVACY_EFFECTIVE_DATE = "15 September 2026";
 export const PRIVACY_LAST_UPDATED = "15 September 2026";
 
-export const privacySummary =
-    "Qum is a Mac app that doesn’t require an account. Prayer times, the Qibla, your log, and your settings stay on this Mac. A coordinate or a city name may go to Apple Location Services so Qum can name or resolve a place — that is the only data that leaves this Mac. Qum does not run analytics, show ads, or track you, and this site does not set cookies.";
+export const privacySummary = [
+    "Qum is a Mac app that doesn’t require an account. Prayer times, the Qibla, your log, and your settings stay on this Mac. A coordinate or a city name may go to Apple Location Services so Qum can name or resolve a place — that is the only data that leaves this Mac.",
+    "Qum does not run analytics, show ads, or track you, and this site does not set cookies.",
+] as const;
 
 export type PrivacyTableRow = {
     data: string;
@@ -129,7 +131,8 @@ export const privacySections: readonly PrivacySection[] = [
         paragraphs: [
             "Qum has no servers of its own. It does not run analytics, crash reporting, advertising, or a Qum account.",
             "Apple provides Location Services when you use automatic location or a typed city, and delivers the local notifications you have enabled. Buying or downloading Qum on the Mac App Store is handled by Apple. Qum does not receive your Apple Account or payment details.",
-            "hayyaqum.com does not set cookies, run analytics, or show advertising. You can read this page without an account. The computers that serve it may keep ordinary web-server logs — IP address, time, and the page requested — as part of delivering the site. The Mac App Store button opens Apple’s store; Qum does not receive that visit.",
+            "hayyaqum.com does not set cookies, run analytics, or show advertising. You can read this page without an account. The computers that serve it may keep ordinary web-server logs — IP address, time, and the page requested — as part of delivering the site.",
+            "The Mac App Store button opens Apple’s store; Qum does not receive that visit.",
         ],
     },
     {
