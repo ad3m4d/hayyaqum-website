@@ -5,6 +5,7 @@ import { HomeScreen } from "@/pages/home-screen";
 import { NotFound } from "@/pages/not-found";
 import { PrivacyScreen } from "@/pages/privacy-screen";
 import { RouteProvider } from "@/providers/router-provider";
+import { ScrollToTop } from "@/providers/scroll-to-top";
 import { ThemeProvider } from "@/providers/theme-provider";
 import "@/styles/globals.css";
 
@@ -13,6 +14,7 @@ createRoot(document.getElementById("root")!).render(
         <ThemeProvider defaultTheme="light">
             <BrowserRouter>
                 <RouteProvider>
+                    <ScrollToTop />
                     <Routes>
                         <Route path="/" element={<HomeScreen />} />
                         <Route path="/privacy" element={<PrivacyScreen />} />
