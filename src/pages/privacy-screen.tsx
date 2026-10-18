@@ -43,6 +43,7 @@ function PrivacyParagraph({ children }: { children: string }) {
 function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
     return (
         <div className="w-full overflow-x-auto">
+            <p className="mb-3 hidden text-sm text-[#606766] max-md:block">This table scrolls sideways.</p>
             <div className="w-[1024px] min-w-[1024px] overflow-hidden rounded-3xl border border-black/5 bg-[#fbfcfc]">
                 <table className="w-full table-fixed border-collapse text-left">
                 <caption className="sr-only">What Qum stores, why, who receives it, and how long it is kept</caption>
@@ -105,7 +106,7 @@ export const PrivacyScreen = () => {
 
     return (
         <SiteLayout footer="legal">
-            <main className="w-full min-w-0">
+            <div className="w-full min-w-0">
                 <section className="flex w-full flex-col items-center px-20 py-20 max-[769px]:pt-10 max-[769px]:pb-16 max-[480px]:px-5 max-[480px]:py-10">
                     <div className="flex w-full max-w-container flex-col items-center">
                         <div className="flex w-full max-w-[1024px] flex-col items-start gap-8 max-[769px]:max-w-none max-[480px]:gap-6">
@@ -141,7 +142,7 @@ export const PrivacyScreen = () => {
                         ))}
                     </div>
                 </section>
-            </main>
+            </div>
         </SiteLayout>
     );
 };

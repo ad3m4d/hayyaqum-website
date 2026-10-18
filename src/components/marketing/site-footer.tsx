@@ -6,12 +6,12 @@ export type SiteFooterVariant = "full" | "legal";
 function LegalBar() {
     return (
         <div className="flex w-full max-w-container items-center justify-between max-[480px]:flex-col max-[480px]:items-center max-[480px]:gap-6 max-[480px]:text-center">
-            <p className="text-sm font-normal text-[#a1acaa]">Copyright © 2026 Qum. All rights reserved.</p>
+            <p className="text-sm font-normal text-[#606766]">Copyright © 2026 Qum. All rights reserved.</p>
             <Button
                 href="/privacy"
                 color="link-gray"
                 size="sm"
-                className="h-5 font-normal text-[#a1acaa] hover:font-semibold hover:text-brand-600 *:data-text:no-underline hover:*:data-text:underline hover:*:data-text:decoration-brand-700 hover:*:data-text:decoration-from-font"
+                className="min-h-7 font-normal text-[#606766] hover:font-semibold hover:text-brand-700 *:data-text:no-underline hover:*:data-text:underline hover:*:data-text:decoration-brand-700 hover:*:data-text:decoration-from-font"
             >
                 Privacy Policy
             </Button>
@@ -33,8 +33,8 @@ export function SiteFooter({ variant = "full" }: { variant?: SiteFooterVariant }
             <div className="flex w-full max-w-container flex-col items-center gap-12 text-center">
                 <div className="flex flex-col items-center gap-4 text-center">
                     <p className="text-lg font-medium text-primary max-[480px]:max-w-[280px]">Made for workdays that still have salah in them.</p>
-                    <p className="text-display-sm font-semibold text-tertiary max-[480px]:max-w-[280px]" aria-label="Hayya Qum">
-                        Hayya Qum · هَيَّا قُمْ
+                    <p className="text-display-sm font-semibold text-tertiary max-[480px]:max-w-[280px]">
+                        Hayya Qum · <span lang="ar">هَيَّا قُمْ</span>
                     </p>
                 </div>
                 <DownloadStoreButton />

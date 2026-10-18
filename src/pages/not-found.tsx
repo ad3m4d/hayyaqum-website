@@ -1,32 +1,39 @@
-import { ArrowLeft } from "@untitledui/icons";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Button } from "@/components/base/buttons/button";
+import { SiteLayout } from "@/components/marketing/site-layout";
 
 export function NotFound() {
-    const router = useNavigate();
+    const goBack = useNavigate();
+
+    useEffect(() => {
+        document.title = "Page not found — Qum";
+        return () => {
+            document.title = "Qum — Prayer times in the MacBook notch";
+        };
+    }, []);
 
     return (
-        <section className="flex min-h-screen items-start bg-primary py-16 md:items-center md:py-24">
-            <div className="mx-auto max-w-container grow px-4 md:px-8">
-                <div className="flex w-full max-w-3xl flex-col gap-8 md:gap-12">
-                    <div className="flex flex-col gap-4 md:gap-6">
-                        <div className="flex flex-col gap-3">
-                            <span className="text-md font-semibold text-brand-secondary">404 error</span>
-                            <h1 className="text-display-md font-semibold text-primary md:text-display-lg lg:text-display-xl">We can’t find that page</h1>
-                        </div>
-                        <p className="text-lg text-tertiary md:text-xl">Sorry, the page you are looking for doesn't exist or has been moved.</p>
+        <SiteLayout footer="legal">
+            <section className="flex w-full flex-col items-center px-20 py-20 max-[480px]:px-5 max-[480px]:py-10">
+                <div className="flex w-full max-w-[1024px] flex-col items-start gap-8">
+                    <div className="flex flex-col gap-3">
+                        <p className="text-md font-normal text-[#1e7285]">404</p>
+                        <h1 className="text-display-lg font-bold tracking-[-0.96px] text-[#232b32] max-[769px]:text-display-md max-[769px]:font-semibold">
+                            This page isn’t here
+                        </h1>
                     </div>
-
+                    <p className="text-display-xs font-normal text-[#606766] max-[480px]:text-lg">The address may have moved, or it was never on this site.</p>
                     <div className="flex flex-col-reverse gap-3 sm:flex-row">
-                        <Button color="secondary" size="xl" iconLeading={ArrowLeft} onClick={() => router(-1)}>
-                            Go back
+                        <Button color="secondary" size="xl" onClick={() => goBack(-1)}>
+                            Back
                         </Button>
                         <Button size="xl" href="/">
-                            Take me home
+                            Go home
                         </Button>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </SiteLayout>
     );
 }

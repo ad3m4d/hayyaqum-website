@@ -6,6 +6,7 @@ export const features = [
         id: "reminder",
         label: "A reminder before each prayer",
         caption: "Before each prayer, Qum reminds you in the notch. At prayer time, the adhan plays.",
+        overlayTitle: "Prayer times that live in the notch",
         iconOn: "/assets/feature-reminder-on.svg",
         iconOff: "/assets/feature-reminder-off.svg",
         video: "/assets/demo-reminder.mp4",
@@ -46,6 +47,7 @@ export const features = [
     id: string;
     label: string;
     caption: string;
+    overlayTitle?: string;
     iconOn: string;
     iconOff: string;
     video?: string;

@@ -14,7 +14,7 @@ export const HomeScreen = () => {
                                 src="/assets/logomark-hero.png"
                                 width={96}
                                 height={96}
-                                alt="Qum"
+                                alt=""
                             />
                         </div>
                         <h1 className="max-w-[702px] text-display-lg font-bold text-primary max-md:max-w-none max-md:text-display-md max-md:font-semibold">
