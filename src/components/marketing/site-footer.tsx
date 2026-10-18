@@ -7,14 +7,24 @@ function LegalBar() {
     return (
         <div className="flex w-full max-w-container items-center justify-between max-[480px]:flex-col max-[480px]:items-center max-[480px]:gap-6 max-[480px]:text-center">
             <p className="text-sm font-normal text-[#606766]">Copyright © 2026 Qum. All rights reserved.</p>
-            <Button
-                href="/privacy"
-                color="link-gray"
-                size="sm"
-                className="min-h-7 font-normal text-[#606766] hover:font-semibold hover:text-brand-700 *:data-text:no-underline hover:*:data-text:underline hover:*:data-text:decoration-brand-700 hover:*:data-text:decoration-from-font"
-            >
-                Privacy Policy
-            </Button>
+            <div className="flex items-center gap-6 max-[480px]:flex-col max-[480px]:gap-3">
+                <Button
+                    href="/about"
+                    color="link-gray"
+                    size="sm"
+                    className="min-h-7 font-normal text-[#606766] hover:font-semibold hover:text-brand-700 max-[480px]:min-h-11 *:data-text:no-underline hover:*:data-text:underline hover:*:data-text:decoration-brand-700 hover:*:data-text:decoration-from-font"
+                >
+                    What Qum is
+                </Button>
+                <Button
+                    href="/privacy"
+                    color="link-gray"
+                    size="sm"
+                    className="min-h-7 font-normal text-[#606766] hover:font-semibold hover:text-brand-700 max-[480px]:min-h-11 *:data-text:no-underline hover:*:data-text:underline hover:*:data-text:decoration-brand-700 hover:*:data-text:decoration-from-font"
+                >
+                    Privacy Policy
+                </Button>
+            </div>
         </div>
     );
 }

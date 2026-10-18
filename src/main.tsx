@@ -1,28 +1,22 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router";
-import { HomeScreen } from "@/pages/home-screen";
-import { NotFound } from "@/pages/not-found";
-import { PrivacyScreen } from "@/pages/privacy-screen";
-import { RouteProvider } from "@/providers/router-provider";
-import { ScrollToTop } from "@/providers/scroll-to-top";
-import { ThemeProvider } from "@/providers/theme-provider";
+import { createRoot, hydrateRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router";
+import { App } from "@/app";
 import "@/styles/globals.css";
 
-createRoot(document.getElementById("root")!).render(
+const app = (
     <StrictMode>
-        <ThemeProvider defaultTheme="light">
-            <BrowserRouter>
-                <RouteProvider>
-                    <ScrollToTop />
-                    <Routes>
-                        <Route path="/" element={<HomeScreen />} />
-                        <Route path="/privacy" element={<PrivacyScreen />} />
-                        <Route path="/privacy.html" element={<PrivacyScreen />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </RouteProvider>
-            </BrowserRouter>
-        </ThemeProvider>
-    </StrictMode>,
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </StrictMode>
 );
+
+const root = document.getElementById("root");
+if (!root) throw new Error("Root element missing");
+
+if (root.hasChildNodes()) {
+    hydrateRoot(root, app);
+} else {
+    createRoot(root).render(app);
+}

@@ -1,5 +1,18 @@
-export const APP_STORE_URL = "https://apps.apple.com/app/qum";
+/** Mac App Store listing. Null until Apple assigns an ID — do not invent one. */
+export const APP_STORE_URL: string | null = null;
+export const SITE_ORIGIN = "https://hayyaqum.com";
 export const SUPPORT_EMAIL = "hello@hayyaqum.com";
+
+export const CALCULATION_METHODS = [
+    "Muslim World League",
+    "Umm al-Qura",
+    "Egyptian Authority",
+    "University of Karachi",
+    "ISNA",
+    "Diyanet",
+] as const;
+
+export const ASR_CONVENTIONS = ["Shafi", "Hanafi"] as const;
 
 export const features = [
     {
@@ -134,7 +147,7 @@ export const privacySections: readonly PrivacySection[] = [
             "Qum has no servers of its own. It does not run analytics, crash reporting, advertising, or a Qum account.",
             "Apple provides Location Services when you use automatic location or a typed city, and delivers the local notifications you have enabled. Buying or downloading Qum on the Mac App Store is handled by Apple. Qum does not receive your Apple Account or payment details.",
             "hayyaqum.com does not set cookies, run analytics, or show advertising. You can read this page without an account. The computers that serve it may keep ordinary web-server logs — IP address, time, and the page requested — as part of delivering the site.",
-            "The Mac App Store button opens Apple’s store; Qum does not receive that visit.",
+            "A Mac App Store listing, when it exists, is Apple’s; Qum does not receive that visit.",
         ],
     },
     {

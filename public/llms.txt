@@ -1,0 +1,16 @@
+# Qum
+
+Qum is a Mac app that puts the next prayer, the Qibla, and the adhan in the MacBook notch.
+
+- Home: https://hayyaqum.com/
+- What Qum is: https://hayyaqum.com/about
+- Privacy: https://hayyaqum.com/privacy
+- Email: hello@hayyaqum.com
+
+Requires a MacBook with a notch: MacBook Pro (2021 or later) or MacBook Air (2022 or later). Other Macs have no notch for Qum to sit in.
+
+No account, no ads, no tracking. Prayer times, the Qibla, the prayer log, and settings stay on this Mac. A coordinate or a city name may go to Apple Location Services so Qum can name or resolve a place — that is the only data that leaves this Mac.
+
+Qum is not an iPhone app and not a menu-bar timer. Menu-bar prayer apps keep a countdown in the status bar on any Mac. Qum uses the notch, plays the adhan there, and keeps the streak on this Mac.
+
+No Mac can measure heading. Qum shows Qibla direction from the desk after a one-time calibration.

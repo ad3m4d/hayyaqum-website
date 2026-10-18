@@ -1,10 +1,13 @@
 import { Features } from "@/components/marketing/features";
+import { PageMeta } from "@/components/marketing/page-meta";
 import { SiteLayout } from "@/components/marketing/site-layout";
 import { DownloadStoreButton } from "@/components/marketing/store-buttons";
+import { pageMeta } from "@/data/seo";
 
 export const HomeScreen = () => {
     return (
         <SiteLayout>
+            <PageMeta {...pageMeta.home} />
             <section className="flex w-full flex-col items-center px-20 py-20 min-[769px]:max-xl:px-12 min-[481px]:max-md:px-20 max-md:py-10 max-[480px]:px-5">
                 <div className="flex w-full max-w-container min-w-0 flex-col items-center gap-6 max-[480px]:items-start">
                     <div className="flex w-full max-w-[1024px] items-start gap-10 min-[481px]:max-md:items-center max-md:gap-6 max-[480px]:flex-col max-[480px]:items-start">

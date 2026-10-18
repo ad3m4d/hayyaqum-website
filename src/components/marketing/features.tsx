@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { Tooltip } from "@/components/base/tooltip/tooltip";
 import { features } from "@/data/site";
 import { cx } from "@/utils/cx";
 
@@ -31,6 +32,7 @@ export function Features() {
     const [buffered, setBuffered] = useState(0);
     const [rate, setRate] = useState<(typeof PLAYBACK_RATES)[number]>(1);
     const [idleHidden, setIdleHidden] = useState(false);
+    const [keyboardChrome, setKeyboardChrome] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
     const videosRef = useRef(new Map<string, HTMLVideoElement>());
     const lastPlayedId = useRef<string | null>(null);
@@ -41,14 +43,15 @@ export function Features() {
     const overlayTitle = "overlayTitle" in feature ? feature.overlayTitle : undefined;
     const fadeClass = reduceMotion ? "duration-0" : FADE_MS_CLASS;
     const showTitle = paused && Boolean(overlayTitle) && currentTime < TITLE_AT_START_S;
-    const showControls = paused || reduceMotion || !idleHidden;
+    const showControls = paused || reduceMotion || keyboardChrome || !idleHidden;
+    const captionId = `feature-caption-${feature.id}`;
     const playedPct = duration > 0 ? Math.min(100, (currentTime / duration) * 100) : 0;
     const bufferedPct = duration > 0 ? Math.min(100, (buffered / duration) * 100) : 0;
 
-    const revealControls = useCallback(() => {
+    const revealControls = useCallback((opts?: { keyboard?: boolean }) => {
         setIdleHidden(false);
         window.clearTimeout(hideTimer.current);
-        if (paused || reduceMotion) return;
+        if (paused || reduceMotion || opts?.keyboard) return;
         hideTimer.current = window.setTimeout(() => setIdleHidden(true), CONTROLS_HIDE_MS);
     }, [paused, reduceMotion]);
 
@@ -174,19 +177,25 @@ export function Features() {
 
         if ((event.code === "Space" || event.key === "k" || event.key === "K") && !nativeControl) {
             event.preventDefault();
+            setKeyboardChrome(true);
             togglePaused();
+            revealControls({ keyboard: true });
             return;
         }
 
         if (event.key === "ArrowLeft" && !nativeControl) {
             event.preventDefault();
+            setKeyboardChrome(true);
             seekTo(currentTime - 5);
+            revealControls({ keyboard: true });
             return;
         }
 
         if (event.key === "ArrowRight" && !nativeControl) {
             event.preventDefault();
+            setKeyboardChrome(true);
             seekTo(currentTime + 5);
+            revealControls({ keyboard: true });
         }
     };
 
@@ -198,9 +207,13 @@ export function Features() {
                     className="relative aspect-[1280/640] w-full max-w-container min-w-0 overflow-hidden rounded-[32px] border-2 border-black/5 shadow-xl outline-brand focus-visible:outline-2 focus-visible:outline-offset-2 max-md:aspect-auto min-[481px]:max-md:h-[480px] max-md:max-w-none max-md:rounded-none min-[481px]:max-md:border-[1.5px] max-[480px]:h-80 max-[480px]:border"
                     role="region"
                     aria-label={`${feature.label} demo, ${paused ? "paused" : "playing"}`}
+                    aria-describedby={captionId}
                     tabIndex={0}
-                    onMouseMove={revealControls}
-                    onFocusCapture={revealControls}
+                    onMouseMove={() => {
+                        setKeyboardChrome(false);
+                        revealControls();
+                    }}
+                    onFocusCapture={() => revealControls({ keyboard: true })}
                     onKeyDown={onPlayerKeyDown}
                     onClick={(event) => {
                         if ((event.target as HTMLElement).closest("[data-player-controls]")) return;
@@ -241,7 +254,7 @@ export function Features() {
                     )}
 
                     {showTitle ? (
-                        <p className="pointer-events-none absolute top-1/2 left-1/2 z-[15] w-[min(665px,calc(100%-2.5rem))] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-800 to-brand-700 bg-clip-text text-center text-display-lg font-semibold text-transparent max-md:text-display-sm max-[480px]:text-xl">
+                        <p className="pointer-events-none absolute top-[9%] left-1/2 z-[15] w-[min(665px,calc(100%-2.5rem))] -translate-x-1/2 bg-gradient-to-r from-brand-800 to-brand-700 bg-clip-text text-center text-display-lg font-semibold text-transparent max-md:text-display-sm max-[480px]:top-6 max-[480px]:text-xl">
                             {overlayTitle}
                         </p>
                     ) : null}
@@ -256,7 +269,7 @@ export function Features() {
                                 playerRef.current?.focus();
                             }}
                             aria-label={`Play ${feature.label}`}
-                            className="absolute top-1/2 left-1/2 z-20 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 outline-brand backdrop-blur-[8px] transition duration-100 ease-linear hover:bg-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 active:bg-white/50"
+                            className="absolute top-1/2 left-1/2 z-20 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 outline-brand backdrop-blur-[8px] transition duration-100 ease-linear hover:bg-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 active:bg-white/50 reduced-transparency:bg-white reduced-transparency:backdrop-blur-none contrast-more:bg-white contrast-more:backdrop-blur-none"
                         >
                             <img src="/assets/play.svg" width={20} height={20} alt="" />
                         </button>
@@ -266,7 +279,7 @@ export function Features() {
                         <div
                             data-player-controls
                             className={cx(
-                                "absolute inset-x-0 bottom-0 z-30 flex justify-center bg-gradient-to-b from-[rgba(15,19,22,0)] to-[rgba(15,19,22,0.3)] px-8 pt-12 pb-8 transition-opacity max-md:px-4 max-md:pt-8 max-md:pb-4",
+                                "absolute inset-x-0 bottom-0 z-30 flex justify-center bg-gradient-to-b from-[rgba(15,19,22,0)] to-[rgba(15,19,22,0.35)] px-8 pt-12 pb-8 transition-opacity max-md:px-4 max-md:pt-8 max-md:pb-4 reduced-transparency:from-[rgba(15,19,22,0.85)] reduced-transparency:to-[rgba(15,19,22,0.85)] contrast-more:to-[rgba(15,19,22,0.55)]",
                                 fadeClass,
                                 showControls ? "opacity-100" : "pointer-events-none opacity-0",
                             )}
@@ -276,7 +289,7 @@ export function Features() {
                                     <span className="w-9 shrink-0 text-xs font-semibold text-white tabular-nums">{formatClock(currentTime)}</span>
                                     <label className="relative flex h-11 min-w-px flex-1 items-center">
                                         <span className="sr-only">Seek {feature.label}</span>
-                                        <span className="relative h-2 w-full rounded-full bg-white/30 backdrop-blur-[4px]">
+                                        <span className="relative h-2 w-full rounded-full bg-white/30 backdrop-blur-[4px] reduced-transparency:bg-white/40 reduced-transparency:backdrop-blur-none contrast-more:bg-white/45 contrast-more:backdrop-blur-none">
                                             <span className="absolute inset-y-0 left-0 rounded-full bg-white/30" style={{ width: `${bufferedPct}%` }} />
                                             <span
                                                 className="absolute inset-y-0 left-0 rounded-full bg-white"
@@ -308,28 +321,30 @@ export function Features() {
                                         -{formatClock(Math.max(0, duration - currentTime))}
                                     </span>
                                 </div>
-                                <button
-                                    type="button"
-                                    aria-label={`Playback speed, ${rate} times`}
-                                    onClick={(event) => {
-                                        event.stopPropagation();
-                                        setRate((current) => {
-                                            const index = PLAYBACK_RATES.indexOf(current);
-                                            return PLAYBACK_RATES[(index + 1) % PLAYBACK_RATES.length];
-                                        });
-                                    }}
-                                    className="flex size-11 shrink-0 items-center justify-center rounded-sm outline-brand focus-visible:outline-2 focus-visible:outline-offset-2"
-                                >
-                                    <span
-                                        className={cx(
-                                            "flex h-8 items-center justify-center rounded-sm text-xs font-semibold text-white",
-                                            rate === 1 ? "w-8" : "min-w-8 px-1.5",
-                                        )}
+                                <Tooltip title="Playback speed" placement="top">
+                                    <button
+                                        type="button"
+                                        aria-label={`Playback speed, ${rate} times`}
+                                        onClick={(event) => {
+                                            event.stopPropagation();
+                                            setRate((current) => {
+                                                const index = PLAYBACK_RATES.indexOf(current);
+                                                return PLAYBACK_RATES[(index + 1) % PLAYBACK_RATES.length];
+                                            });
+                                        }}
+                                        className="flex size-11 shrink-0 items-center justify-center rounded-sm outline-brand focus-visible:outline-2 focus-visible:outline-offset-2"
                                     >
-                                        {rate === 1 ? "1" : String(rate)}
-                                        <img src="/assets/playback-x.svg" width={8} height={8} alt="" className="size-2" />
-                                    </span>
-                                </button>
+                                        <span
+                                            className={cx(
+                                                "flex h-8 items-center justify-center rounded-sm text-xs font-semibold text-white",
+                                                rate === 1 ? "w-8" : "min-w-8 px-1.5",
+                                            )}
+                                        >
+                                            {rate === 1 ? "1" : String(rate)}
+                                            <img src="/assets/playback-x.svg" width={8} height={8} alt="" className="size-2" />
+                                        </span>
+                                    </button>
+                                </Tooltip>
                             </div>
                         </div>
                     ) : null}
@@ -338,6 +353,7 @@ export function Features() {
                     {features.map((item) => (
                         <p
                             key={item.id}
+                            id={item.id === feature.id ? captionId : undefined}
                             className={cx(
                                 "px-4 text-center text-xl text-tertiary italic transition-opacity max-[480px]:px-5 max-[480px]:text-md",
                                 fadeClass,
@@ -352,7 +368,8 @@ export function Features() {
                 </div>
             </div>
 
-            <div className="flex w-full max-w-container flex-nowrap items-start justify-start gap-x-2 overflow-x-auto overscroll-x-contain scrollbar-hide min-[1280px]:justify-center max-md:max-w-none max-md:px-5">
+            <div className="relative w-full max-w-container max-md:max-w-none">
+                <div className="flex w-full flex-nowrap items-start justify-start gap-x-2 overflow-x-auto overscroll-x-contain scrollbar-hide min-[1280px]:justify-center max-md:px-5">
                 {features.map((item, index) => {
                     const isSelected = index === selected;
 
@@ -381,6 +398,10 @@ export function Features() {
                         </button>
                     );
                 })}
+                    <div className="w-4 shrink-0 max-md:w-5 min-[1280px]:hidden" aria-hidden />
+                </div>
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#fbfcfc] to-transparent min-[1280px]:hidden max-md:left-0" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#fbfcfc] to-transparent min-[1280px]:hidden" />
             </div>
         </section>
     );

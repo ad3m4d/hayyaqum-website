@@ -1,5 +1,7 @@
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
+import { PageMeta } from "@/components/marketing/page-meta";
 import { SiteLayout } from "@/components/marketing/site-layout";
+import { pageMeta } from "@/data/seo";
 import {
     PRIVACY_LAST_UPDATED,
     privacySections,
@@ -20,7 +22,7 @@ function PrivacyParagraph({ children }: { children: string }) {
     parts.forEach((part, index) => {
         if (part.startsWith(".")) {
             nodes.push(
-                <span key={`dot-${index}`} className="font-semibold text-[#258ea6]">
+                <span key={`dot-${index}`} className="font-semibold text-[#1c6b7d]">
                     .
                 </span>,
             );
@@ -30,7 +32,7 @@ function PrivacyParagraph({ children }: { children: string }) {
         }
         if (index < parts.length - 1) {
             nodes.push(
-                <a key={index} className="font-semibold text-[#258ea6] underline" href={`mailto:${SUPPORT_EMAIL}`}>
+                <a key={index} className="font-semibold text-[#1c6b7d] underline" href={`mailto:${SUPPORT_EMAIL}`}>
                     {SUPPORT_EMAIL}
                 </a>,
             );
@@ -42,70 +44,86 @@ function PrivacyParagraph({ children }: { children: string }) {
 
 function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
     return (
-        <div className="w-full overflow-x-auto">
-            <p className="mb-3 hidden text-sm text-[#606766] max-md:block">This table scrolls sideways.</p>
-            <div className="w-[1024px] min-w-[1024px] overflow-hidden rounded-3xl border border-black/5 bg-[#fbfcfc]">
-                <table className="w-full table-fixed border-collapse text-left">
-                <caption className="sr-only">What Qum stores, why, who receives it, and how long it is kept</caption>
-                <colgroup>
-                    <col className="w-[200px]" />
-                    <col />
-                    <col />
-                    <col />
-                </colgroup>
-                <thead>
-                    <tr className="bg-[#f2f7f6]">
-                        <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
-                            Data type
-                        </th>
-                        <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
-                            Why ...?
-                        </th>
-                        <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
-                            Shared with ...
-                        </th>
-                        <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
-                            Kept
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows.map((row, index) => (
-                        <tr key={row.data}>
-                            <th
-                                scope="row"
-                                className={cx("px-6 py-4 align-top text-md font-medium text-[#2c363f]", index < rows.length - 1 && "border-b border-black/5")}
-                            >
-                                {row.data}
-                            </th>
-                            <td className={cx("px-6 py-4 align-top text-md font-normal text-[#606766]", index < rows.length - 1 && "border-b border-black/5")}>
-                                {row.why}
-                            </td>
-                            <td className={cx("px-6 py-4 align-top text-md font-normal text-[#606766]", index < rows.length - 1 && "border-b border-black/5")}>
-                                {row.sharedWith}
-                            </td>
-                            <td className={cx("px-6 py-4 align-top text-md font-normal text-[#606766]", index < rows.length - 1 && "border-b border-black/5")}>
-                                {row.retention}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-                </table>
+        <>
+            <div className="hidden w-full overflow-x-auto md:block">
+                <div className="w-[1024px] min-w-[1024px] overflow-hidden rounded-3xl border border-black/5 bg-[#fbfcfc]">
+                    <table className="w-full table-fixed border-collapse text-left">
+                        <caption className="sr-only">What Qum stores, why, who receives it, and how long it is kept</caption>
+                        <colgroup>
+                            <col className="w-[200px]" />
+                            <col />
+                            <col />
+                            <col />
+                        </colgroup>
+                        <thead>
+                            <tr className="bg-[#f2f7f6]">
+                                <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
+                                    Data type
+                                </th>
+                                <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
+                                    Why
+                                </th>
+                                <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
+                                    Shared with
+                                </th>
+                                <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
+                                    Kept
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows.map((row, index) => (
+                                <tr key={row.data}>
+                                    <th
+                                        scope="row"
+                                        className={cx("px-6 py-4 align-top text-md font-medium text-[#2c363f]", index < rows.length - 1 && "border-b border-black/5")}
+                                    >
+                                        {row.data}
+                                    </th>
+                                    <td className={cx("px-6 py-4 align-top text-md font-normal text-[#606766]", index < rows.length - 1 && "border-b border-black/5")}>
+                                        {row.why}
+                                    </td>
+                                    <td className={cx("px-6 py-4 align-top text-md font-normal text-[#606766]", index < rows.length - 1 && "border-b border-black/5")}>
+                                        {row.sharedWith}
+                                    </td>
+                                    <td className={cx("px-6 py-4 align-top text-md font-normal text-[#606766]", index < rows.length - 1 && "border-b border-black/5")}>
+                                        {row.retention}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+            <ul className="flex flex-col gap-4 md:hidden">
+                {rows.map((row) => (
+                    <li key={row.data} className="rounded-3xl border border-black/5 bg-[#fbfcfc] px-5 py-4">
+                        <p className="text-md font-medium text-[#2c363f]">{row.data}</p>
+                        <dl className="mt-3 grid gap-3 text-md">
+                            <div>
+                                <dt className="text-xs font-semibold text-[#4b504f]">Why</dt>
+                                <dd className="mt-1 font-normal text-[#606766]">{row.why}</dd>
+                            </div>
+                            <div>
+                                <dt className="text-xs font-semibold text-[#4b504f]">Shared with</dt>
+                                <dd className="mt-1 font-normal text-[#606766]">{row.sharedWith}</dd>
+                            </div>
+                            <div>
+                                <dt className="text-xs font-semibold text-[#4b504f]">Kept</dt>
+                                <dd className="mt-1 font-normal text-[#606766]">{row.retention}</dd>
+                            </div>
+                        </dl>
+                    </li>
+                ))}
+            </ul>
+        </>
     );
 }
 
 export const PrivacyScreen = () => {
-    useEffect(() => {
-        document.title = "Privacy Policy — Qum";
-        return () => {
-            document.title = "Qum — Prayer times in the MacBook notch";
-        };
-    }, []);
-
     return (
         <SiteLayout footer="legal">
+            <PageMeta {...pageMeta.privacy} />
             <div className="w-full min-w-0">
                 <section className="flex w-full flex-col items-center px-20 py-20 max-[769px]:pt-10 max-[769px]:pb-16 max-[480px]:px-5 max-[480px]:py-10">
                     <div className="flex w-full max-w-container flex-col items-center">
