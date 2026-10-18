@@ -12,7 +12,7 @@ export function SiteLayout({ children, footer = "full" }: PropsWithChildren<{ fo
                 Skip to content
             </a>
             <SiteNav />
-            <main id="main" className="w-full min-w-0">
+            <main id="main" className="flex w-full min-w-0 flex-1 flex-col">
                 {children}
             </main>
             <SiteFooter variant={footer} />

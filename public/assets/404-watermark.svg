@@ -1,0 +1,17 @@
+<svg width="1143" height="498" viewBox="0 0 1143 498" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M78 280L78 217L148 217L148 148L218 148L218 78L282 78L282 280L78 280ZM3.66372e-05 358L1.25889e-05 210L70 210L70 139L140 139L140 70L211 70L211 3.24269e-05L360 3.24269e-05L360 498L282 498L282 358L3.66372e-05 358Z"
+        fill="#0F1316"
+        fill-opacity="0.05"
+    />
+    <path d="M470 78H673V420H470L470 78ZM462 70H392L392 428H462V498H681V428H751L751 70H681V3.24269e-05H462V70Z" fill="#0F1316" fill-opacity="0.05" />
+    <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M860.999 280L860.999 217L930.999 217L930.999 148L1001 148L1001 78L1065 78L1065 280L860.999 280ZM782.999 358L782.999 210L852.999 210L852.999 139L922.999 139L922.999 70L993.999 70L993.999 0L1143 0L1143 498L1065 498L1065 358L782.999 358Z"
+        fill="#0F1316"
+        fill-opacity="0.05"
+    />
+</svg>

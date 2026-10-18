@@ -17,6 +17,7 @@ export function App() {
                     <Route path="/about" element={<AboutScreen />} />
                     <Route path="/privacy" element={<PrivacyScreen />} />
                     <Route path="/privacy.html" element={<PrivacyScreen />} />
+                    <Route path="/404" element={<NotFound />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </RouteProvider>

@@ -52,7 +52,7 @@ export function PageMeta({ title, description, path }: PageMeta) {
             meta.setAttribute("property", "og:image");
             return meta;
         });
-        ogImage.setAttribute("content", `${SITE_ORIGIN}/assets/logomark-hero.png`);
+        ogImage.setAttribute("content", `${SITE_ORIGIN}/assets/og-image.png`);
     }, [canonical, description, title]);
 
     return null;

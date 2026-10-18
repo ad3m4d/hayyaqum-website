@@ -29,7 +29,7 @@ function setMeta(html, { title, description, canonical, jsonLd }) {
         `<meta property="og:title" content="${escapeAttr(title)}" />`,
         `<meta property="og:description" content="${escapeAttr(description)}" />`,
         `<meta property="og:url" content="${escapeAttr(canonical)}" />`,
-        `<meta property="og:image" content="https://hayyaqum.com/assets/logomark-hero.png" />`,
+        `<meta property="og:image" content="https://hayyaqum.com/assets/og-image.png" />`,
         jsonLd
             ? `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, "\\u003c")}</script>`
             : "",

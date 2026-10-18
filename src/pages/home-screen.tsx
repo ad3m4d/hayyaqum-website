@@ -15,6 +15,8 @@ export const HomeScreen = () => {
                             <img
                                 className="size-24 min-[481px]:max-md:size-20 max-[480px]:size-16"
                                 src="/assets/logomark-hero.png"
+                                srcSet="/assets/logomark-hero.png 228w, /assets/icon-brand.png 456w"
+                                sizes="(max-width: 480px) 64px, (max-width: 769px) 80px, 96px"
                                 width={96}
                                 height={96}
                                 alt=""

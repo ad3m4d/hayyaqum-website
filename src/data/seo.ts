@@ -24,8 +24,8 @@ export const pageMeta = {
     },
     notFound: {
         path: "/404",
-        title: "Page not found — Qum",
-        description: "This page isn’t on hayyaqum.com.",
+        title: "This page isn’t here — Qum",
+        description: "There’s nothing at this address on Qum’s site.",
     },
 } as const satisfies Record<string, PageMeta>;
 
@@ -70,7 +70,7 @@ export function jsonLdForPath(path: string): object | null {
                     name: "Qum",
                     url: `${SITE_ORIGIN}/`,
                     email: "hello@hayyaqum.com",
-                    logo: `${SITE_ORIGIN}/assets/logomark-hero.png`,
+                    logo: `${SITE_ORIGIN}/assets/icon-brand.png`,
                 },
                 {
                     "@type": "WebSite",
