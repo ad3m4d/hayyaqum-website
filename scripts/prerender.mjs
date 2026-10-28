@@ -24,13 +24,29 @@ function setMeta(html, { title, description, canonical, jsonLd }) {
 
     next = next.replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/>/, `<meta name="description" content="${escapeAttr(description)}" />`);
 
+    const ogImage = "https://hayyaqum.com/assets/og-image.png";
+    const ogImageAlt =
+        "A MacBook notch opens into the Qum panel: countdown and the five prayers for the day, with Qibla bearing. Tagline: Prayer, in the notch of your Mac.";
+
     const extra = [
         `<link rel="canonical" href="${escapeAttr(canonical)}" />`,
         `<meta property="og:type" content="website" />`,
+        `<meta property="og:site_name" content="Qum" />`,
+        `<meta property="og:locale" content="en_US" />`,
         `<meta property="og:title" content="${escapeAttr(title)}" />`,
         `<meta property="og:description" content="${escapeAttr(description)}" />`,
         `<meta property="og:url" content="${escapeAttr(canonical)}" />`,
-        `<meta property="og:image" content="https://hayyaqum.com/assets/og-image.png" />`,
+        `<meta property="og:image" content="${ogImage}" />`,
+        `<meta property="og:image:secure_url" content="${ogImage}" />`,
+        `<meta property="og:image:type" content="image/png" />`,
+        `<meta property="og:image:width" content="1200" />`,
+        `<meta property="og:image:height" content="630" />`,
+        `<meta property="og:image:alt" content="${escapeAttr(ogImageAlt)}" />`,
+        `<meta name="twitter:card" content="summary_large_image" />`,
+        `<meta name="twitter:title" content="${escapeAttr(title)}" />`,
+        `<meta name="twitter:description" content="${escapeAttr(description)}" />`,
+        `<meta name="twitter:image" content="${ogImage}" />`,
+        `<meta name="twitter:image:alt" content="${escapeAttr(ogImageAlt)}" />`,
         jsonLd
             ? `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, "\\u003c")}</script>`
             : "",

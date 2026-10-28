@@ -47,12 +47,40 @@ export function PageMeta({ title, description, path }: PageMeta) {
         });
         ogUrl.setAttribute("content", canonical);
 
-        const ogImage = ensure('meta[property="og:image"]', () => {
-            const meta = document.createElement("meta");
-            meta.setAttribute("property", "og:image");
-            return meta;
-        });
-        ogImage.setAttribute("content", `${SITE_ORIGIN}/assets/og-image.png`);
+        const ogImageUrl = `${SITE_ORIGIN}/assets/og-image.png`;
+        const ogImageAlt =
+            "A MacBook notch opens into the Qum panel: countdown and the five prayers for the day, with Qibla bearing. Tagline: Prayer, in the notch of your Mac.";
+
+        const metaProperty = (property: string, content: string) => {
+            const node = ensure(`meta[property="${property}"]`, () => {
+                const meta = document.createElement("meta");
+                meta.setAttribute("property", property);
+                return meta;
+            });
+            node.setAttribute("content", content);
+        };
+
+        const metaName = (name: string, content: string) => {
+            const node = ensure(`meta[name="${name}"]`, () => {
+                const meta = document.createElement("meta");
+                meta.setAttribute("name", name);
+                return meta;
+            });
+            node.setAttribute("content", content);
+        };
+
+        metaProperty("og:image", ogImageUrl);
+        metaProperty("og:image:secure_url", ogImageUrl);
+        metaProperty("og:image:type", "image/png");
+        metaProperty("og:image:width", "1200");
+        metaProperty("og:image:height", "630");
+        metaProperty("og:image:alt", ogImageAlt);
+
+        metaName("twitter:card", "summary_large_image");
+        metaName("twitter:title", title);
+        metaName("twitter:description", description);
+        metaName("twitter:image", ogImageUrl);
+        metaName("twitter:image:alt", ogImageAlt);
     }, [canonical, description, title]);
 
     return null;
