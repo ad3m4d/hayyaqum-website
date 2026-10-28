@@ -22,6 +22,11 @@ export const pageMeta = {
         title: "Privacy Policy — Qum",
         description: "Qum does not require an account. Prayer times, the Qibla, the log, and settings stay on this Mac. This site does not set cookies.",
     },
+    terms: {
+        path: "/terms",
+        title: "Terms of Use — Qum",
+        description: "Qum is a personal Mac utility for prayer times and Qibla. It is not a religious authority. Location is used to calculate times for where this Mac is.",
+    },
     notFound: {
         path: "/404",
         title: "This page isn’t here — Qum",
@@ -29,7 +34,7 @@ export const pageMeta = {
     },
 } as const satisfies Record<string, PageMeta>;
 
-export const prerenderPaths = ["/", "/about", "/privacy", "/privacy.html"] as const;
+export const prerenderPaths = ["/", "/about", "/privacy", "/privacy.html", "/terms"] as const;
 
 export function canonicalUrl(path: string) {
     if (path === "/privacy.html") return `${SITE_ORIGIN}/privacy`;
@@ -40,6 +45,7 @@ export function canonicalUrl(path: string) {
 export function metaForPath(path: string): PageMeta {
     if (path === "/about") return pageMeta.about;
     if (path === "/privacy" || path === "/privacy.html") return pageMeta.privacy;
+    if (path === "/terms") return pageMeta.terms;
     if (path === "/404") return pageMeta.notFound;
     return pageMeta.home;
 }
@@ -104,6 +110,17 @@ export function jsonLdForPath(path: string): object | null {
             name: pageMeta.privacy.title,
             url: canonical,
             description: pageMeta.privacy.description,
+            about: { "@id": `${SITE_ORIGIN}/#app` },
+        };
+    }
+
+    if (path === "/terms") {
+        return {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: pageMeta.terms.title,
+            url: canonical,
+            description: pageMeta.terms.description,
             about: { "@id": `${SITE_ORIGIN}/#app` },
         };
     }

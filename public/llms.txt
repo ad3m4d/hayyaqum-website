@@ -5,6 +5,7 @@ Qum is a Mac app that puts the next prayer, the Qibla, and the adhan in the MacB
 - Home: https://hayyaqum.com/
 - What Qum is: https://hayyaqum.com/about
 - Privacy: https://hayyaqum.com/privacy
+- Terms: https://hayyaqum.com/terms
 - Email: hello@hayyaqum.com
 
 Requires a MacBook with a notch: MacBook Pro (2021 or later) or MacBook Air (2022 or later). Other Macs have no notch for Qum to sit in.

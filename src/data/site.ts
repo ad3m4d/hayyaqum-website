@@ -66,8 +66,9 @@ export const features = [
     video?: string;
 }[];
 
-export const PRIVACY_EFFECTIVE_DATE = "15 September 2026";
-export const PRIVACY_LAST_UPDATED = "15 September 2026";
+export const PRIVACY_EFFECTIVE_DATE = "28 October 2026";
+export const PRIVACY_LAST_UPDATED = "28 October 2026";
+export const TERMS_LAST_UPDATED = "28 October 2026";
 
 export const privacySummary = [
     "Qum is a Mac app that doesn’t require an account. Prayer times, the Qibla, your log, and your settings stay on this Mac. A coordinate or a city name may go to Apple Location Services so Qum can name or resolve a place — that is the only data that leaves this Mac.",
@@ -81,11 +82,13 @@ export type PrivacyTableRow = {
     retention: string;
 };
 
-export type PrivacySection = {
+export type LegalSection = {
     heading: string;
     paragraphs: string[];
     table?: readonly PrivacyTableRow[];
 };
+
+export type PrivacySection = LegalSection;
 
 export const privacySections: readonly PrivacySection[] = [
     {
@@ -129,7 +132,7 @@ export const privacySections: readonly PrivacySection[] = [
     {
         heading: "Location",
         paragraphs: [
-            "Qum uses your location to calculate prayer times and Qibla direction. Location Services are optional. Qum asks when you choose automatic location — not at launch, and not for advertising.",
+            "Qum uses location to calculate prayer times and Qibla direction for the place in use. Automatic Location Services are how Qum gets precise times for where this Mac is, because those times differ from place to place. Location Services remain optional: Qum asks when you choose automatic location — not at launch, and not for advertising.",
             "If you deny the permission, Qum does not read this Mac’s position. Type a city instead. You can turn Location Services off for Qum later in System Settings › Privacy & Security.",
             "To show a city name, Qum may send a coordinate to Apple Location Services. If you type a city, Qum may send that name to Apple to resolve a coordinate. Prayer-time and Qibla maths themselves run on this Mac. Apple may handle those place-name requests on its own systems, including outside the country you are in.",
         ],
@@ -182,6 +185,103 @@ export const privacySections: readonly PrivacySection[] = [
         paragraphs: [
             `This policy took effect on ${PRIVACY_EFFECTIVE_DATE}. If what Qum does with data changes, this page and Settings › About › Privacy Policy will say so. Qum cannot email you about a change, because it has no account.`,
             `Questions: write to ${SUPPORT_EMAIL}.`,
+        ],
+    },
+];
+
+export const LOCATION_PURPOSE_STRING =
+    "Qum uses your location to calculate prayer times and Qibla direction for where this Mac is." as const;
+
+export const productDisclaimer = {
+    label: "Utility & Location Disclaimer:",
+    paragraphs: [
+        "Qum is a personal Mac utility for prayer times, Qibla direction, and local reminders for people who already keep salah in the day. It is NOT a religious authority, preaching app, fatwa service, or source of religious instruction.",
+        "Automatic Location Services are how Qum gets precise prayer times and Qibla for where this Mac is, because those times differ from place to place; if you decline Location, you can type a city instead. Calculated times depend on the method you choose and are not a guarantee that they match every mosque or scholarly timetable — follow a local authority when that is what you intend.",
+    ],
+} as const;
+
+export const termsIntro = [
+    'These Terms of Use (“Terms”) govern use of the Qum Mac app (the “App”) and related information on hayyaqum.com. By downloading, installing, or using Qum, you agree to these Terms. If you do not agree, stop using the App and uninstall it.',
+] as const;
+
+export const termsSections: readonly LegalSection[] = [
+    {
+        heading: "1. What Qum is",
+        paragraphs: [
+            "Qum is a personal utility for MacBook models with a notch. It calculates and displays prayer times, Qibla direction, optional local reminders, and a private on-device prayer log.",
+            "Qum is not a mosque, school, charity, religious authority, or preaching platform. It does not issue religious rulings, teach doctrine, host sermons, or replace a local imam, mosque timetable, or published scholarly schedule.",
+        ],
+    },
+    {
+        heading: "2. Accuracy of prayer times and Qibla",
+        paragraphs: [
+            "Prayer times and Qibla are astronomical and geographic calculations that run on this Mac. They depend on the place used (automatic Location Services, or a city you type), the calculation method and conventions you choose in Settings, and the date together with this Mac’s clock and time zone.",
+            "Times differ by location. Automatic location exists so times and Qibla can follow where this Mac is. Qum does not guarantee that a calculated time matches every mosque schedule or every regional practice. Where a local authority publishes different times, follow that authority if that is what you intend.",
+        ],
+    },
+    {
+        heading: "3. Location Services",
+        paragraphs: [
+            "Location is used only for prayer-time calculation and Qibla direction for the place in use. That use is directly relevant to the App’s features.",
+            "Prayer-time and Qibla maths run on this Mac. A coordinate or typed city name may be sent to Apple Location Services only to name or resolve a place. Location is not used for advertising, analytics, or tracking across apps or websites.",
+            "Qum asks for Location Services when you choose automatic location — not for marketing. If you decline, Qum does not read this Mac’s position. Type a city instead. You can change or revoke access later in System Settings › Privacy & Security.",
+            `Location purpose string used in the App: “${LOCATION_PURPOSE_STRING}”`,
+            "Data practices for location are also described in the Privacy Policy.",
+        ],
+    },
+    {
+        heading: "4. Notifications and related permissions",
+        paragraphs: [
+            "Local reminders, if enabled, are for prayer-time alerts you chose. They are not marketing messages. You can leave reminders off; the App still works.",
+            "If Stay silent in meetings (or a similar setting) is enabled, Qum may check whether another app is already using an audio input. It does not record the microphone and does not request microphone access for that check.",
+        ],
+    },
+    {
+        heading: "5. Acceptable use",
+        paragraphs: [
+            "You agree that you will not reverse-engineer, decompile, or attempt to extract source code from the App except where applicable law allows; bypass or tamper with security or sandbox protections; or use the App for any unlawful purpose.",
+        ],
+    },
+    {
+        heading: "6. Intellectual property",
+        paragraphs: [
+            "The App’s name, design, icons, and software are protected by applicable intellectual property laws. These Terms do not grant ownership of the App.",
+        ],
+    },
+    {
+        heading: "7. Third-party services",
+        paragraphs: [
+            "Qum has no servers of its own for accounts or analytics. Apple may provide Location Services, deliver local notifications you enable, and handle Mac App Store purchase or download. Apple’s terms and privacy practices apply to those services. Qum does not receive your Apple Account or payment details.",
+        ],
+    },
+    {
+        heading: "8. Disclaimer of warranties",
+        paragraphs: [
+            "The App is provided on an “AS IS” and “AS AVAILABLE” basis, without warranties of any kind, express or implied, to the maximum extent permitted by law. Qum does not warrant that calculated prayer times or Qibla are error-free, uninterrupted, or suitable for every religious, legal, or personal purpose.",
+        ],
+    },
+    {
+        heading: "9. Limitation of liability",
+        paragraphs: [
+            "To the maximum extent permitted by law, the publisher of Qum will not be liable for any indirect, incidental, special, consequential, or punitive damages, or for any loss arising from reliance on calculated times, Qibla direction, reminders, or inability to use the App.",
+        ],
+    },
+    {
+        heading: "10. Privacy",
+        paragraphs: [
+            "How Qum uses data is described in the Privacy Policy. If these Terms and the Privacy Policy ever conflict on a data practice, the Privacy Policy controls for that practice.",
+        ],
+    },
+    {
+        heading: "11. Changes",
+        paragraphs: [
+            `These Terms took effect on ${TERMS_LAST_UPDATED}. If they change, this page and Settings › About will say so. Qum cannot email you about a change, because it has no account.`,
+        ],
+    },
+    {
+        heading: "12. Contact",
+        paragraphs: [
+            `Questions about these Terms: write to ${SUPPORT_EMAIL}.`,
         ],
     },
 ];

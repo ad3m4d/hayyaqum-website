@@ -259,19 +259,24 @@ export function Features() {
                         </p>
                     ) : null}
 
-                    {feature.video && paused ? (
+                    {feature.video ? (
                         <button
                             type="button"
+                            data-player-controls
                             onClick={(event) => {
                                 event.stopPropagation();
-                                setPaused(false);
+                                togglePaused();
                                 revealControls();
                                 playerRef.current?.focus();
                             }}
-                            aria-label={`Play ${feature.label}`}
-                            className="absolute top-1/2 left-1/2 z-20 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 outline-brand backdrop-blur-[8px] transition duration-100 ease-linear hover:bg-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 active:bg-white/50 reduced-transparency:bg-white reduced-transparency:backdrop-blur-none contrast-more:bg-white contrast-more:backdrop-blur-none"
+                            aria-label={paused ? `Play ${feature.label}` : `Pause ${feature.label}`}
+                            className={cx(
+                                "absolute top-1/2 left-1/2 z-20 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 outline-brand backdrop-blur-[8px] transition duration-100 ease-linear hover:bg-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 active:bg-white/50 reduced-transparency:bg-white reduced-transparency:backdrop-blur-none contrast-more:bg-white contrast-more:backdrop-blur-none",
+                                fadeClass,
+                                paused || showControls ? "opacity-100" : "pointer-events-none opacity-0",
+                            )}
                         >
-                            <img src="/assets/play.svg" width={20} height={20} alt="" />
+                            <img src={paused ? "/assets/play.svg" : "/assets/pause.svg"} width={20} height={20} alt="" />
                         </button>
                     ) : null}
 
@@ -285,6 +290,24 @@ export function Features() {
                             )}
                         >
                             <div className="flex w-full max-w-[1024px] items-center gap-1">
+                                <button
+                                    type="button"
+                                    aria-label={paused ? `Play ${feature.label}` : `Pause ${feature.label}`}
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                        togglePaused();
+                                        revealControls();
+                                    }}
+                                    className="flex size-11 shrink-0 items-center justify-center rounded-sm outline-brand focus-visible:outline-2 focus-visible:outline-offset-2"
+                                >
+                                    <img
+                                        src={paused ? "/assets/play.svg" : "/assets/pause.svg"}
+                                        width={16}
+                                        height={16}
+                                        alt=""
+                                        className="brightness-0 invert"
+                                    />
+                                </button>
                                 <div className="flex min-w-px flex-1 items-center gap-2 px-2">
                                     <span className="w-9 shrink-0 text-xs font-semibold text-white tabular-nums">{formatClock(currentTime)}</span>
                                     <label className="relative flex h-11 min-w-px flex-1 items-center">
@@ -390,7 +413,9 @@ export function Features() {
                                 className={cx(
                                     "w-[200px] max-w-full text-center text-lg transition-colors min-[481px]:max-md:w-40 min-[481px]:max-md:text-md max-[480px]:w-40 max-[480px]:max-w-none max-[480px]:text-sm",
                                     fadeClass,
-                                    isSelected ? "font-semibold text-brand-700" : "font-medium text-tertiary",
+                                    isSelected
+                                        ? "font-semibold text-brand-700 underline decoration-brand-200 decoration-2 underline-offset-4"
+                                        : "font-medium text-tertiary",
                                 )}
                             >
                                 {item.label}

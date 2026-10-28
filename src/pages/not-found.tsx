@@ -41,6 +41,9 @@ export function NotFound() {
                         <Button href="/privacy" color="link-color" size="lg" className={recoveryLinkClassName}>
                             Privacy
                         </Button>
+                        <Button href="/terms" color="link-color" size="lg" className={recoveryLinkClassName}>
+                            Terms
+                        </Button>
                     </nav>
                 </div>
             </section>

@@ -21,7 +21,7 @@ export function AboutScreen() {
                 <section className="flex w-full flex-col items-center px-20 py-20 max-[769px]:pt-10 max-[769px]:pb-16 max-[480px]:px-5 max-[480px]:py-10">
                     <div className="flex w-full max-w-[1024px] flex-col items-start gap-8 max-[769px]:max-w-none">
                         <div className="flex flex-col items-start gap-3">
-                            <p className="text-md font-normal text-[#1e7285]">Qum</p>
+                            <p className="text-md font-normal text-brand-secondary">Qum</p>
                             <h1 className="text-display-lg font-bold tracking-[-0.96px] text-[#232b32] max-[769px]:text-display-md max-[769px]:font-semibold max-[769px]:tracking-[-0.72px]">
                                 What Qum is
                             </h1>

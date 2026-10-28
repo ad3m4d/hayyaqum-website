@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { LegalParagraph } from "@/components/marketing/legal-copy";
 import { PageMeta } from "@/components/marketing/page-meta";
 import { SiteLayout } from "@/components/marketing/site-layout";
 import { pageMeta } from "@/data/seo";
@@ -6,41 +6,9 @@ import {
     PRIVACY_LAST_UPDATED,
     privacySections,
     privacySummary,
-    SUPPORT_EMAIL,
     type PrivacyTableRow,
 } from "@/data/site";
 import { cx } from "@/utils/cx";
-
-function PrivacyParagraph({ children }: { children: string }) {
-    if (!children.includes(SUPPORT_EMAIL)) {
-        return <p className="text-lg font-normal text-[#606766]">{children}</p>;
-    }
-
-    const parts = children.split(SUPPORT_EMAIL);
-    const nodes: ReactNode[] = [];
-
-    parts.forEach((part, index) => {
-        if (part.startsWith(".")) {
-            nodes.push(
-                <span key={`dot-${index}`} className="font-semibold text-[#1c6b7d]">
-                    .
-                </span>,
-            );
-            nodes.push(part.slice(1));
-        } else {
-            nodes.push(part);
-        }
-        if (index < parts.length - 1) {
-            nodes.push(
-                <a key={index} className="font-semibold text-[#1c6b7d] underline" href={`mailto:${SUPPORT_EMAIL}`}>
-                    {SUPPORT_EMAIL}
-                </a>,
-            );
-        }
-    });
-
-    return <p className="text-lg font-normal text-[#606766]">{nodes}</p>;
-}
 
 function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
     return (
@@ -129,16 +97,19 @@ export const PrivacyScreen = () => {
                     <div className="flex w-full max-w-container flex-col items-center">
                         <div className="flex w-full max-w-[1024px] flex-col items-start gap-8 max-[769px]:max-w-none max-[480px]:gap-6">
                             <div className="flex flex-col items-start gap-3">
-                                <p className="text-md font-normal text-[#1e7285]">Last updated {PRIVACY_LAST_UPDATED}</p>
+                                <p className="text-md font-normal text-brand-secondary">Last updated {PRIVACY_LAST_UPDATED}</p>
                                 <h1 className="text-display-lg font-bold tracking-[-0.96px] text-[#232b32] max-[769px]:text-display-md max-[769px]:font-semibold max-[769px]:tracking-[-0.72px]">
                                     Privacy Policy
                                 </h1>
                             </div>
                             <div className="flex flex-col gap-6 min-[481px]:max-[769px]:gap-5 max-[480px]:gap-[18px]">
                                 {privacySummary.map((paragraph) => (
-                                    <p key={paragraph} className="text-display-xs font-normal text-[#606766] min-[481px]:max-[769px]:text-xl max-[480px]:text-lg">
+                                    <LegalParagraph
+                                        key={paragraph}
+                                        className="text-display-xs font-normal text-[#606766] min-[481px]:max-[769px]:text-xl max-[480px]:text-lg"
+                                    >
                                         {paragraph}
-                                    </p>
+                                    </LegalParagraph>
                                 ))}
                             </div>
                         </div>
@@ -152,7 +123,7 @@ export const PrivacyScreen = () => {
                                 <h2 className="text-display-xs font-semibold text-[#2c363f]">{section.heading}</h2>
                                 <div className="flex flex-col gap-[18px]">
                                     {section.paragraphs.map((paragraph) => (
-                                        <PrivacyParagraph key={paragraph}>{paragraph}</PrivacyParagraph>
+                                        <LegalParagraph key={paragraph}>{paragraph}</LegalParagraph>
                                     ))}
                                     {section.table ? <PrivacyTable rows={section.table} /> : null}
                                 </div>
