@@ -22,15 +22,7 @@ export function SiteNav() {
                         Qum (<span lang="ar">قُمْ</span>)
                     </span>
                 </a>
-                <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
-                    <a
-                        href="/about"
-                        className="hidden min-h-11 items-center rounded-full px-3 text-md font-medium text-secondary outline-brand hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 sm:inline-flex"
-                    >
-                        What Qum is
-                    </a>
-                    <NavStoreButton />
-                </div>
+                <NavStoreButton />
             </div>
         </header>
     );
