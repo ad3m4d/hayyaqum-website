@@ -23,9 +23,10 @@ const colorHeadline = "#232b32";
 const colorBody = "#808988";
 const colorMuted = "#a1acaa";
 
-function PrimaryDownload({ label }: { label: string }) {
+function PrimaryDownload({ label, mobileLabel, fullWidthMobile = false }: { label: string; mobileLabel: string; fullWidthMobile?: boolean }) {
     const base =
-        "group relative inline-flex shrink-0 items-center gap-2.5 overflow-clip rounded-full pl-4 pr-5 py-3 text-lg font-semibold leading-7 text-[#fbfcfc] outline-brand focus-visible:outline-2 focus-visible:outline-offset-2";
+        "group relative inline-flex shrink-0 items-center gap-2.5 overflow-clip rounded-full pl-4 pr-5 py-3 text-lg font-semibold leading-7 text-[#fbfcfc] outline-brand focus-visible:outline-2 focus-visible:outline-offset-2" +
+        (fullWidthMobile ? " max-sm:w-[311px] max-sm:max-w-full max-sm:justify-center" : "");
     const style = { backgroundColor: brandDeep };
     const content = (
         <>
@@ -34,7 +35,7 @@ function PrimaryDownload({ label }: { label: string }) {
                 className="pointer-events-none absolute inset-0 origin-left scale-x-0 rounded-full bg-[#1E7285] transition-transform duration-300 ease-out group-hover:scale-x-100"
             />
             <img src="/assets/figma/apple-primary.svg" alt="" className="relative size-6" />
-            <span className="relative">{label}</span>
+            <span className="relative hidden sm:inline">{label}</span><span className="relative sm:hidden">{mobileLabel}</span>
         </>
     );
     return APP_STORE_URL ? (
@@ -44,16 +45,16 @@ function PrimaryDownload({ label }: { label: string }) {
     );
 }
 
-export function SiteBookend() {
+export function SiteBookend({ fullWidthMobileCTA = false }: { fullWidthMobileCTA?: boolean }) {
     const { copy } = useLang();
     const v2 = copy.homeV2;
     return (
-        <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-10 max-sm:px-6 max-sm:pt-12">
-            <div className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-sm:items-center max-sm:px-0 max-sm:text-center">
+        <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-10 max-sm:pb-5 max-sm:px-8 max-sm:pt-10">
+            <div className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-sm:px-0">
                 <ParallaxDrift speed={-0.08}>
-                    <QumBrand size={96} />
+                    <QumBrand size={96} className="max-sm:size-16" />
                 </ParallaxDrift>
-                <div className="flex w-full flex-col gap-6 max-sm:items-center">
+                <div className="flex w-full flex-col gap-6 max-sm:gap-4">
                     <h3
                         className="text-[48px] font-semibold leading-[60px] tracking-[-0.96px] max-sm:text-[36px] max-sm:leading-[44px]"
                         style={{ color: colorHeadline }}
@@ -62,20 +63,20 @@ export function SiteBookend() {
                         {v2.bookend.wordmark}
                     </h3>
                     <p
-                        className="text-[30px] font-normal leading-[38px] max-sm:text-[22px] max-sm:leading-[30px]"
+                        className="text-[30px] font-normal leading-[38px] max-sm:text-[24px] max-sm:leading-[32px]"
                         style={{ color: colorBody }}
                     >
                         {v2.bookend.sub}
                     </p>
                 </div>
-                <PrimaryDownload label={v2.downloadCTA} />
+                <PrimaryDownload label={v2.downloadCTA} mobileLabel={v2.downloadCTAShort} fullWidthMobile={fullWidthMobileCTA} />
                 <p className="whitespace-pre-line text-base italic leading-6" style={{ color: colorBody }}>
                     {v2.bookend.fine}
                 </p>
             </div>
 
             <div
-                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-start max-sm:gap-3 max-sm:px-0 max-sm:text-center max-[480px]:items-center"
+                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-center max-sm:gap-8 max-sm:px-0 max-[480px]:items-center"
                 style={{ color: colorMuted }}
             >
                 <p>{v2.footer.copyright}</p>

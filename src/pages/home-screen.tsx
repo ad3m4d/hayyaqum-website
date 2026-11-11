@@ -40,14 +40,14 @@ function Logomark96() {
     // Use the authored brand SVG (same component the nav renders) so hero and
     // bookend carry the full filter stack, gradient stroke highlight and
     // mix-blend mark — matching the nav's render quality.
-    return <QumBrand size={96} />;
+    return <QumBrand size={96} className="max-sm:size-16" />;
 }
 
-function PrimaryDownload({ label }: { label: string }) {
+function PrimaryDownload({ label, mobileLabel }: { label: string; mobileLabel: string }) {
     // Figma 912:53269 — flat teal pill (#258EA6). Hover is a left→right fill-in
     // to the darker teal #1E7285 (brand_Secondary/500) over 300ms ease-out.
     const base =
-        "group relative inline-flex shrink-0 items-center gap-2.5 overflow-clip rounded-full pl-4 pr-5 py-3 text-lg font-semibold leading-7 text-[#fbfcfc] outline-brand focus-visible:outline-2 focus-visible:outline-offset-2";
+        "group relative inline-flex shrink-0 items-center max-sm:w-[311px] max-sm:max-w-full max-sm:justify-center gap-2.5 overflow-clip rounded-full pl-4 pr-5 py-3 text-lg font-semibold leading-7 text-[#fbfcfc] outline-brand focus-visible:outline-2 focus-visible:outline-offset-2";
     const style = { backgroundColor: brandDeep };
     const content = (
         <>
@@ -56,7 +56,7 @@ function PrimaryDownload({ label }: { label: string }) {
                 className="pointer-events-none absolute inset-0 origin-left scale-x-0 rounded-full bg-[#1E7285] transition-transform duration-300 ease-out group-hover:scale-x-100"
             />
             <img src="/assets/figma/apple-primary.svg" alt="" className="relative size-6" />
-            <span className="relative">{label}</span>
+            <span className="relative hidden sm:inline">{label}</span><span className="relative sm:hidden">{mobileLabel}</span>
         </>
     );
     return APP_STORE_URL ? (
@@ -106,7 +106,7 @@ const FEAT_ASSET: Record<FeatureV2Id, string> = {
 function VideoCard({ id, label }: { id: FeatureV2Id; label: string }) {
     return (
         <div
-            className="relative isolate aspect-[1024/480] min-sm:max-lg:aspect-[88/45] w-full max-w-[1024px] overflow-hidden rounded-[24px] border-2 border-[rgba(15,19,22,0.05)] shadow-[0_20px_24px_-4px_rgba(0,0,0,0.08),0_8px_8px_-4px_rgba(0,0,0,0.03),0_3px_3px_-1.5px_rgba(0,0,0,0.04)]"
+            className="relative isolate aspect-[1024/480] min-sm:max-lg:aspect-[88/45] w-full max-w-[1024px] overflow-hidden rounded-[24px] max-sm:rounded-none max-sm:border-0 max-sm:aspect-[125/64] border-2 border-[rgba(15,19,22,0.05)] shadow-[0_20px_24px_-4px_rgba(0,0,0,0.08),0_8px_8px_-4px_rgba(0,0,0,0.03),0_3px_3px_-1.5px_rgba(0,0,0,0.04)]"
             style={{
                 WebkitMaskImage:
                     "radial-gradient(white, black)",
@@ -128,14 +128,14 @@ export const HomeScreen = () => {
             <PageMeta {...pageMeta.home} />
 
             {/* ----------------------- hero (822:3849) ----------------------- */}
-            <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 py-20 min-sm:max-lg:py-24 max-sm:px-6 max-sm:py-12">
-                <div className="flex w-full max-w-[768px] flex-col items-start gap-10 px-8 max-sm:items-center max-sm:px-0 max-sm:text-center">
+            <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 py-20 min-sm:max-lg:py-24 max-sm:px-8 max-sm:py-16">
+                <div className="flex w-full max-w-[768px] flex-col items-start gap-10 px-8 max-sm:px-0">
                     <ParallaxDrift speed={0.18}>
                         <Logomark96 />
                     </ParallaxDrift>
-                    <div className="flex w-full flex-col gap-6 max-sm:items-center">
+                    <div className="flex w-full flex-col gap-6 max-sm:gap-4">
                         <h1
-                            className="text-[48px] font-bold leading-[60px] tracking-[-0.96px] max-sm:text-[36px] max-sm:leading-[44px]"
+                            className="text-[48px] font-bold leading-[60px] tracking-[-0.96px] max-sm:text-[36px] max-sm:leading-[44px] max-sm:font-semibold"
                             style={{ color: colorHeadline }}
                         >
                             {v2.hero.headlineA}
@@ -143,15 +143,15 @@ export const HomeScreen = () => {
                             {v2.hero.headlineB}
                         </h1>
                         <p
-                            className="text-[30px] font-normal leading-[38px] max-sm:text-[22px] max-sm:leading-[30px]"
+                            className="text-[30px] font-normal leading-[38px] max-sm:text-[24px] max-sm:leading-[32px]"
                             style={{ color: colorBody }}
                         >
                             {v2.hero.sub}
                         </p>
                     </div>
-                    <div className="flex w-full flex-wrap items-center gap-x-8 gap-y-4 max-sm:justify-center">
-                        <PrimaryDownload label={v2.downloadCTA} />
-                        <p className="w-[320px] whitespace-pre-line text-base italic leading-6 max-sm:w-auto max-sm:text-center" style={{ color: colorBody }}>
+                    <div className="flex w-full flex-wrap items-center gap-x-8 gap-y-4 max-sm:flex-col max-sm:items-start max-sm:gap-5 max-sm:pt-4">
+                        <PrimaryDownload label={v2.downloadCTA} mobileLabel={v2.downloadCTAShort} />
+                        <p className="w-[320px] whitespace-pre-line text-base italic leading-6 max-sm:w-auto" style={{ color: colorBody }}>
                             {v2.hero.requirement}
                         </p>
                     </div>
@@ -163,19 +163,19 @@ export const HomeScreen = () => {
                 <section
                     key={section.id}
                     id={section.id}
-                    className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-32 max-sm:gap-10 max-sm:px-6 max-sm:pt-12 max-sm:pb-20"
+                    className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-32 max-sm:gap-16 max-sm:px-0 max-sm:pt-10 max-sm:pb-16"
                 >
-                    <RiseIn className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-sm:items-center max-sm:px-0 max-sm:text-center">
-                        <img src={FEAT_ASSET[section.id]} alt="" className="size-18" aria-hidden />
-                        <div className="flex w-full flex-col gap-3 max-sm:items-center">
+                    <RiseIn className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8">
+                        <img src={FEAT_ASSET[section.id]} alt="" className="size-18 max-sm:size-16" aria-hidden />
+                        <div className="flex w-full flex-col gap-3">
                             <h2
-                                className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-sm:text-[28px] max-sm:leading-[36px]"
+                                className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-sm:text-[30px] max-sm:leading-[38px] max-sm:font-semibold"
                                 style={{ color: colorFeatureHeadline }}
                             >
                                 {section.headline}
                             </h2>
                             <p
-                                className="text-[24px] font-normal leading-[32px] max-sm:text-[18px] max-sm:leading-[28px]"
+                                className="text-[24px] font-normal leading-[32px] max-sm:text-[20px] max-sm:leading-[30px]"
                                 style={{ color: colorBody }}
                             >
                                 {section.sub}
@@ -190,7 +190,7 @@ export const HomeScreen = () => {
             ))}
 
             {/* --------------------- bookend / footer (822:3861) -------------------- */}
-            <SiteBookend />
+            <SiteBookend fullWidthMobileCTA />
         </SiteLayout>
     );
 };

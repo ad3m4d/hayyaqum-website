@@ -28,13 +28,13 @@ export function TermsScreen() {
         <SiteLayout footer="legal">
             <PageMeta {...pageMeta.terms} />
 
-            <div className="flex w-full flex-col items-center gap-10 px-20 min-sm:max-lg:px-0 py-20 max-sm:px-6 max-sm:py-12">
+            <div className="flex w-full flex-col items-center gap-10 px-20 min-sm:max-lg:px-0 py-20 max-sm:px-8 max-sm:py-16">
                 {/* title + last updated (Figma 845:33892 pattern) */}
                 <section
                     className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-sm:px-0"
                     style={{ color: colorHeadline }}
                 >
-                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-sm:text-[28px] max-sm:leading-[36px]">
+                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px]">
                         {t.title}
                     </h1>
                     <p className="text-[20px] leading-[30px]">

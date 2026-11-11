@@ -54,7 +54,7 @@ export function AboutScreen() {
         <SiteLayout footer="none">
             <PageMeta {...pageMeta.about} />
 
-            <div className="flex w-full flex-col items-center gap-10 px-20 min-sm:max-lg:px-0 py-20 max-sm:px-6 max-sm:py-12">
+            <div className="flex w-full flex-col items-center gap-10 px-20 min-sm:max-lg:px-0 py-20 max-sm:px-8 max-sm:py-16">
                 <AboutSection heading={a.whatItIs.heading}>
                     <p>{a.whatItIs.body}</p>
                 </AboutSection>

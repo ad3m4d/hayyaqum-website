@@ -50,7 +50,7 @@ export function SiteNav({ plain = false }: { plain?: boolean }) {
     return (
         <header className="sticky top-0 z-50 flex w-full justify-center pt-6 pb-0">
             <div
-                className="mx-auto flex w-full max-w-[768px] items-center justify-between gap-4 rounded-full border border-white/40 bg-white/55 py-3 pl-5 pr-3 shadow-[0_1px_2px_rgba(15,19,22,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-xl backdrop-saturate-150 min-sm:max-lg:pl-8 min-sm:max-lg:pr-8 max-sm:mx-4 max-sm:max-w-none max-[480px]:py-2 max-[480px]:pl-3 max-[480px]:pr-2"
+                className="mx-auto flex w-full max-w-[768px] items-center justify-between gap-4 rounded-full border border-white/40 bg-white/55 py-3 pl-5 pr-3 shadow-[0_1px_2px_rgba(15,19,22,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-xl backdrop-saturate-150 min-sm:max-lg:pl-8 min-sm:max-lg:pr-8 max-sm:mx-4 max-sm:max-w-none max-sm:border-0 max-sm:pl-5 max-sm:pr-4"
                 style={plain ? {
                     border: 0,
                     background: "transparent",
@@ -61,18 +61,20 @@ export function SiteNav({ plain = false }: { plain?: boolean }) {
             >
                 <a
                     href="/"
+                    aria-label={copy.homeV2.wordmark}
                     className="flex min-w-0 items-center gap-3 outline-brand focus-visible:outline-2 focus-visible:outline-offset-2"
                     style={{ unicodeBidi: "isolate" }}
                 >
-                    <QumBrand size={40} />
-                    <span className="text-xl font-semibold leading-[30px] text-[color:#2c363f]">
+                    <QumBrand size={40} className="max-sm:hidden" />
+                    <QumBrand size={40} cropToMark className="sm:hidden overflow-visible" />
+                    <span className="hidden sm:inline text-xl font-semibold leading-[30px] text-[color:#2c363f]">
                         {copy.homeV2.wordmark}{" "}
                         <span className="font-normal" lang="ar" style={{ unicodeBidi: "isolate" }}>
                             {copy.homeV2.wordmarkParenthetical}
                         </span>
                     </span>
                 </a>
-                <div className="flex items-center gap-4 max-[480px]:gap-2">
+                <div className="flex items-center gap-4">
                     {LANGUAGE_TOGGLE_ENABLED ? (
                         <button
                             type="button"
@@ -90,13 +92,13 @@ export function SiteNav({ plain = false }: { plain?: boolean }) {
                         <a href={APP_STORE_URL} className={navPillCls} style={pillWash}>
                             <FillInOverlay />
                             <img src="/assets/figma/apple-secondary.svg" alt="" className="relative size-5" />
-                            <span className="relative max-[480px]:hidden">{copy.homeV2.downloadCTAShort}</span>
+                            <span className="relative hidden sm:inline">{copy.homeV2.downloadCTAShort}</span><span className="relative sm:hidden">{lang === "ar" ? "تحميل" : "Download"}</span>
                         </a>
                     ) : (
                         <span role="status" className={navPillCls} style={pillWash}>
                             <FillInOverlay />
                             <img src="/assets/figma/apple-secondary.svg" alt="" className="relative size-5" />
-                            <span className="relative max-[480px]:hidden">{copy.homeV2.downloadCTAShort}</span>
+                            <span className="relative hidden sm:inline">{copy.homeV2.downloadCTAShort}</span><span className="relative sm:hidden">{lang === "ar" ? "تحميل" : "Download"}</span>
                         </span>
                     )}
                 </div>

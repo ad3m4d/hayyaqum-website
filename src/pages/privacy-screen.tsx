@@ -44,9 +44,9 @@ function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
     const bodyCellCls = "flex gap-3 px-6 py-4 items-start";
 
     return (
-        <>
+        <div className="w-full overflow-x-auto overscroll-x-contain rounded-2xl focus-visible:outline-2 focus-visible:outline-[#258ea6]" tabIndex={0} role="region" aria-label={copy.privacy.tableCaption}>
             <div
-                className="hidden w-full overflow-clip rounded-2xl border md:grid"
+                className="grid w-full min-w-[704px] overflow-clip rounded-2xl border"
                 style={{
                     backgroundColor: "#fbfcfc",
                     borderColor: colorBorder,
@@ -56,6 +56,7 @@ function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
                 aria-label={copy.privacy.tableCaption}
             >
                 {/* header row */}
+                <div role="row" className="contents">
                 {[h.data, h.why, h.shared, h.kept].map((label) => (
                     <div
                         key={label}
@@ -69,12 +70,13 @@ function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
                     </div>
                 ))}
 
+                </div>
                 {/* body rows */}
                 {rows.map((row, i) => {
                     const isLast = i === rows.length - 1;
                     const borderCls = isLast ? "" : "border-b";
                     return (
-                        <div key={row.data} className="contents">
+                        <div key={row.data} role="row" className="contents">
                             <div
                                 className={`${bodyCellCls} ${borderCls}`}
                                 style={{ borderColor: colorBorder }}
@@ -116,20 +118,7 @@ function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
                 })}
             </div>
 
-            {/* Narrow viewport: stacked cards per row */}
-            <ul className="flex flex-col gap-3 md:hidden">
-                {rows.map((row) => (
-                    <li key={row.data} className="rounded-2xl border bg-white px-5 py-4" style={{ borderColor: colorBorder }}>
-                        <p className="text-base font-medium leading-6" style={{ color: colorHeadline }}>{row.data}</p>
-                        <dl className="mt-3 grid gap-3 text-base leading-6">
-                            <div><dt className="text-sm font-medium leading-5" style={{ color: colorHeaderText }}>{h.why}</dt><dd className="mt-1" style={{ color: colorBody }}>{row.why}</dd></div>
-                            <div><dt className="text-sm font-medium leading-5" style={{ color: colorHeaderText }}>{h.shared}</dt><dd className="mt-1" style={{ color: colorBody }}>{row.sharedWith}</dd></div>
-                            <div><dt className="text-sm font-medium leading-5" style={{ color: colorHeaderText }}>{h.kept}</dt><dd className="mt-1" style={{ color: colorBody }}>{row.retention}</dd></div>
-                        </dl>
-                    </li>
-                ))}
-            </ul>
-        </>
+        </div>
     );
 }
 
@@ -141,10 +130,10 @@ export const PrivacyScreen = () => {
         <SiteLayout footer="legal">
             <PageMeta {...pageMeta.privacy} />
 
-            <div className="flex w-full flex-col items-center gap-10 px-20 min-sm:max-lg:px-0 py-20 max-sm:px-6 max-sm:py-12">
+            <div className="flex w-full flex-col items-center gap-10 px-20 min-sm:max-lg:px-0 py-20 max-sm:px-8 max-sm:py-16">
                 {/* title + last updated (Figma 845:33892) */}
                 <section className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-sm:px-0" style={{ color: colorHeadline }}>
-                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-sm:text-[28px] max-sm:leading-[36px]">
+                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px]">
                         {p.title}
                     </h1>
                     <p className="text-[20px] leading-[30px]">

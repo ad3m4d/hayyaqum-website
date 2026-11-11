@@ -4,10 +4,11 @@ import brandSvg from "../../../public/assets/figma/qum-brand.svg?raw";
 type Props = {
     size?: number;
     className?: string;
+    cropToMark?: boolean;
 };
 
 /** Render the authored vector at display size, with isolated filter/gradient IDs. */
-export function QumBrand({ size = 96, className }: Props) {
+export function QumBrand({ size = 96, className, cropToMark = false }: Props) {
     const id = useId().replace(/:/g, "");
     const markup = brandSvg
         .replace(/<svg[^>]*>/, "")
@@ -19,7 +20,7 @@ export function QumBrand({ size = 96, className }: Props) {
         <svg
             width={size}
             height={size}
-            viewBox="0 0 38 38"
+            viewBox={cropToMark ? "3 2 32 32" : "0 0 38 38"}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden

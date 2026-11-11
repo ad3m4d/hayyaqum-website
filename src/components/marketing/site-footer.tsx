@@ -19,9 +19,9 @@ export function SiteFooter(_props: { variant?: SiteFooterVariant }) {
     const v2 = copy.homeV2.footer;
 
     return (
-        <footer className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 py-10 max-sm:px-6">
+        <footer className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 py-10 max-sm:py-5 max-sm:px-8">
             <div
-                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-start max-sm:gap-3 max-sm:px-0 max-sm:text-center max-[480px]:items-center"
+                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-center max-sm:gap-8 max-sm:px-0 max-sm:text-center max-[480px]:items-center"
                 style={{ color: "#a1acaa" }}
             >
                 <p>{v2.copyright}</p>

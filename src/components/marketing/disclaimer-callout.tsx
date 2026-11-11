@@ -12,7 +12,7 @@ export function DisclaimerCallout() {
 
     return (
         <aside
-            className="w-full rounded-2xl border-s-4 border-[#258ea6] bg-[#e9f4f6] p-6 text-[20px] font-normal leading-[30px] text-[#606766]"
+            className="w-full rounded-2xl border-s-4 border-[#258ea6] bg-[#e9f4f6] p-6 max-sm:px-4 max-sm:py-4 text-[20px] font-normal leading-[30px] text-[#606766]"
             aria-label={copy.terms.disclaimerAria}
         >
             <div className="flex w-full flex-col gap-5">
