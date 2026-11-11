@@ -27,5 +27,4 @@ dist-ssr
 # Local Claude Code config
 .claude/
 
-# Marketing demo videos — not tracked in git (served separately; too large for repo)
-public/videos/
+# Demo delivery files in public/videos are versioned so Git-based deployments include them.
