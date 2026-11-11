@@ -85,7 +85,7 @@ export function TermsScreen() {
                 {t.sections.slice(0, -1).map(renderSection)}
                 <section id="acknowledgments" className="flex w-full max-w-[768px] scroll-mt-32 flex-col items-start gap-4 px-8 max-sm:px-0">
                     <h2 className="text-[24px] font-semibold leading-[32px]" style={{ color: colorHeadline }}>12. Acknowledgments</h2>
-                    <div lang="en" className="flex min-w-0 flex-col gap-4 text-[20px] font-normal leading-[30px]" style={{ color: colorBody }}>
+                    <div lang="en" className="flex min-w-0 flex-col gap-4 text-lg font-normal leading-7" style={{ color: colorBody }}>
                         <p>The adhan you hear in Qum was recorded and shared by other people. These are their credits and terms.</p>
                         {acknowledgments.entries.map((entry) => (
                             <div key={entry.id}>

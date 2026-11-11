@@ -76,7 +76,7 @@ export function SiteBookend({ fullWidthMobileCTA = false }: { fullWidthMobileCTA
             </div>
 
             <div
-                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-center max-sm:gap-8 max-sm:px-0 max-[480px]:items-center"
+                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-start max-sm:gap-8 max-sm:px-0"
                 style={{ color: colorMuted }}
             >
                 <p>{v2.footer.copyright}</p>

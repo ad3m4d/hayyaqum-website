@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { FeatureV2Id } from "@/data/i18n";
 import { useLang } from "@/providers/language-provider";
 
@@ -14,6 +14,8 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
     const video = useRef<HTMLVideoElement>(null);
     const wanted = useRef(false);
     const pending = useRef(false);
+    const manuallyPaused = useRef(false);
+    const inView = useRef(false);
     const [playing, setPlaying] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -22,7 +24,7 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
         video.current?.pause();
         setLoading(false);
     };
-    const play = () => {
+    const play = useCallback(() => {
         const el = video.current;
         if (!el) return;
         window.dispatchEvent(new CustomEvent(PLAY_EVENT, { detail: el }));
@@ -31,7 +33,7 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
         pending.current = true;
         setError(false);
         setLoading(true);
-        // No media source exists until the visitor expresses intent to play.
+        // Attach media only when the card becomes visible or playback is requested.
         // Set the DOM property before play(): Safari's policy checks muted state.
         el.muted = true;
         el.defaultMuted = true;
@@ -66,7 +68,7 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
             pending.current = false;
             setLoading(false);
         });
-    };
+    }, [id, lang]);
 
     useEffect(() => {
         const el = video.current;
@@ -76,15 +78,20 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
             el.pause();
             setLoading(false);
         };
-        const visibility = () => { if (document.hidden) stop(); };
+        const autoPlay = () => {
+            if (inView.current && !document.hidden && !manuallyPaused.current && !reduced.matches) play();
+        };
+        const visibility = () => { if (document.hidden) stop(); else autoPlay(); };
         const otherPlay = (event: Event) => {
             if ((event as CustomEvent).detail !== el) stop();
         };
         const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-        const preference = () => { if (reduced.matches) stop(); };
+        const preference = () => { if (reduced.matches) stop(); else autoPlay(); };
         const observer = new IntersectionObserver(([entry]) => {
-            if (!entry.isIntersecting) stop();
-        });
+            inView.current = entry.isIntersecting && entry.intersectionRatio >= 0.5;
+            if (inView.current) autoPlay();
+            else stop();
+        }, { threshold: [0, 0.5] });
         observer.observe(el);
         document.addEventListener("visibilitychange", visibility);
         window.addEventListener(PLAY_EVENT, otherPlay);
@@ -97,16 +104,10 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
             window.removeEventListener(PLAY_EVENT, otherPlay);
             reduced.removeEventListener("change", preference);
         };
-    }, []);
+    }, [play]);
 
     return (
-        <div
-            className="relative size-full"
-            onPointerEnter={(event) => {
-                if (event.pointerType === "mouse" && window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) play();
-            }}
-            onPointerLeave={(event) => { if (event.pointerType === "mouse") pause(); }}
-        >
+        <div className="relative size-full">
             <video
                 ref={video}
                 className="block size-full bg-transparent object-cover [transform:translateZ(0)]"
@@ -126,7 +127,15 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
                 style={{ backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}
                 aria-busy={loading}
                 aria-label={`${playing || loading ? (lang === "ar" ? "إيقاف مؤقت" : "Pause") : (lang === "ar" ? "تشغيل" : "Play")}: ${label}`}
-                onClick={() => { if (wanted.current) pause(); else play(); }}
+                onClick={() => {
+                    if (wanted.current) {
+                        manuallyPaused.current = true;
+                        pause();
+                    } else {
+                        manuallyPaused.current = false;
+                        play();
+                    }
+                }}
             >
                 <img
                     src={playing || loading ? "/assets/figma/demo-pause.svg" : "/assets/figma/demo-play.svg"}
