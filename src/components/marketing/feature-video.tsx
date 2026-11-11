@@ -67,21 +67,19 @@ export const FeatureVideo = forwardRef(function FeatureVideo(
         return () => io.disconnect();
     }, [lang]);
 
-    const mp4 = `/videos/${id}-${lang}.mp4`;
-    const webm = lang === "en" ? `/videos/${id}-en.webm` : null;
+    const webm = `/videos/${id}-${lang}.webm`;
 
     return (
         <video
             ref={setRef}
-            className="block size-full object-cover"
+            className="block size-full bg-transparent object-cover [transform:translateZ(0)]"
             aria-label={label}
             muted
             playsInline
             loop
             preload="none"
         >
-            {webm ? <source src={webm} type="video/webm" /> : null}
-            <source src={mp4} type="video/mp4" />
+            <source src={webm} type="video/webm" />
         </video>
     );
 });

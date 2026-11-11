@@ -35,8 +35,17 @@ function FillInOverlay() {
     );
 }
 
+/**
+ * Language toggle is hidden while the AR translation pass is still in review.
+ * Flip this to true (and `LANGUAGE_TOGGLE_ENABLED` in language-provider.tsx)
+ * to bring it back.
+ */
+const LANGUAGE_TOGGLE_ENABLED = false;
+
 export function SiteNav() {
     const { copy, toggle, lang } = useLang();
+    void toggle;
+    void lang;
 
     return (
         <header className="sticky top-0 z-50 flex w-full justify-center pt-6 pb-0">
@@ -58,17 +67,19 @@ export function SiteNav() {
                     </span>
                 </a>
                 <div className="flex items-center gap-4 max-[480px]:gap-2">
-                    <button
-                        type="button"
-                        onClick={toggle}
-                        aria-label={copy.nav.toggleAria}
-                        className={navPillCls}
-                        style={pillWash}
-                    >
-                        <FillInOverlay />
-                        <img src="/assets/figma/translate-02.svg" alt="" className="relative size-5" />
-                        <span className="relative">{lang === "en" ? copy.homeV2.langShort : "EN"}</span>
-                    </button>
+                    {LANGUAGE_TOGGLE_ENABLED ? (
+                        <button
+                            type="button"
+                            onClick={toggle}
+                            aria-label={copy.nav.toggleAria}
+                            className={navPillCls}
+                            style={pillWash}
+                        >
+                            <FillInOverlay />
+                            <img src="/assets/figma/translate-02.svg" alt="" className="relative size-5" />
+                            <span className="relative">{lang === "en" ? copy.homeV2.langShort : "EN"}</span>
+                        </button>
+                    ) : null}
                     {APP_STORE_URL ? (
                         <a href={APP_STORE_URL} className={navPillCls} style={pillWash}>
                             <FillInOverlay />

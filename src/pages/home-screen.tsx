@@ -108,6 +108,12 @@ const FEAT_ASSET: Record<FeatureV2Id, string> = {
 function VideoCard({ id, label }: { id: FeatureV2Id; label: string }) {
     // Figma 829:24211 — 1024×480 rounded card. No play button, no scrubber.
     // Video plays only while the pointer is inside the card (Adam's ask).
+    //
+    // Safari rounded-corner workaround: Safari's video compositing layer
+    // historically ignores the parent's `overflow: hidden` + `border-radius`
+    // clip, bleeding opaque corners outside the rounded shape. The
+    // `-webkit-mask-image` below forces Safari to apply a mask that matches
+    // the border-radius, pulling the video into the parent's clip.
     const videoRef = useRef<HTMLVideoElement>(null);
     const onEnter = () => {
         const v = videoRef.current;
@@ -120,7 +126,11 @@ function VideoCard({ id, label }: { id: FeatureV2Id; label: string }) {
     };
     return (
         <div
-            className="relative aspect-[2880/1080] w-full max-w-[1024px] overflow-hidden rounded-[24px] border-2 border-[rgba(15,19,22,0.05)] shadow-[0_20px_24px_-4px_rgba(0,0,0,0.08),0_8px_8px_-4px_rgba(0,0,0,0.03),0_3px_3px_-1.5px_rgba(0,0,0,0.04)]"
+            className="relative isolate aspect-[1024/480] w-full max-w-[1024px] overflow-hidden rounded-[24px] border-2 border-[rgba(15,19,22,0.05)] shadow-[0_20px_24px_-4px_rgba(0,0,0,0.08),0_8px_8px_-4px_rgba(0,0,0,0.03),0_3px_3px_-1.5px_rgba(0,0,0,0.04)]"
+            style={{
+                WebkitMaskImage:
+                    "radial-gradient(white, black)",
+            }}
             onMouseEnter={onEnter}
             onMouseLeave={onLeave}
         >

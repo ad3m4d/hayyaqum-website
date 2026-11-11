@@ -17,10 +17,19 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(undefine
  * hydration matches the prerendered HTML. After mount, read localStorage —
  * falling back to navigator.language — and switch if needed.
  */
+/**
+ * Translation locked to English while the AR copy is still being finalised.
+ * Flip this to true once the AR pass is ready (and re-mount the EN/AR toggle
+ * in `site-nav.tsx`). Nothing else needs to change — the rest of the provider
+ * keeps the stored-preference and navigator.language detection intact.
+ */
+const LANGUAGE_TOGGLE_ENABLED = false;
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
     const [lang, setLangState] = useState<Lang>("en");
 
     useEffect(() => {
+        if (!LANGUAGE_TOGGLE_ENABLED) return;
         let next: Lang = "en";
         try {
             const stored = window.localStorage.getItem(STORAGE_KEY);
