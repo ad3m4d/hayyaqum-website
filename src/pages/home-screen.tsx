@@ -141,7 +141,7 @@ export const HomeScreen = () => {
 
             {/* ----------------------- hero (822:3849) ----------------------- */}
             <section className="flex w-full flex-col items-center gap-16 px-20 py-20 max-md:px-6 max-md:py-12">
-                <div className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-md:items-center max-md:px-0 max-md:text-center">
+                <div className="flex w-full max-w-[768px] flex-col items-start gap-10 px-8 max-md:items-center max-md:px-0 max-md:text-center">
                     <ParallaxDrift speed={0.18}>
                         <Logomark96 />
                     </ParallaxDrift>
