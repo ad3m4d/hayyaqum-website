@@ -1,3 +1,4 @@
+import { useEffect, useId, useRef, useState } from "react";
 import { LegalParagraph } from "@/components/marketing/legal-copy";
 import { PageMeta } from "@/components/marketing/page-meta";
 import { SiteLayout } from "@/components/marketing/site-layout";
@@ -39,12 +40,32 @@ const colorHeaderText = "#4b504f";
 function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
     const { copy } = useLang();
     const h = copy.privacy.tableHeaders;
+    const tableRef = useRef<HTMLDivElement>(null);
+    const tableId = useId();
+    const [scrollPercent, setScrollPercent] = useState(0);
+    const [overflows, setOverflows] = useState(false);
+    const syncScroll = () => {
+        const el = tableRef.current;
+        if (!el) return;
+        const maximum = el.scrollWidth - el.clientWidth;
+        setOverflows(maximum > 0);
+        setScrollPercent(maximum > 0 ? Math.min(100, Math.abs(el.scrollLeft) / maximum * 100) : 0);
+    };
+    useEffect(() => {
+        const el = tableRef.current;
+        if (!el) return;
+        const observer = new ResizeObserver(syncScroll);
+        observer.observe(el);
+        syncScroll();
+        return () => observer.disconnect();
+    }, []);
 
     const headerCellCls = "flex items-center gap-3 px-6 py-3 border-b";
     const bodyCellCls = "flex gap-3 px-6 py-4 items-start";
 
     return (
-        <div className="w-full overflow-x-auto overscroll-x-contain rounded-2xl focus-visible:outline-2 focus-visible:outline-[#258ea6]" tabIndex={0} role="region" aria-label={copy.privacy.tableCaption}>
+        <div className="w-full">
+        <div ref={tableRef} id={tableId} onScroll={syncScroll} className="w-full overflow-x-auto overscroll-x-contain rounded-2xl max-sm:scrollbar-hide focus-visible:outline-2 focus-visible:outline-[#258ea6]" tabIndex={0} role="region" aria-label={copy.privacy.tableCaption}>
             <div
                 className="grid w-full min-w-[704px] overflow-clip rounded-2xl border"
                 style={{
@@ -118,6 +139,29 @@ function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
                 })}
             </div>
 
+        </div>
+        {overflows && (
+            <div className="privacy-table-scrollbar sm:hidden">
+                <input
+                    type="range"
+                    min={0}
+                    max={100}
+                    step={1}
+                    value={scrollPercent}
+                    aria-label={copy.privacy.tableCaption}
+                    aria-controls={tableId}
+                    aria-valuetext={`${Math.round(scrollPercent)}%`}
+                    onChange={(event) => {
+                        const el = tableRef.current;
+                        if (!el) return;
+                        const percent = Number(event.target.value);
+                        const direction = getComputedStyle(el).direction === "rtl" ? -1 : 1;
+                        el.scrollLeft = direction * percent / 100 * (el.scrollWidth - el.clientWidth);
+                        setScrollPercent(percent);
+                    }}
+                />
+            </div>
+        )}
         </div>
     );
 }

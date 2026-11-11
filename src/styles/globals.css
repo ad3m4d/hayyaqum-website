@@ -83,3 +83,55 @@ input[type="search"]::-webkit-search-cancel-button {
 .recharts-surface path {
     outline: none;
 }
+
+/* Figma 959:72135: 311×18 frame, 4px inset, 211×6 rounded thumb. */
+.privacy-table-scrollbar {
+    padding: 12px 4px 0;
+}
+
+.privacy-table-scrollbar input {
+    appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    height: 6px;
+    margin: 0;
+    background: transparent;
+    cursor: grab;
+}
+
+.privacy-table-scrollbar input:active { cursor: grabbing; }
+.privacy-table-scrollbar input:focus-visible {
+    outline: 2px solid #258ea6;
+    outline-offset: 4px;
+    border-radius: 9999px;
+}
+
+.privacy-table-scrollbar input::-webkit-slider-runnable-track {
+    height: 6px;
+    background: transparent;
+}
+
+.privacy-table-scrollbar input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 69.636964%;
+    height: 6px;
+    border: 0;
+    border-radius: 9999px;
+    background: #a1acaa;
+    opacity: 0.15;
+}
+
+.privacy-table-scrollbar input::-moz-range-track {
+    height: 6px;
+    background: transparent;
+}
+
+.privacy-table-scrollbar input::-moz-range-thumb {
+    width: 69.636964%;
+    height: 6px;
+    border: 0;
+    border-radius: 9999px;
+    background: #a1acaa;
+    opacity: 0.15;
+}
