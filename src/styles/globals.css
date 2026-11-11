@@ -2,6 +2,14 @@
 @import "./theme.css";
 @import "./typography.css";
 
+/* Arabic webfont — loaded always (CSS can't tree-shake by lang attr), applied only when the root is RTL. */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap");
+
+:root[dir="rtl"] body,
+:root[dir="rtl"] {
+    font-family: "IBM Plex Sans Arabic", var(--font-body);
+}
+
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-react-aria-components";
 @plugin "tailwindcss-animate";

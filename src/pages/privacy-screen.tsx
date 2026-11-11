@@ -2,84 +2,129 @@ import { LegalParagraph } from "@/components/marketing/legal-copy";
 import { PageMeta } from "@/components/marketing/page-meta";
 import { SiteLayout } from "@/components/marketing/site-layout";
 import { pageMeta } from "@/data/seo";
-import {
-    PRIVACY_LAST_UPDATED,
-    privacySections,
-    privacySummary,
-    type PrivacyTableRow,
-} from "@/data/site";
-import { cx } from "@/utils/cx";
+import { useLang } from "@/providers/language-provider";
+import type { PrivacyTableRow } from "@/data/i18n";
 
+/**
+ * Privacy page from Figma 845:33889.
+ *
+ *   body:    flex-col gap-40, 768px content column, left-aligned
+ *   title:   "Privacy Policy" display-xs semibold #2c363f +
+ *            "Last Updated: <date>" text-sm, "Last Updated:" semibold
+ *   summary: text-xl regular #606766
+ *   section: heading (display-xs semibold #2c363f) + body paragraphs
+ *            (text-xl regular #606766). First section includes a table.
+ *   footer:  legal (compact copyright row + About / Privacy / Terms)
+ */
+
+const colorHeadline = "#2c363f";
+const colorBody = "#606766";
+const colorBorder = "rgba(15,19,22,0.05)";
+const colorHeaderBg = "#f2f7f6";
+const colorHeaderText = "#4b504f";
+
+/*
+ * Privacy table from Figma 865:36784.
+ *
+ *   wrapper: rounded-2xl bg-white, 1px border #0f131608 (5% black), overflow-clip
+ *   grid:    4 columns — col 1 fixed 158px, cols 2-4 1fr each
+ *   header:  bg #f2f7f6, 44px tall, px-24 py-12, 14/20 medium-510 #4b504f
+ *   row:     cells px-24 py-16, border-b (except last row)
+ *   col 1:   16/24 medium-510 #2c363f (row header)
+ *   cols 2-4: 16/24 regular #606766
+ *
+ * Uses CSS grid so cells in the same row share a height even when their text
+ * lengths differ — otherwise independent flex columns misalign rows.
+ */
 function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
+    const { copy } = useLang();
+    const h = copy.privacy.tableHeaders;
+
+    const headerCellCls = "flex items-center gap-3 px-6 py-3 border-b";
+    const bodyCellCls = "flex gap-3 px-6 py-4 items-start";
+
     return (
         <>
-            <div className="hidden w-full overflow-x-auto md:block">
-                <div className="w-[1024px] min-w-[1024px] overflow-hidden rounded-3xl border border-black/5 bg-[#fbfcfc]">
-                    <table className="w-full table-fixed border-collapse text-left">
-                        <caption className="sr-only">What Qum stores, why, who receives it, and how long it is kept</caption>
-                        <colgroup>
-                            <col className="w-[200px]" />
-                            <col />
-                            <col />
-                            <col />
-                        </colgroup>
-                        <thead>
-                            <tr className="bg-[#f2f7f6]">
-                                <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
-                                    Data type
-                                </th>
-                                <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
-                                    Why
-                                </th>
-                                <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
-                                    Shared with
-                                </th>
-                                <th scope="col" className="h-11 border-b border-black/5 px-6 py-3 text-xs font-semibold text-[#4b504f]">
-                                    Kept
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {rows.map((row, index) => (
-                                <tr key={row.data}>
-                                    <th
-                                        scope="row"
-                                        className={cx("px-6 py-4 align-top text-md font-medium text-[#2c363f]", index < rows.length - 1 && "border-b border-black/5")}
-                                    >
-                                        {row.data}
-                                    </th>
-                                    <td className={cx("px-6 py-4 align-top text-md font-normal text-[#606766]", index < rows.length - 1 && "border-b border-black/5")}>
-                                        {row.why}
-                                    </td>
-                                    <td className={cx("px-6 py-4 align-top text-md font-normal text-[#606766]", index < rows.length - 1 && "border-b border-black/5")}>
-                                        {row.sharedWith}
-                                    </td>
-                                    <td className={cx("px-6 py-4 align-top text-md font-normal text-[#606766]", index < rows.length - 1 && "border-b border-black/5")}>
-                                        {row.retention}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+            <div
+                className="hidden w-full overflow-clip rounded-2xl border md:grid"
+                style={{
+                    backgroundColor: "#fbfcfc",
+                    borderColor: colorBorder,
+                    gridTemplateColumns: "158px 1fr 1fr 1fr",
+                }}
+                role="table"
+                aria-label={copy.privacy.tableCaption}
+            >
+                {/* header row */}
+                {[h.data, h.why, h.shared, h.kept].map((label) => (
+                    <div
+                        key={label}
+                        className={headerCellCls}
+                        style={{ backgroundColor: colorHeaderBg, borderColor: colorBorder }}
+                        role="columnheader"
+                    >
+                        <span className="text-sm font-medium leading-5" style={{ color: colorHeaderText }}>
+                            {label}
+                        </span>
+                    </div>
+                ))}
+
+                {/* body rows */}
+                {rows.map((row, i) => {
+                    const isLast = i === rows.length - 1;
+                    const borderCls = isLast ? "" : "border-b";
+                    return (
+                        <div key={row.data} className="contents">
+                            <div
+                                className={`${bodyCellCls} ${borderCls}`}
+                                style={{ borderColor: colorBorder }}
+                                role="rowheader"
+                            >
+                                <span className="text-base font-medium leading-6" style={{ color: colorHeadline }}>
+                                    {row.data}
+                                </span>
+                            </div>
+                            <div
+                                className={`${bodyCellCls} ${borderCls}`}
+                                style={{ borderColor: colorBorder }}
+                                role="cell"
+                            >
+                                <span className="text-base font-normal leading-6" style={{ color: colorBody }}>
+                                    {row.why}
+                                </span>
+                            </div>
+                            <div
+                                className={`${bodyCellCls} ${borderCls}`}
+                                style={{ borderColor: colorBorder }}
+                                role="cell"
+                            >
+                                <span className="text-base font-normal leading-6" style={{ color: colorBody }}>
+                                    {row.sharedWith}
+                                </span>
+                            </div>
+                            <div
+                                className={`${bodyCellCls} ${borderCls}`}
+                                style={{ borderColor: colorBorder }}
+                                role="cell"
+                            >
+                                <span className="text-base font-normal leading-6" style={{ color: colorBody }}>
+                                    {row.retention}
+                                </span>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
-            <ul className="flex flex-col gap-4 md:hidden">
+
+            {/* Narrow viewport: stacked cards per row */}
+            <ul className="flex flex-col gap-3 md:hidden">
                 {rows.map((row) => (
-                    <li key={row.data} className="rounded-3xl border border-black/5 bg-[#fbfcfc] px-5 py-4">
-                        <p className="text-md font-medium text-[#2c363f]">{row.data}</p>
-                        <dl className="mt-3 grid gap-3 text-md">
-                            <div>
-                                <dt className="text-xs font-semibold text-[#4b504f]">Why</dt>
-                                <dd className="mt-1 font-normal text-[#606766]">{row.why}</dd>
-                            </div>
-                            <div>
-                                <dt className="text-xs font-semibold text-[#4b504f]">Shared with</dt>
-                                <dd className="mt-1 font-normal text-[#606766]">{row.sharedWith}</dd>
-                            </div>
-                            <div>
-                                <dt className="text-xs font-semibold text-[#4b504f]">Kept</dt>
-                                <dd className="mt-1 font-normal text-[#606766]">{row.retention}</dd>
-                            </div>
+                    <li key={row.data} className="rounded-2xl border bg-white px-5 py-4" style={{ borderColor: colorBorder }}>
+                        <p className="text-base font-medium leading-6" style={{ color: colorHeadline }}>{row.data}</p>
+                        <dl className="mt-3 grid gap-3 text-base leading-6">
+                            <div><dt className="text-sm font-medium leading-5" style={{ color: colorHeaderText }}>{h.why}</dt><dd className="mt-1" style={{ color: colorBody }}>{row.why}</dd></div>
+                            <div><dt className="text-sm font-medium leading-5" style={{ color: colorHeaderText }}>{h.shared}</dt><dd className="mt-1" style={{ color: colorBody }}>{row.sharedWith}</dd></div>
+                            <div><dt className="text-sm font-medium leading-5" style={{ color: colorHeaderText }}>{h.kept}</dt><dd className="mt-1" style={{ color: colorBody }}>{row.retention}</dd></div>
                         </dl>
                     </li>
                 ))}
@@ -89,48 +134,49 @@ function PrivacyTable({ rows }: { rows: readonly PrivacyTableRow[] }) {
 }
 
 export const PrivacyScreen = () => {
+    const { copy } = useLang();
+    const p = copy.privacy;
+
     return (
         <SiteLayout footer="legal">
             <PageMeta {...pageMeta.privacy} />
-            <div className="w-full min-w-0">
-                <section className="flex w-full flex-col items-center px-20 py-20 max-[769px]:pt-10 max-[769px]:pb-16 max-[480px]:px-5 max-[480px]:py-10">
-                    <div className="flex w-full max-w-container flex-col items-center">
-                        <div className="flex w-full max-w-[1024px] flex-col items-start gap-8 max-[769px]:max-w-none max-[480px]:gap-6">
-                            <div className="flex flex-col items-start gap-3">
-                                <p className="text-md font-normal text-brand-secondary">Last updated {PRIVACY_LAST_UPDATED}</p>
-                                <h1 className="text-display-lg font-bold tracking-[-0.96px] text-[#232b32] max-[769px]:text-display-md max-[769px]:font-semibold max-[769px]:tracking-[-0.72px]">
-                                    Privacy Policy
-                                </h1>
-                            </div>
-                            <div className="flex flex-col gap-6 min-[481px]:max-[769px]:gap-5 max-[480px]:gap-[18px]">
-                                {privacySummary.map((paragraph) => (
-                                    <LegalParagraph
-                                        key={paragraph}
-                                        className="text-display-xs font-normal text-[#606766] min-[481px]:max-[769px]:text-xl max-[480px]:text-lg"
-                                    >
-                                        {paragraph}
-                                    </LegalParagraph>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+
+            <div className="flex w-full flex-col items-center gap-10 px-20 py-20 max-md:px-6 max-md:py-12">
+                {/* title + last updated (Figma 845:33892) */}
+                <section className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-md:px-0" style={{ color: colorHeadline }}>
+                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-md:text-[28px] max-md:leading-[36px]">
+                        {p.title}
+                    </h1>
+                    <p className="text-[20px] leading-[30px]">
+                        <span className="font-bold">{p.lastUpdated}:</span>{" "}
+                        {p.lastUpdatedDate}
+                    </p>
                 </section>
 
-                <section className="flex w-full flex-col items-center px-20 pb-20 max-[480px]:px-5 max-[480px]:pb-10">
-                    <div className="flex w-full max-w-[1024px] flex-col max-[769px]:max-w-none">
-                        {privacySections.map((section) => (
-                            <section key={section.heading} className="flex flex-col gap-4 pb-8">
-                                <h2 className="text-display-xs font-semibold text-[#2c363f]">{section.heading}</h2>
-                                <div className="flex flex-col gap-[18px]">
-                                    {section.paragraphs.map((paragraph) => (
-                                        <LegalParagraph key={paragraph}>{paragraph}</LegalParagraph>
-                                    ))}
-                                    {section.table ? <PrivacyTable rows={section.table} /> : null}
-                                </div>
-                            </section>
-                        ))}
-                    </div>
+                {/* summary */}
+                <section className="flex w-full max-w-[768px] flex-col items-start gap-5 px-8 max-md:px-0 text-[20px] font-normal leading-[30px]" style={{ color: colorBody }}>
+                    {p.summary.map((paragraph) => (
+                        <LegalParagraph key={paragraph}>{paragraph}</LegalParagraph>
+                    ))}
                 </section>
+
+                {/* sections */}
+                {p.sections.map((section) => (
+                    <section
+                        key={section.heading}
+                        className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-md:px-0"
+                    >
+                        <h2 className="text-[24px] font-semibold leading-[32px]" style={{ color: colorHeadline }}>
+                            {section.heading}
+                        </h2>
+                        <div className="flex w-full flex-col gap-5 text-[20px] font-normal leading-[30px]" style={{ color: colorBody }}>
+                            {section.paragraphs.map((paragraph) => (
+                                <LegalParagraph key={paragraph}>{paragraph}</LegalParagraph>
+                            ))}
+                            {section.table ? <PrivacyTable rows={section.table} /> : null}
+                        </div>
+                    </section>
+                ))}
             </div>
         </SiteLayout>
     );

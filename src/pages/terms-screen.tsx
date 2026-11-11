@@ -1,56 +1,87 @@
-import { PageMeta } from "@/components/marketing/page-meta";
+import { DisclaimerCallout } from "@/components/marketing/disclaimer-callout";
 import { LegalParagraph } from "@/components/marketing/legal-copy";
+import { PageMeta } from "@/components/marketing/page-meta";
 import { SiteLayout } from "@/components/marketing/site-layout";
 import { pageMeta } from "@/data/seo";
-import { DisclaimerCallout } from "@/components/marketing/disclaimer-callout";
-import { TERMS_LAST_UPDATED, termsIntro, termsSections } from "@/data/site";
+import { useLang } from "@/providers/language-provider";
+
+/**
+ * Terms page from Figma 873:38357.
+ *
+ *   body:     flex-col gap-40 px-80 py-80, 768px content column, left-aligned
+ *   title:    "Terms of Use" display-md bold (36/44, -0.72) +
+ *             "Last Updated: <date>" text-xl, label bold, both #2c363f
+ *   intro:    text-xl regular #606766 + DisclaimerCallout (soft teal panel)
+ *   sections: numbered headings (display-xs semibold #2c363f) + body paragraphs
+ *             (text-xl regular #606766)
+ *   footer:   legal (compact copyright row + About / Privacy / Terms)
+ */
+
+const colorHeadline = "#2c363f";
+const colorBody = "#606766";
 
 export function TermsScreen() {
+    const { copy } = useLang();
+    const t = copy.terms;
+
     return (
         <SiteLayout footer="legal">
             <PageMeta {...pageMeta.terms} />
-            <div className="w-full min-w-0">
-                <section className="flex w-full flex-col items-center px-20 py-20 max-[769px]:pt-10 max-[769px]:pb-16 max-[480px]:px-5 max-[480px]:py-10">
-                    <div className="flex w-full max-w-container flex-col items-center">
-                        <div className="flex w-full max-w-[1024px] flex-col items-start gap-8 max-[769px]:max-w-none max-[480px]:gap-6">
-                            <div className="flex flex-col items-start gap-3">
-                                <p className="text-md font-normal text-brand-secondary">Last updated {TERMS_LAST_UPDATED}</p>
-                                <h1 className="text-display-lg font-bold tracking-[-0.96px] text-[#232b32] max-[769px]:text-display-md max-[769px]:font-semibold max-[769px]:tracking-[-0.72px]">
-                                    Terms of Use
-                                </h1>
-                            </div>
-                            <div className="flex flex-col gap-6 min-[481px]:max-[769px]:gap-5 max-[480px]:gap-[18px]">
-                                {termsIntro.map((paragraph) => (
-                                    <LegalParagraph
-                                        key={paragraph}
-                                        linkify={false}
-                                        className="text-display-xs font-normal text-[#606766] min-[481px]:max-[769px]:text-xl max-[480px]:text-lg"
-                                    >
-                                        {paragraph}
-                                    </LegalParagraph>
-                                ))}
-                                <DisclaimerCallout />
-                            </div>
-                        </div>
-                    </div>
+
+            <div className="flex w-full flex-col items-center gap-10 px-20 py-20 max-md:px-6 max-md:py-12">
+                {/* title + last updated (Figma 845:33892 pattern) */}
+                <section
+                    className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-md:px-0"
+                    style={{ color: colorHeadline }}
+                >
+                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-md:text-[28px] max-md:leading-[36px]">
+                        {t.title}
+                    </h1>
+                    <p className="text-[20px] leading-[30px]">
+                        <span className="font-bold">{t.lastUpdated}:</span> {t.lastUpdatedDate}
+                    </p>
                 </section>
 
-                <section className="flex w-full flex-col items-center px-20 pb-20 max-[480px]:px-5 max-[480px]:pb-10">
-                    <div className="flex w-full max-w-[1024px] flex-col max-[769px]:max-w-none">
-                        {termsSections.map((section) => (
-                            <section key={section.heading} className="flex flex-col gap-4 pb-8">
-                                <h2 className="text-display-xs font-semibold text-[#2c363f]">{section.heading}</h2>
-                                <div className="flex flex-col gap-[18px]">
-                                    {section.paragraphs.map((paragraph) => (
-                                        <LegalParagraph key={paragraph} linkify={section.heading !== "10. Privacy"}>
-                                            {paragraph}
-                                        </LegalParagraph>
-                                    ))}
-                                </div>
-                            </section>
-                        ))}
-                    </div>
+                {/* intro paragraphs + disclaimer callout */}
+                <section
+                    className="flex w-full max-w-[768px] flex-col items-start gap-5 px-8 max-md:px-0 text-[20px] font-normal leading-[30px]"
+                    style={{ color: colorBody }}
+                >
+                    {t.intro.map((paragraph) => (
+                        <LegalParagraph key={paragraph} linkify={false}>
+                            {paragraph}
+                        </LegalParagraph>
+                    ))}
+                    <DisclaimerCallout />
                 </section>
+
+                {/* numbered sections */}
+                {t.sections.map((section) => (
+                    <section
+                        key={section.heading}
+                        className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-md:px-0"
+                    >
+                        <h2
+                            className="text-[24px] font-semibold leading-[32px]"
+                            style={{ color: colorHeadline }}
+                        >
+                            {section.heading}
+                        </h2>
+                        <div
+                            className="flex w-full flex-col gap-5 text-[20px] font-normal leading-[30px]"
+                            style={{ color: colorBody }}
+                        >
+                            {section.paragraphs.map((paragraph) => (
+                                <LegalParagraph
+                                    key={paragraph}
+                                    linkify={!/Privacy|الخصوصية/.test(section.heading)}
+                                >
+                                    {paragraph}
+                                </LegalParagraph>
+                            ))}
+                        </div>
+                    </section>
+                ))}
             </div>
         </SiteLayout>
     );

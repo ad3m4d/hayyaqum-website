@@ -9,27 +9,27 @@ export type PageMeta = {
 export const pageMeta = {
     home: {
         path: "/",
-        title: "Qum — Prayer times in the MacBook notch",
+        title: "Qum · Prayer times in the MacBook notch",
         description: "Qum is a Mac app that puts the next prayer, the Qibla, and the adhan in the MacBook notch. No account, no ads, no tracking. Requires a MacBook with a notch.",
     },
     about: {
         path: "/about",
-        title: "What Qum is — Qum",
+        title: "What Qum is · Qum",
         description: "Qum is a prayer-times Mac app for notched MacBooks. It is not an iPhone app and not a menu-bar timer. Prayer times and Qibla stay on this Mac.",
     },
     privacy: {
         path: "/privacy",
-        title: "Privacy Policy — Qum",
+        title: "Privacy Policy · Qum",
         description: "Qum does not require an account. Prayer times, the Qibla, the log, and settings stay on this Mac. This site does not set cookies.",
     },
     terms: {
         path: "/terms",
-        title: "Terms of Use — Qum",
+        title: "Terms of Use · Qum",
         description: "Qum is a personal Mac utility for prayer times and Qibla. It is not a religious authority. Location is used to calculate times for where this Mac is.",
     },
     notFound: {
         path: "/404",
-        title: "This page isn’t here — Qum",
+        title: "This page isn’t here · Qum",
         description: "There’s nothing at this address on Qum’s site.",
     },
 } as const satisfies Record<string, PageMeta>;

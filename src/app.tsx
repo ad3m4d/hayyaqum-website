@@ -4,6 +4,7 @@ import { HomeScreen } from "@/pages/home-screen";
 import { NotFound } from "@/pages/not-found";
 import { PrivacyScreen } from "@/pages/privacy-screen";
 import { TermsScreen } from "@/pages/terms-screen";
+import { LanguageProvider } from "@/providers/language-provider";
 import { RouteProvider } from "@/providers/router-provider";
 import { ScrollToTop } from "@/providers/scroll-to-top";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -12,6 +13,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 export function App() {
     return (
         <ThemeProvider defaultTheme="light">
+            <LanguageProvider>
             <RouteProvider>
                 <ScrollToTop />
                 <Routes>
@@ -24,6 +26,7 @@ export function App() {
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </RouteProvider>
+            </LanguageProvider>
         </ThemeProvider>
     );
 }

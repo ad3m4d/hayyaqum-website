@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { Tooltip } from "@/components/base/tooltip/tooltip";
-import { features } from "@/data/site";
+import { features as featureAssets } from "@/data/site";
+import { useLang } from "@/providers/language-provider";
 import { cx } from "@/utils/cx";
 
-const STILL_DWELL_MS = 6000;
 const FADE_MS_CLASS = "duration-500 ease-out";
 const CONTROLS_HIDE_MS = 2500;
 const TITLE_AT_START_S = 0.35;
@@ -23,6 +23,12 @@ function bufferedEnd(video: HTMLVideoElement) {
 }
 
 export function Features() {
+    const { copy } = useLang();
+    /** Merge the language-specific label/caption with the asset-only metadata keyed by id. */
+    const features = copy.features.map((f) => {
+        const asset = featureAssets.find((a) => a.id === f.id)!;
+        return { ...asset, ...f };
+    });
     const [selected, setSelected] = useState(0);
     const [inView, setInView] = useState(false);
     const [reduceMotion, setReduceMotion] = useState(false);
@@ -40,7 +46,7 @@ export function Features() {
     const scrubbing = useRef(false);
     const playerRef = useRef<HTMLDivElement>(null);
     const feature = features[selected];
-    const overlayTitle = "overlayTitle" in feature ? feature.overlayTitle : undefined;
+    const overlayTitle = feature.overlayTitle;
     const fadeClass = reduceMotion ? "duration-0" : FADE_MS_CLASS;
     const showTitle = paused && Boolean(overlayTitle) && currentTime < TITLE_AT_START_S;
     const showControls = paused || reduceMotion || keyboardChrome || !idleHidden;
@@ -153,14 +159,20 @@ export function Features() {
     }, [revealControls, feature.id]);
 
     useEffect(() => {
-        if (paused || reduceMotion || feature.video || !inView) return;
-
-        const id = window.setTimeout(() => {
-            setSelected((index) => (index + 1) % features.length);
-        }, STILL_DWELL_MS);
-
-        return () => window.clearTimeout(id);
-    }, [selected, paused, reduceMotion, feature.video, inView]);
+        const applyHash = () => {
+            const match = /^#demo-(.+)$/.exec(window.location.hash);
+            if (!match) return;
+            const index = features.findIndex((item) => item.id === match[1]);
+            if (index >= 0) {
+                setSelected(index);
+                setPaused(false);
+                sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        };
+        applyHash();
+        window.addEventListener("hashchange", applyHash);
+        return () => window.removeEventListener("hashchange", applyHash);
+    }, []);
 
     useEffect(() => {
         const tile = sectionRef.current?.querySelector<HTMLElement>(`[data-feature="${feature.id}"]`);
@@ -200,13 +212,13 @@ export function Features() {
     };
 
     return (
-        <section ref={sectionRef} className="flex w-full flex-col items-center gap-16 px-20 pb-20 min-[769px]:max-xl:px-12 max-md:px-0 max-md:pb-20 max-[480px]:gap-8" aria-label="Features">
+        <section id="demo" ref={sectionRef} className="flex w-full scroll-mt-24 flex-col items-center gap-16 px-20 pb-20 min-[769px]:max-xl:px-12 max-md:px-0 max-md:pb-20 max-[480px]:gap-8" aria-label={copy.player.ariaSection}>
             <div className="flex w-full max-w-container min-w-0 flex-col items-center gap-10 max-md:max-w-none max-[480px]:gap-8">
                 <div
                     ref={playerRef}
                     className="relative aspect-[1280/640] w-full max-w-container min-w-0 overflow-hidden rounded-[32px] border-2 border-black/5 shadow-xl outline-brand focus-visible:outline-2 focus-visible:outline-offset-2 max-md:aspect-auto min-[481px]:max-md:h-[480px] max-md:max-w-none max-md:rounded-none min-[481px]:max-md:border-[1.5px] max-[480px]:h-80 max-[480px]:border"
                     role="region"
-                    aria-label={`${feature.label} demo, ${paused ? "paused" : "playing"}`}
+                    aria-label={copy.player.demoLabel(feature.label, paused ? copy.player.paused : copy.player.playing)}
                     aria-describedby={captionId}
                     tabIndex={0}
                     onMouseMove={() => {
@@ -269,7 +281,7 @@ export function Features() {
                                 revealControls();
                                 playerRef.current?.focus();
                             }}
-                            aria-label={paused ? `Play ${feature.label}` : `Pause ${feature.label}`}
+                            aria-label={paused ? copy.player.play(feature.label) : copy.player.pause(feature.label)}
                             className={cx(
                                 "absolute top-1/2 left-1/2 z-20 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 outline-brand backdrop-blur-[8px] transition duration-100 ease-linear hover:bg-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 active:bg-white/50 reduced-transparency:bg-white reduced-transparency:backdrop-blur-none contrast-more:bg-white contrast-more:backdrop-blur-none",
                                 fadeClass,
@@ -292,7 +304,7 @@ export function Features() {
                             <div className="flex w-full max-w-[1024px] items-center gap-1">
                                 <button
                                     type="button"
-                                    aria-label={paused ? `Play ${feature.label}` : `Pause ${feature.label}`}
+                                    aria-label={paused ? copy.player.play(feature.label) : copy.player.pause(feature.label)}
                                     onClick={(event) => {
                                         event.stopPropagation();
                                         togglePaused();
@@ -311,7 +323,7 @@ export function Features() {
                                 <div className="flex min-w-px flex-1 items-center gap-2 px-2">
                                     <span className="w-9 shrink-0 text-xs font-semibold text-white tabular-nums">{formatClock(currentTime)}</span>
                                     <label className="relative flex h-11 min-w-px flex-1 items-center">
-                                        <span className="sr-only">Seek {feature.label}</span>
+                                        <span className="sr-only">{copy.player.seek(feature.label)}</span>
                                         <span className="relative h-2 w-full rounded-full bg-white/30 backdrop-blur-[4px] reduced-transparency:bg-white/40 reduced-transparency:backdrop-blur-none contrast-more:bg-white/45 contrast-more:backdrop-blur-none">
                                             <span className="absolute inset-y-0 left-0 rounded-full bg-white/30" style={{ width: `${bufferedPct}%` }} />
                                             <span
@@ -344,10 +356,10 @@ export function Features() {
                                         -{formatClock(Math.max(0, duration - currentTime))}
                                     </span>
                                 </div>
-                                <Tooltip title="Playback speed" placement="top">
+                                <Tooltip title={copy.player.playbackSpeed} placement="top">
                                     <button
                                         type="button"
-                                        aria-label={`Playback speed, ${rate} times`}
+                                        aria-label={copy.player.speedLabel(rate)}
                                         onClick={(event) => {
                                             event.stopPropagation();
                                             setRate((current) => {

@@ -31,5 +31,9 @@ export default defineConfig({
         alias: {
             "@": path.resolve(rootDir, "./src"),
         },
+        dedupe: ["react", "react-dom"],
+    },
+    optimizeDeps: {
+        exclude: ["glisse", "motion", "motion/react"],
     },
 });

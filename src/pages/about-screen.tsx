@@ -1,79 +1,97 @@
 import type { ReactNode } from "react";
 import { PageMeta } from "@/components/marketing/page-meta";
+import { SiteBookend } from "@/components/marketing/site-bookend";
 import { SiteLayout } from "@/components/marketing/site-layout";
 import { pageMeta } from "@/data/seo";
-import { ASR_CONVENTIONS, CALCULATION_METHODS, features } from "@/data/site";
+import { useLang } from "@/providers/language-provider";
+import {
+    CALCULATION_METHODS_AR,
+    CALCULATION_METHODS_EN,
+    ASR_CONVENTIONS_AR,
+    ASR_CONVENTIONS_EN,
+} from "@/data/i18n";
+
+/**
+ * About page from Figma 845:30455.
+ *
+ *   body:    flex-col gap-40 px-80 py-80, 768px content column
+ *   section: flex-col gap-16 px-32, heading (display-xs/24-32 #2c363f semibold)
+ *            + body (text-xl/20-30 #606766)
+ *   list:    disc, 16px between items, same body style
+ *   footer:  SiteBookend (same block as home — Figma 845:30576)
+ */
+
+const colorHeadline = "#2c363f";
+const colorBody = "#606766";
 
 function AboutSection({ heading, children }: { heading: string; children: ReactNode }) {
     return (
-        <section className="flex flex-col gap-4 pb-8">
-            <h2 className="text-display-xs font-semibold text-[#2c363f]">{heading}</h2>
-            <div className="flex flex-col gap-[18px] text-lg font-normal text-[#606766]">{children}</div>
+        <section className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-md:px-0">
+            <h2
+                className="w-full text-[24px] font-semibold leading-[32px]"
+                style={{ color: colorHeadline }}
+            >
+                {heading}
+            </h2>
+            <div
+                className="flex w-full flex-col gap-5 text-[20px] font-normal leading-[30px]"
+                style={{ color: colorBody }}
+            >
+                {children}
+            </div>
         </section>
     );
 }
 
 export function AboutScreen() {
+    const { lang, copy } = useLang();
+    const methods = lang === "ar" ? CALCULATION_METHODS_AR : CALCULATION_METHODS_EN;
+    const asr = lang === "ar" ? ASR_CONVENTIONS_AR : ASR_CONVENTIONS_EN;
+    const asrJoiner = lang === "ar" ? " أو " : " or ";
+    const a = copy.about;
+
     return (
-        <SiteLayout footer="legal">
+        <SiteLayout footer="none">
             <PageMeta {...pageMeta.about} />
-            <div className="w-full min-w-0">
-                <section className="flex w-full flex-col items-center px-20 py-20 max-[769px]:pt-10 max-[769px]:pb-16 max-[480px]:px-5 max-[480px]:py-10">
-                    <div className="flex w-full max-w-[1024px] flex-col items-start gap-8 max-[769px]:max-w-none">
-                        <div className="flex flex-col items-start gap-3">
-                            <p className="text-md font-normal text-brand-secondary">Qum</p>
-                            <h1 className="text-display-lg font-bold tracking-[-0.96px] text-[#232b32] max-[769px]:text-display-md max-[769px]:font-semibold max-[769px]:tracking-[-0.72px]">
-                                What Qum is
-                            </h1>
-                        </div>
-                        <p className="text-display-xs font-normal text-[#606766] min-[481px]:max-[769px]:text-xl max-[480px]:text-lg">
-                            Qum is a Mac app that puts the next prayer, the Qibla, and the adhan in the MacBook notch — so the workday still has salah in it. It does not require an account.
-                        </p>
-                    </div>
-                </section>
 
-                <section className="flex w-full flex-col items-center px-20 pb-20 max-[480px]:px-5 max-[480px]:pb-10">
-                    <div className="flex w-full max-w-[1024px] flex-col max-[769px]:max-w-none">
-                        <AboutSection heading="Who it is for">
-                            <p>
-                                A MacBook with a notch: MacBook Pro (2021 or later) or MacBook Air (2022 or later). Other Macs have no notch for Qum to sit in.
-                            </p>
-                        </AboutSection>
+            <div className="flex w-full flex-col items-center gap-10 px-20 py-20 max-md:px-6 max-md:py-12">
+                <AboutSection heading={a.whatItIs.heading}>
+                    <p>{a.whatItIs.body}</p>
+                </AboutSection>
 
-                        <AboutSection heading="What it does">
-                            <ul className="list-disc space-y-2 ps-5">
-                                {features.map((item) => (
-                                    <li key={item.id}>
-                                        <span className="font-medium text-[#2c363f]">{item.label}.</span> {item.caption}
-                                    </li>
-                                ))}
-                            </ul>
-                        </AboutSection>
+                <AboutSection heading={a.whoFor.heading}>
+                    <p>{a.whoFor.body}</p>
+                </AboutSection>
 
-                        <AboutSection heading="Prayer times">
-                            <p>
-                                Prayer times are calculated on this Mac. A coordinate or a city name may go to Apple Location Services so Qum can name or resolve a place — that is the only data that leaves this Mac.
-                            </p>
-                            <p>
-                                Calculation methods: {CALCULATION_METHODS.join(", ")}. Asr can be {ASR_CONVENTIONS.join(" or ")}.
-                            </p>
-                        </AboutSection>
+                <AboutSection heading={a.whatItDoes.heading}>
+                    <ul className="list-disc space-y-4 ps-[30px]">
+                        {copy.features.map((item) => (
+                            <li key={item.id}>
+                                <span>{item.label}. {item.caption}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </AboutSection>
 
-                        <AboutSection heading="Qibla on a Mac">
-                            <p>
-                                No Mac can measure heading. There is no magnetometer. Qum solves the bearing as geometry and shows Qibla direction from the desk after a one-time calibration. The direction stays in the notch.
-                            </p>
-                        </AboutSection>
+                <AboutSection heading={a.prayerTimes.heading}>
+                    <p>{a.prayerTimes.body1}</p>
+                    <p>
+                        {a.prayerTimes.methodsLabel(methods.join(lang === "ar" ? "، " : ", "))}{" "}
+                        {a.prayerTimes.asrLabel(asr.join(asrJoiner))}
+                    </p>
+                </AboutSection>
 
-                        <AboutSection heading="What it is not">
-                            <p>
-                                Qum is not an iPhone or iPad app. It is not a menu-bar countdown that runs on every Mac. Menu-bar prayer apps keep a timer in the status bar; Qum uses the notch on notched MacBooks, plays the adhan there, and keeps the streak on this Mac. If the Mac has no notch, Qum is the wrong app.
-                            </p>
-                            <p>Qum does not run analytics, show ads, or track you. The prayer log stays on this Mac. Location is optional.</p>
-                        </AboutSection>
-                    </div>
-                </section>
+                <AboutSection heading={a.qiblaSection.heading}>
+                    <p>{a.qiblaSection.body}</p>
+                </AboutSection>
+
+                <AboutSection heading={a.whatItIsNot.heading}>
+                    <p>{a.whatItIsNot.body1}</p>
+                    <p>{a.whatItIsNot.body2}</p>
+                </AboutSection>
             </div>
+
+            <SiteBookend />
         </SiteLayout>
     );
 }
