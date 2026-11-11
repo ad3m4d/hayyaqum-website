@@ -476,7 +476,7 @@ const en: SiteCopy = {
                 paragraphs: [`These Terms took effect on ${TERMS_LAST_UPDATED_EN}. If they change, this page and Settings › About will say so. Qum cannot email you about a change, because it has no account.`],
             },
             {
-                heading: "12. Contact",
+                heading: "13. Contact",
                 paragraphs: [`Questions about these Terms: write to ${SUPPORT_EMAIL}.`],
             },
         ],
@@ -782,7 +782,7 @@ const ar: SiteCopy = {
                 paragraphs: [`بدأ العمل بهذه الشروط في ${TERMS_LAST_UPDATED_AR}. إن تغيّرت، فستُذكَر التغييرات في هذه الصفحة وفي إعدادات ‹ عن. لا يمكن لـ Qum أن يُرسِل إليك بريداً بشأن التغيير، لأنّه ليس لديه حساب.`],
             },
             {
-                heading: "12. التواصل",
+                heading: "13. التواصل",
                 paragraphs: [`لأسئلة بشأن هذه الشروط: اكتب إلى ${SUPPORT_EMAIL}.`],
             },
         ],
