@@ -26,7 +26,7 @@ const colorBody = "#606766";
 
 function AboutSection({ heading, children }: { heading: string; children: ReactNode }) {
     return (
-        <section className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-md:px-0">
+        <section className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-sm:px-0">
             <h2
                 className="w-full text-[24px] font-semibold leading-[32px]"
                 style={{ color: colorHeadline }}
@@ -54,7 +54,7 @@ export function AboutScreen() {
         <SiteLayout footer="none">
             <PageMeta {...pageMeta.about} />
 
-            <div className="flex w-full flex-col items-center gap-10 px-20 py-20 max-md:px-6 max-md:py-12">
+            <div className="flex w-full flex-col items-center gap-10 px-20 min-sm:max-lg:px-0 py-20 max-sm:px-6 max-sm:py-12">
                 <AboutSection heading={a.whatItIs.heading}>
                     <p>{a.whatItIs.body}</p>
                 </AboutSection>

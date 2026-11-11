@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { FeatureVideo } from "@/components/marketing/feature-video";
 import { ParallaxDrift, RiseIn } from "@/components/marketing/parallax";
 import { QumBrand } from "@/components/marketing/qum-brand";
@@ -33,7 +32,6 @@ import featReminder from "@/components/foundations/featured-icon/features_Icon-4
 
 const brandTeal = "#1e7285";
 const brandDeep = "#258ea6";
-const brandWash = "#e9f4f6";
 const colorHeadline = "#232b32";
 const colorFeatureHeadline = "#2c363f";
 const colorBody = "#808988";
@@ -106,35 +104,15 @@ const FEAT_ASSET: Record<FeatureV2Id, string> = {
 };
 
 function VideoCard({ id, label }: { id: FeatureV2Id; label: string }) {
-    // Figma 829:24211 — 1024×480 rounded card. No play button, no scrubber.
-    // Video plays only while the pointer is inside the card (Adam's ask).
-    //
-    // Safari rounded-corner workaround: Safari's video compositing layer
-    // historically ignores the parent's `overflow: hidden` + `border-radius`
-    // clip, bleeding opaque corners outside the rounded shape. The
-    // `-webkit-mask-image` below forces Safari to apply a mask that matches
-    // the border-radius, pulling the video into the parent's clip.
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const onEnter = () => {
-        const v = videoRef.current;
-        if (!v) return;
-        if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        v.play().catch(() => {});
-    };
-    const onLeave = () => {
-        videoRef.current?.pause();
-    };
     return (
         <div
-            className="relative isolate aspect-[1024/480] w-full max-w-[1024px] overflow-hidden rounded-[24px] border-2 border-[rgba(15,19,22,0.05)] shadow-[0_20px_24px_-4px_rgba(0,0,0,0.08),0_8px_8px_-4px_rgba(0,0,0,0.03),0_3px_3px_-1.5px_rgba(0,0,0,0.04)]"
+            className="relative isolate aspect-[1024/480] min-sm:max-lg:aspect-[88/45] w-full max-w-[1024px] overflow-hidden rounded-[24px] border-2 border-[rgba(15,19,22,0.05)] shadow-[0_20px_24px_-4px_rgba(0,0,0,0.08),0_8px_8px_-4px_rgba(0,0,0,0.03),0_3px_3px_-1.5px_rgba(0,0,0,0.04)]"
             style={{
                 WebkitMaskImage:
                     "radial-gradient(white, black)",
             }}
-            onMouseEnter={onEnter}
-            onMouseLeave={onLeave}
         >
-            <FeatureVideo ref={videoRef} id={id} label={label} />
+            <FeatureVideo id={id} label={label} />
         </div>
     );
 }
@@ -150,14 +128,14 @@ export const HomeScreen = () => {
             <PageMeta {...pageMeta.home} />
 
             {/* ----------------------- hero (822:3849) ----------------------- */}
-            <section className="flex w-full flex-col items-center gap-16 px-20 py-20 max-md:px-6 max-md:py-12">
-                <div className="flex w-full max-w-[768px] flex-col items-start gap-10 px-8 max-md:items-center max-md:px-0 max-md:text-center">
+            <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 py-20 min-sm:max-lg:py-24 max-sm:px-6 max-sm:py-12">
+                <div className="flex w-full max-w-[768px] flex-col items-start gap-10 px-8 max-sm:items-center max-sm:px-0 max-sm:text-center">
                     <ParallaxDrift speed={0.18}>
                         <Logomark96 />
                     </ParallaxDrift>
-                    <div className="flex w-full flex-col gap-6 max-md:items-center">
+                    <div className="flex w-full flex-col gap-6 max-sm:items-center">
                         <h1
-                            className="text-[48px] font-bold leading-[60px] tracking-[-0.96px] max-md:text-[36px] max-md:leading-[44px]"
+                            className="text-[48px] font-bold leading-[60px] tracking-[-0.96px] max-sm:text-[36px] max-sm:leading-[44px]"
                             style={{ color: colorHeadline }}
                         >
                             {v2.hero.headlineA}
@@ -165,15 +143,15 @@ export const HomeScreen = () => {
                             {v2.hero.headlineB}
                         </h1>
                         <p
-                            className="text-[30px] font-normal leading-[38px] max-md:text-[22px] max-md:leading-[30px]"
+                            className="text-[30px] font-normal leading-[38px] max-sm:text-[22px] max-sm:leading-[30px]"
                             style={{ color: colorBody }}
                         >
                             {v2.hero.sub}
                         </p>
                     </div>
-                    <div className="flex w-full flex-wrap items-center gap-x-8 gap-y-4 max-md:justify-center">
+                    <div className="flex w-full flex-wrap items-center gap-x-8 gap-y-4 max-sm:justify-center">
                         <PrimaryDownload label={v2.downloadCTA} />
-                        <p className="w-[320px] whitespace-pre-line text-base italic leading-6 max-md:w-auto max-md:text-center" style={{ color: colorBody }}>
+                        <p className="w-[320px] whitespace-pre-line text-base italic leading-6 max-sm:w-auto max-sm:text-center" style={{ color: colorBody }}>
                             {v2.hero.requirement}
                         </p>
                     </div>
@@ -185,19 +163,19 @@ export const HomeScreen = () => {
                 <section
                     key={section.id}
                     id={section.id}
-                    className="flex w-full flex-col items-center gap-16 px-20 pt-20 pb-32 max-md:gap-10 max-md:px-6 max-md:pt-12 max-md:pb-20"
+                    className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-32 max-sm:gap-10 max-sm:px-6 max-sm:pt-12 max-sm:pb-20"
                 >
-                    <RiseIn className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-md:items-center max-md:px-0 max-md:text-center">
+                    <RiseIn className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-sm:items-center max-sm:px-0 max-sm:text-center">
                         <img src={FEAT_ASSET[section.id]} alt="" className="size-18" aria-hidden />
-                        <div className="flex w-full flex-col gap-3 max-md:items-center">
+                        <div className="flex w-full flex-col gap-3 max-sm:items-center">
                             <h2
-                                className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-md:text-[28px] max-md:leading-[36px]"
+                                className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-sm:text-[28px] max-sm:leading-[36px]"
                                 style={{ color: colorFeatureHeadline }}
                             >
                                 {section.headline}
                             </h2>
                             <p
-                                className="text-[24px] font-normal leading-[32px] max-md:text-[18px] max-md:leading-[28px]"
+                                className="text-[24px] font-normal leading-[32px] max-sm:text-[18px] max-sm:leading-[28px]"
                                 style={{ color: colorBody }}
                             >
                                 {section.sub}
@@ -205,7 +183,7 @@ export const HomeScreen = () => {
                         </div>
                         <SecondaryDownload label={v2.downloadCTAShort} />
                     </RiseIn>
-                    <RiseIn distance={40} className="flex w-full justify-center">
+                    <RiseIn distance={40} className="flex w-full justify-center min-sm:max-lg:px-8">
                         <VideoCard id={section.id} label={section.sub} />
                     </RiseIn>
                 </section>

@@ -3,11 +3,11 @@ import { SiteFooter, type SiteFooterVariant } from "@/components/marketing/site-
 import { SiteNav } from "@/components/marketing/site-nav";
 import { useLang } from "@/providers/language-provider";
 
-export function SiteLayout({ children, footer = "full" }: PropsWithChildren<{ footer?: SiteFooterVariant }>) {
+export function SiteLayout({ children, footer = "full", background = "gradient" }: PropsWithChildren<{ footer?: SiteFooterVariant; background?: "gradient" | "plain" }>) {
     const { copy } = useLang();
     return (
         <div
-            className="flex min-h-dvh w-full max-w-full flex-col items-center overflow-x-clip"
+            className="flex min-h-dvh w-full max-w-full flex-col items-center overflow-clip"
             style={{
                 /*
                  * Parallax backdrop — matches the pasted recipe:
@@ -25,7 +25,8 @@ export function SiteLayout({ children, footer = "full" }: PropsWithChildren<{ fo
                  * iOS Safari ignores `background-attachment: fixed` and renders
                  * it as `scroll` — accepted trade-off for this technique.
                  */
-                backgroundImage:
+                backgroundColor: "#fbfcfc",
+                backgroundImage: background === "plain" ? "none" :
                     "radial-gradient(60% 40% at 15% 20%, rgba(222, 238, 242, 0.7), transparent 70%), radial-gradient(50% 35% at 85% 70%, rgba(233, 244, 246, 0.55), transparent 70%), linear-gradient(180deg, #fbfcfc 0%, #f6f9f8 100%)",
                 backgroundAttachment: "fixed",
                 backgroundPosition: "center",
@@ -39,7 +40,7 @@ export function SiteLayout({ children, footer = "full" }: PropsWithChildren<{ fo
             >
                 {copy.aria.skipToContent}
             </a>
-            <SiteNav />
+            <SiteNav plain={background === "plain"} />
             <main id="main" className="flex w-full min-w-0 flex-1 flex-col">
                 {children}
             </main>

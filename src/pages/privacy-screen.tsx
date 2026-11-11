@@ -141,10 +141,10 @@ export const PrivacyScreen = () => {
         <SiteLayout footer="legal">
             <PageMeta {...pageMeta.privacy} />
 
-            <div className="flex w-full flex-col items-center gap-10 px-20 py-20 max-md:px-6 max-md:py-12">
+            <div className="flex w-full flex-col items-center gap-10 px-20 min-sm:max-lg:px-0 py-20 max-sm:px-6 max-sm:py-12">
                 {/* title + last updated (Figma 845:33892) */}
-                <section className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-md:px-0" style={{ color: colorHeadline }}>
-                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-md:text-[28px] max-md:leading-[36px]">
+                <section className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-sm:px-0" style={{ color: colorHeadline }}>
+                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-sm:text-[28px] max-sm:leading-[36px]">
                         {p.title}
                     </h1>
                     <p className="text-[20px] leading-[30px]">
@@ -154,7 +154,7 @@ export const PrivacyScreen = () => {
                 </section>
 
                 {/* summary */}
-                <section className="flex w-full max-w-[768px] flex-col items-start gap-5 px-8 max-md:px-0 text-[20px] font-normal leading-[30px]" style={{ color: colorBody }}>
+                <section className="flex w-full max-w-[768px] flex-col items-start gap-5 px-8 max-sm:px-0 text-[20px] font-normal leading-[30px]" style={{ color: colorBody }}>
                     {p.summary.map((paragraph) => (
                         <LegalParagraph key={paragraph}>{paragraph}</LegalParagraph>
                     ))}
@@ -164,7 +164,7 @@ export const PrivacyScreen = () => {
                 {p.sections.map((section) => (
                     <section
                         key={section.heading}
-                        className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-md:px-0"
+                        className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-sm:px-0"
                     >
                         <h2 className="text-[24px] font-semibold leading-[32px]" style={{ color: colorHeadline }}>
                             {section.heading}

@@ -38,6 +38,12 @@
     transition-timing-function: inherit;
 }
 
+/* Keep Safari's end-of-page bounce from exposing the white browser canvas. */
+html {
+    overscroll-behavior-y: none;
+    background-color: #fbfcfc;
+}
+
 html,
 body {
     font-family: var(--font-body);

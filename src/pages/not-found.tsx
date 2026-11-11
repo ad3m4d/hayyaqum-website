@@ -1,50 +1,38 @@
-import { Button } from "@/components/base/buttons/button";
 import { PageMeta } from "@/components/marketing/page-meta";
+import { QumBrand } from "@/components/marketing/qum-brand";
 import { SiteLayout } from "@/components/marketing/site-layout";
+import { APP_STORE_URL } from "@/data/site";
 import { pageMeta } from "@/data/seo";
 
-const recoveryLinkClassName =
-    "min-h-7 font-normal text-[#1c6b7d] hover:font-semibold hover:text-brand-700 max-[480px]:min-h-11 *:data-text:no-underline hover:*:data-text:underline hover:*:data-text:decoration-brand-700 hover:*:data-text:decoration-from-font";
-
+/** Figma 874:38554 (desktop), 922:57468 (tablet). */
 export function NotFound() {
+    const buttonClassName = "inline-flex h-[52px] items-center justify-center gap-2.5 rounded-full bg-[#258ea6] px-8 text-lg font-semibold leading-7 text-[#fbfcfc] shadow-[0_1px_2px_#0000000d,inset_0_-2px_0_#0000000d,inset_0_0_0_1px_#0000002e] hover:bg-[#1e7285] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#258ea6]";
+    const buttonContent = <><img src="/assets/figma/apple-primary.svg" alt="" className="size-6" /><span>Go to Mac App Store</span></>;
     return (
-        <SiteLayout footer="legal">
+        <SiteLayout footer="legal" background="plain">
             <PageMeta {...pageMeta.notFound} />
-            <section className="relative flex w-full flex-1 flex-col items-center justify-center overflow-hidden px-20 py-20 min-[769px]:max-xl:px-12 max-md:py-16 max-[480px]:px-5 max-[480px]:py-12">
-                <div
+            <section className="relative flex w-full flex-1 items-center justify-center overflow-hidden py-20 max-sm:px-6 max-sm:py-12">
+                <img
+                    src="/assets/404-watermark.svg"
+                    width={1143}
+                    height={498}
+                    alt=""
                     aria-hidden
-                    className="pointer-events-none absolute inset-[19.78%_10.35%_19.78%_10.28%] z-0 select-none max-md:inset-x-0 max-md:inset-y-[22%]"
-                >
-                    <img
-                        src="/assets/404-watermark.svg"
-                        width={1143}
-                        height={498}
-                        alt=""
-                        className="mx-auto block h-full w-full max-w-none object-contain"
-                    />
-                </div>
-
-                <div className="relative z-10 flex w-full max-w-[1024px] flex-col items-center gap-6 px-8 text-center max-[480px]:gap-4 max-[480px]:px-0">
-                    <h1 className="max-w-[768px] text-display-xl font-bold tracking-[-1.2px] text-[#232b32] max-md:text-display-lg max-md:tracking-[-0.96px] max-[480px]:text-display-md max-[480px]:font-semibold max-[480px]:tracking-[-0.72px]">
-                        This page isn’t here
-                    </h1>
-                    <p className="max-w-[640px] text-display-xs font-normal text-[#606766] max-[480px]:text-lg">
-                        There’s nothing at this address on Qum’s site.
-                    </p>
-                    <nav aria-label="Continue" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 pt-2 max-[480px]:flex-col max-[480px]:gap-3">
-                        <Button href="/" color="link-color" size="lg" className={recoveryLinkClassName}>
-                            Home
-                        </Button>
-                        <Button href="/about" color="link-color" size="lg" className={recoveryLinkClassName}>
-                            What Qum is
-                        </Button>
-                        <Button href="/privacy" color="link-color" size="lg" className={recoveryLinkClassName}>
-                            Privacy
-                        </Button>
-                        <Button href="/terms" color="link-color" size="lg" className={recoveryLinkClassName}>
-                            Terms
-                        </Button>
-                    </nav>
+                    className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(100%-64px)] max-w-[1143px] -translate-x-1/2 -translate-y-1/2 select-none max-lg:w-full"
+                />
+                <div className="relative flex w-full max-w-[768px] flex-col items-center gap-8 text-center">
+                    <QumBrand size={96} />
+                    <div className="flex w-full flex-col items-center gap-4 px-8 max-sm:px-0">
+                        <h1 className="w-full max-w-[600px] text-[48px] font-bold leading-[60px] tracking-[-0.96px] text-[#232b32] max-sm:text-[36px] max-sm:leading-[44px] max-sm:tracking-[-0.72px]">
+                            Oops! Looks like you've hit a dead end!
+                        </h1>
+                        <p className="w-full max-w-[600px] text-[24px] font-normal leading-[32px] text-[#808988] max-sm:text-[20px] max-sm:leading-[30px]">
+                            The page you were searching for has vanished into thin air. Why not click below and head over to the Mac App Store? It's just a click away!
+                        </p>
+                    </div>
+                    <div className="flex h-[68px] items-end justify-center">
+                        {APP_STORE_URL ? <a href={APP_STORE_URL} className={buttonClassName}>{buttonContent}</a> : <span role="status" className={buttonClassName}>{buttonContent}</span>}
+                    </div>
                 </div>
             </section>
         </SiteLayout>

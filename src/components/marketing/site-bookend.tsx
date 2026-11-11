@@ -48,21 +48,21 @@ export function SiteBookend() {
     const { copy } = useLang();
     const v2 = copy.homeV2;
     return (
-        <section className="flex w-full flex-col items-center gap-16 px-20 pt-20 pb-10 max-md:px-6 max-md:pt-12">
-            <div className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-md:items-center max-md:px-0 max-md:text-center">
+        <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-10 max-sm:px-6 max-sm:pt-12">
+            <div className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-sm:items-center max-sm:px-0 max-sm:text-center">
                 <ParallaxDrift speed={-0.08}>
                     <QumBrand size={96} />
                 </ParallaxDrift>
-                <div className="flex w-full flex-col gap-6 max-md:items-center">
+                <div className="flex w-full flex-col gap-6 max-sm:items-center">
                     <h3
-                        className="text-[48px] font-semibold leading-[60px] tracking-[-0.96px] max-md:text-[36px] max-md:leading-[44px]"
+                        className="text-[48px] font-semibold leading-[60px] tracking-[-0.96px] max-sm:text-[36px] max-sm:leading-[44px]"
                         style={{ color: colorHeadline }}
                         lang="en"
                     >
                         {v2.bookend.wordmark}
                     </h3>
                     <p
-                        className="text-[30px] font-normal leading-[38px] max-md:text-[22px] max-md:leading-[30px]"
+                        className="text-[30px] font-normal leading-[38px] max-sm:text-[22px] max-sm:leading-[30px]"
                         style={{ color: colorBody }}
                     >
                         {v2.bookend.sub}
@@ -75,7 +75,7 @@ export function SiteBookend() {
             </div>
 
             <div
-                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 text-sm leading-5 max-md:flex-col max-md:items-start max-md:gap-3 max-md:px-0 max-md:text-center max-[480px]:items-center"
+                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-start max-sm:gap-3 max-sm:px-0 max-sm:text-center max-[480px]:items-center"
                 style={{ color: colorMuted }}
             >
                 <p>{v2.footer.copyright}</p>

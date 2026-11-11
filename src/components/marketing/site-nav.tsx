@@ -42,7 +42,7 @@ function FillInOverlay() {
  */
 const LANGUAGE_TOGGLE_ENABLED = false;
 
-export function SiteNav() {
+export function SiteNav({ plain = false }: { plain?: boolean }) {
     const { copy, toggle, lang } = useLang();
     void toggle;
     void lang;
@@ -50,8 +50,14 @@ export function SiteNav() {
     return (
         <header className="sticky top-0 z-50 flex w-full justify-center pt-6 pb-0">
             <div
-                className="mx-auto flex w-full max-w-[768px] items-center justify-between gap-4 rounded-full border border-white/40 bg-white/55 py-3 pl-5 pr-3 shadow-[0_1px_2px_rgba(15,19,22,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-xl backdrop-saturate-150 max-md:mx-4 max-md:max-w-none max-[480px]:py-2 max-[480px]:pl-3 max-[480px]:pr-2"
-                style={{ WebkitBackdropFilter: "saturate(150%) blur(24px)" }}
+                className="mx-auto flex w-full max-w-[768px] items-center justify-between gap-4 rounded-full border border-white/40 bg-white/55 py-3 pl-5 pr-3 shadow-[0_1px_2px_rgba(15,19,22,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-xl backdrop-saturate-150 min-sm:max-lg:pl-8 min-sm:max-lg:pr-8 max-sm:mx-4 max-sm:max-w-none max-[480px]:py-2 max-[480px]:pl-3 max-[480px]:pr-2"
+                style={plain ? {
+                    border: 0,
+                    background: "transparent",
+                    boxShadow: "none",
+                    backdropFilter: "none",
+                    WebkitBackdropFilter: "none",
+                } : { WebkitBackdropFilter: "saturate(150%) blur(24px)" }}
             >
                 <a
                     href="/"
