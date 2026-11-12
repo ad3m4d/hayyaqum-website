@@ -177,17 +177,17 @@ export const PrivacyScreen = () => {
             <div className="flex w-full flex-col items-center gap-10 px-20 min-sm:max-lg:px-0 py-20 max-sm:px-8 max-sm:py-16">
                 {/* title + last updated (Figma 845:33892) */}
                 <section className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-sm:px-0" style={{ color: colorHeadline }}>
-                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px]">
+                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-sm:text-[30px] max-sm:font-semibold max-sm:leading-[38px] max-sm:tracking-normal">
                         {p.title}
                     </h1>
-                    <p className="text-[20px] leading-[30px]">
-                        <span className="font-bold">{p.lastUpdated}:</span>{" "}
+                    <p className="text-[20px] leading-[30px] max-sm:text-[18px] max-sm:leading-7">
+                        <span className="font-bold max-sm:font-semibold">{p.lastUpdated}:</span>{" "}
                         {p.lastUpdatedDate}
                     </p>
                 </section>
 
                 {/* summary */}
-                <section className="flex w-full max-w-[768px] flex-col items-start gap-5 px-8 max-sm:px-0 text-[20px] font-normal leading-[30px]" style={{ color: colorBody }}>
+                <section className="flex w-full max-w-[768px] flex-col items-start gap-5 px-8 max-sm:px-0 text-[20px] font-normal leading-[30px] max-sm:text-[18px] max-sm:leading-7" style={{ color: colorBody }}>
                     {p.summary.map((paragraph) => (
                         <LegalParagraph key={paragraph}>{paragraph}</LegalParagraph>
                     ))}
@@ -202,7 +202,7 @@ export const PrivacyScreen = () => {
                         <h2 className="text-[24px] font-semibold leading-[32px]" style={{ color: colorHeadline }}>
                             {section.heading}
                         </h2>
-                        <div className="flex w-full flex-col gap-5 text-[20px] font-normal leading-[30px]" style={{ color: colorBody }}>
+                        <div className="flex w-full flex-col gap-5 text-[20px] font-normal leading-[30px] max-sm:text-[18px] max-sm:leading-7" style={{ color: colorBody }}>
                             {section.paragraphs.map((paragraph) => (
                                 <LegalParagraph key={paragraph}>{paragraph}</LegalParagraph>
                             ))}

@@ -34,7 +34,7 @@ function AboutSection({ heading, children }: { heading: string; children: ReactN
                 {heading}
             </h2>
             <div
-                className="flex w-full flex-col gap-5 text-[20px] font-normal leading-[30px]"
+                className="flex w-full flex-col gap-5 text-[20px] font-normal leading-[30px] max-sm:text-[18px] max-sm:leading-7"
                 style={{ color: colorBody }}
             >
                 {children}

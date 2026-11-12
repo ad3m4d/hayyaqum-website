@@ -36,7 +36,7 @@ export function TermsScreen() {
                 {section.heading}
             </h2>
             <div
-                className="flex w-full flex-col gap-5 text-[20px] font-normal leading-[30px]"
+                className="flex w-full flex-col gap-5 text-[20px] font-normal leading-[30px] max-sm:text-[18px] max-sm:leading-7"
                 style={{ color: colorBody }}
             >
                 {section.paragraphs.map((paragraph) => (
@@ -60,17 +60,17 @@ export function TermsScreen() {
                     className="flex w-full max-w-[768px] flex-col items-start gap-4 px-8 max-sm:px-0"
                     style={{ color: colorHeadline }}
                 >
-                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px]">
+                    <h1 className="text-[36px] font-bold leading-[44px] tracking-[-0.72px] max-sm:text-[30px] max-sm:font-semibold max-sm:leading-[38px] max-sm:tracking-normal">
                         {t.title}
                     </h1>
-                    <p className="text-[20px] leading-[30px]">
+                    <p className="text-[20px] leading-[30px] max-sm:text-[18px] max-sm:leading-7">
                         <span className="font-bold">{t.lastUpdated}:</span> {t.lastUpdatedDate}
                     </p>
                 </section>
 
                 {/* intro paragraphs + disclaimer callout */}
                 <section
-                    className="flex w-full max-w-[768px] flex-col items-start gap-5 px-8 max-sm:px-0 text-[20px] font-normal leading-[30px]"
+                    className="flex w-full max-w-[768px] flex-col items-start gap-5 px-8 max-sm:px-0 text-[20px] font-normal leading-[30px] max-sm:text-[18px] max-sm:leading-7"
                     style={{ color: colorBody }}
                 >
                     {t.intro.map((paragraph) => (
