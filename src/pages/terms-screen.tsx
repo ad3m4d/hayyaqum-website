@@ -90,9 +90,9 @@ export function TermsScreen() {
                             <div key={entry.id}>
                                 <p>{entry.reciter} · {entry.place}</p>
                                 <p className="flex flex-wrap items-baseline gap-x-1">
-                                    <a href={entry.licenceURL} className="font-semibold text-[#258ea6] underline underline-offset-2 hover:text-[#1e7285] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#258ea6]">{entry.licence}</a>
+                                    <a href={entry.licenceURL} className="font-semibold text-[#1c6b7d] underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#258ea6]">{entry.licence}</a>
                                     <span aria-hidden>·</span>
-                                    <a href={entry.sourceURL} aria-label={`Original recording: ${entry.reciter} · ${entry.place}`} className="font-semibold text-[#258ea6] underline underline-offset-2 hover:text-[#1e7285] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#258ea6]">Original recording</a>
+                                    <a href={entry.sourceURL} aria-label={`Original recording: ${entry.reciter} · ${entry.place}`} className="font-semibold text-[#1c6b7d] underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#258ea6]">Original recording</a>
                                 </p>
                             </div>
                         ))}
