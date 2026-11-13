@@ -8,10 +8,10 @@ export const SUPPORTED_LANGS = ["en", "ar"] as const;
 export type Lang = (typeof SUPPORTED_LANGS)[number];
 
 export const SUPPORT_EMAIL = "hello@hayyaqum.com";
-export const PRIVACY_EFFECTIVE_DATE_EN = "28 October 2026";
+export const PRIVACY_EFFECTIVE_DATE_EN = "13 November 2026";
 export const PRIVACY_LAST_UPDATED_EN = "13 November 2026";
 export const TERMS_LAST_UPDATED_EN = "13 November 2026";
-export const PRIVACY_EFFECTIVE_DATE_AR = "28 أكتوبر 2026";
+export const PRIVACY_EFFECTIVE_DATE_AR = "13 نوفمبر 2026";
 export const PRIVACY_LAST_UPDATED_AR = "13 نوفمبر 2026";
 export const TERMS_LAST_UPDATED_AR = "13 نوفمبر 2026";
 
@@ -453,7 +453,7 @@ const en: SiteCopy = {
             {
                 "heading": "Changes and contact",
                 "paragraphs": [
-                    "This policy originally took effect on 28 October 2026 and was last updated on 13 November 2026. The current notice is available on this page and through Settings › About › Privacy Policy. Changes to these practices will be reflected here. Qum has no account email list for notices.",
+                    "This policy took effect on 13 November 2026. The current notice is available on this page and through Settings › About › Privacy Policy. Changes to these practices will be reflected here. Qum has no account email list for notices.",
                     "Questions about privacy or local-data removal: write to hello@hayyaqum.com."
                 ]
             }
@@ -819,7 +819,7 @@ const ar: SiteCopy = {
             {
                 "heading": "التغييرات والتواصل",
                 "paragraphs": [
-                    "بدأ العمل بهذه السياسة في 28 أكتوبر 2026، وكان آخر تحديث لها في 13 نوفمبر 2026. تتاح النسخة الحالية في هذه الصفحة ومن إعدادات ‹ عن ‹ سياسة الخصوصية. ستنعكس التغييرات على الممارسات هنا. لا يملك Qum قائمة بريدية للحسابات لإرسال الإشعارات.",
+                    "بدأ العمل بهذه السياسة في 13 نوفمبر 2026. تتاح النسخة الحالية في هذه الصفحة ومن إعدادات ‹ عن ‹ سياسة الخصوصية. ستنعكس التغييرات على الممارسات هنا. لا يملك Qum قائمة بريدية للحسابات لإرسال الإشعارات.",
                     "لأسئلة الخصوصية أو إزالة البيانات المحلّية: راسل hello@hayyaqum.com."
                 ]
             }
