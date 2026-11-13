@@ -42,7 +42,6 @@ export function TermsScreen() {
                 {section.paragraphs.map((paragraph) => (
                     <LegalParagraph
                         key={paragraph}
-                        linkify={!/Privacy|الخصوصية/.test(section.heading)}
                     >
                         {paragraph}
                     </LegalParagraph>

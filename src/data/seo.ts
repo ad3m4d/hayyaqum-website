@@ -20,7 +20,7 @@ export const pageMeta = {
     privacy: {
         path: "/privacy",
         title: "Privacy Policy · Qum",
-        description: "Qum does not require an account. Prayer times, the Qibla, the log, and settings stay on this Mac. This site does not set cookies.",
+        description: "How Qum handles local prayer history, Apple location and place searches, notifications, website preferences, support messages and data retention.",
     },
     terms: {
         path: "/terms",

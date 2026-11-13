@@ -2,6 +2,12 @@ import { type ReactNode } from "react";
 import { SUPPORT_EMAIL } from "@/data/site";
 
 const LINK_TARGETS: { label: string; href: string }[] = [
+    { label: "Google Privacy Policy", href: "https://policies.google.com/privacy" },
+    { label: "سياسة خصوصية Google", href: "https://policies.google.com/privacy" },
+    { label: "Apple Privacy Policy", href: "https://www.apple.com/legal/privacy/" },
+    { label: "سياسة خصوصية Apple", href: "https://www.apple.com/legal/privacy/" },
+    { label: "شروط الاستخدام", href: "/terms" },
+    { label: "سياسة الخصوصية", href: "/privacy" },
     { label: "Terms of Use", href: "/terms" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: SUPPORT_EMAIL, href: `mailto:${SUPPORT_EMAIL}` },

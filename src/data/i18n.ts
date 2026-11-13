@@ -9,11 +9,11 @@ export type Lang = (typeof SUPPORTED_LANGS)[number];
 
 export const SUPPORT_EMAIL = "hello@hayyaqum.com";
 export const PRIVACY_EFFECTIVE_DATE_EN = "28 October 2026";
-export const PRIVACY_LAST_UPDATED_EN = "28 October 2026";
-export const TERMS_LAST_UPDATED_EN = "28 October 2026";
+export const PRIVACY_LAST_UPDATED_EN = "13 November 2026";
+export const TERMS_LAST_UPDATED_EN = "13 November 2026";
 export const PRIVACY_EFFECTIVE_DATE_AR = "28 أكتوبر 2026";
-export const PRIVACY_LAST_UPDATED_AR = "28 أكتوبر 2026";
-export const TERMS_LAST_UPDATED_AR = "28 أكتوبر 2026";
+export const PRIVACY_LAST_UPDATED_AR = "13 نوفمبر 2026";
+export const TERMS_LAST_UPDATED_AR = "13 نوفمبر 2026";
 
 export const CALCULATION_METHODS_EN = [
     "Muslim World League",
@@ -325,81 +325,139 @@ const en: SiteCopy = {
         notchQibla: "Qibla 114°",
     },
     privacy: {
-        title: "Privacy Policy",
-        sub: "What Qum stores, where it goes, and how to remove it.",
-        lastUpdated: "Last Updated",
-        lastUpdatedDate: PRIVACY_LAST_UPDATED_EN,
-        tableHeaders: { data: "Data type", why: "Why …?", shared: "Shared with …", kept: "Kept" },
-        tableCaption: "What Qum stores, why, who receives it, and how long it is kept",
-        summary: [
-            "Qum is a Mac app that doesn’t require an account. Prayer times, the Qibla, your log, and your settings stay on this Mac. A coordinate or a city name may go to Apple Location Services so Qum can name or resolve a place — that is the only data that leaves this Mac.",
-            "Qum does not run analytics, show ads, or track you, and this site does not set cookies.",
+        "title": "Privacy Policy",
+        "sub": "Local app data, Apple services, this website and your choices.",
+        "lastUpdated": "Last Updated",
+        "lastUpdatedDate": PRIVACY_LAST_UPDATED_EN,
+        "tableHeaders": {
+            "data": "Data type",
+            "why": "Why …?",
+            "shared": "Shared with …",
+            "kept": "Kept"
+        },
+        "tableCaption": "What Qum uses, why, who receives it, and how long it is kept",
+        "summary": [
+            "Qum does not require an account. Prayer-time and Qibla calculations run on your Mac. Prayer history, settings, selected places and Qibla calibration are stored locally. Apple services process automatic-location and place-search requests; the website and support email have separate data flows described below.",
+            "Qum does not run analytics, show ads or track you across apps or websites. This website does not set cookies or run analytics; browser preferences and ordinary hosting logs are described below."
         ],
-        sections: [
+        "sections": [
             {
-                heading: "What Qum stores …",
-                paragraphs: ["Qum does not ask for a name, email, or payment details. It uses only what the table lists, and only for the reason in that row."],
-                table: [
-                    { data: "Location (optional)", why: "Prayer times and Qibla on this Mac", sharedWith: "Apple, when Qum asks for the city name", retention: "Until you switch to a typed city, revoke Location Services, or uninstall" },
-                    { data: "City you type (optional)", why: "Prayer times and Qibla without Location Services", sharedWith: "Apple, to turn the name into a coordinate", retention: "Until you change the city or uninstall" },
-                    { data: "Prayer log", why: "I Prayed, and the streak on this Mac", sharedWith: "No one", retention: "Until you unmark the prayer or uninstall" },
-                    { data: "Settings", why: "Calculation method, theme, volume, Qibla calibration", sharedWith: "No one", retention: "Until you change them or uninstall" },
-                    { data: "Reminders", why: "Local alerts at prayer time", sharedWith: "Apple, to deliver the alert", retention: "Until you turn reminders off or uninstall" },
+                "heading": "What Qum uses …",
+                "paragraphs": [
+                    "The app does not ask you to register or provide payment details. The table distinguishes local app records from requests to Apple, visits to this website and messages you choose to send to support."
                 ],
+                "table": [
+                    {
+                        "data": "Automatic location (optional)",
+                        "why": "Prayer times, Qibla and place names",
+                        "sharedWith": "Apple Location Services; coordinates may be sent for reverse geocoding",
+                        "retention": "A local cache may remain after switching to a typed city or revoking permission; retained until replaced or local app data is removed"
+                    },
+                    {
+                        "data": "Place searches and selected city (optional)",
+                        "why": "Suggestions as you type; resolve a selected place to a coordinate and time zone",
+                        "sharedWith": "Apple MapKit search services",
+                        "retention": "Search text is held in memory; the selected place is stored locally until replaced or local app data is removed. Apple handles requests under its own policy"
+                    },
+                    {
+                        "data": "Prayer history",
+                        "why": "Completions, missed and made-up prayers, streaks, check-ins and reminder suppression",
+                        "sharedWith": "No upload by Qum",
+                        "retention": "Stored locally without an automatic expiry. Clearing a completion does not necessarily delete its record or related timestamps"
+                    },
+                    {
+                        "data": "Settings and calibration",
+                        "why": "Calculation method, theme, volume, reminders and the orientation of your desk",
+                        "sharedWith": "No upload by Qum",
+                        "retention": "Stored locally until changed or local app data is removed. Calibration can remain stored after it becomes stale"
+                    },
+                    {
+                        "data": "Audio-input activity",
+                        "why": "Keep adhan silent during meetings when enabled; defer prayer check-ins while another app uses audio input",
+                        "sharedWith": "No upload by Qum",
+                        "retention": "Queried locally; Qum does not store the queried process identifiers or audio-input state"
+                    },
+                    {
+                        "data": "Local notifications",
+                        "why": "Prayer alerts and streak reminders",
+                        "sharedWith": "The macOS notification subsystem",
+                        "retention": "Pending alerts are managed locally and cancelled or replaced as plans change; delivered alerts may remain in Notification Center"
+                    },
+                    {
+                        "data": "Website preferences and requests",
+                        "why": "Display the site and remember available display preferences",
+                        "sharedWith": "Browser storage on your device; website hosting infrastructure receives requests; Google if its font service is loaded",
+                        "retention": "Browser preferences remain until cleared or changed. Hosting-log retention depends on the hosting provider"
+                    },
+                    {
+                        "data": "Support messages (optional)",
+                        "why": "Respond to questions you email to hello@hayyaqum.com",
+                        "sharedWith": "The support inbox and email service providers",
+                        "retention": "Messages and attachments may remain in email records and backups. Contact support with questions about retention or deletion"
+                    }
+                ]
             },
             {
-                heading: "Location",
-                paragraphs: [
-                    "Qum uses location to calculate prayer times and Qibla direction for the place in use. Automatic Location Services are how Qum gets precise times for where this Mac is, because those times differ from place to place. Location Services remain optional: Qum asks when you choose automatic location — not at launch, and not for advertising.",
-                    "If you deny the permission, Qum does not read this Mac’s position. Type a city instead. You can turn Location Services off for Qum later in System Settings › Privacy & Security.",
-                    "To show a city name, Qum may send a coordinate to Apple Location Services. If you type a city, Qum may send that name to Apple to resolve a coordinate. Prayer-time and Qibla maths themselves run on this Mac. Apple may handle those place-name requests on its own systems, including outside the country you are in.",
-                ],
+                "heading": "Location and place searches",
+                "paragraphs": [
+                    "Automatic Location Services are optional and are used for prayer times and Qibla. On a first setup, Qum asks for location permission when you choose automatic location. If you have already allowed it, later launches and periodic refreshes can request an updated position.",
+                    "If you decline or revoke permission, Qum does not obtain new automatic fixes. Previously saved coordinates or places may remain on your Mac. You can select a city instead in Settings › Prayer times. Finding a new city requires an internet connection.",
+                    "When you type in the City field, Qum sends search fragments to Apple MapKit for suggestions before you select a result. Selecting a result sends a further request to resolve its coordinate and time zone. Qum may send an automatic coordinate to Apple to obtain a place name. These requests are not used by Qum for advertising or tracking.",
+                    "Apple processes these requests on its own systems, potentially outside your country, under the Apple Privacy Policy and the notices for its location and Maps services. Qum does not control Apple’s retention of requests already received."
+                ]
             },
             {
-                heading: "Notifications and the microphone",
-                paragraphs: [
-                    "If you turn reminders on, Qum asks to show a local alert and play a sound. Apple delivers that notification. Qum does not send marketing notifications. If you deny the permission, the app still runs; reminders do not appear. Turn them off in Qum › Sounds, or in System Settings.",
-                    "If you enable Stay silent in meetings, Qum checks whether another app is already using an audio input. It does not record the microphone, and it does not ask for microphone access.",
-                ],
+                "heading": "Notifications and audio-input activity",
+                "paragraphs": [
+                    "Prayer notifications and advance reminders are enabled by default in the current app. If notification permission has not yet been decided, Qum may ask when a prayer approaches or arrives, or when you enable notifications in Settings › Sounds. You can turn them off in Qum or deny or revoke notification permission in System Settings.",
+                    "These are local notifications, not marketing messages or notifications sent through a Qum server. Denying notification permission prevents OS notifications; the notch display and in-app prayer panels can still operate. Adhan playback has its own setting and requires Qum to be running.",
+                    "When Stay silent in meetings is enabled, Qum checks whether another process is using audio input to decide whether to suppress adhan sound. Prayer check-ins also consult audio-input activity to avoid interrupting you, independently of that adhan setting. The check can read process identifiers and bundle identifiers locally. Qum does not record microphone audio, request microphone access for this check, or upload or retain the queried identifiers and activity."
+                ]
             },
             {
-                heading: "Apple and this website",
-                paragraphs: [
-                    "Qum has no servers of its own. It does not run analytics, crash reporting, advertising, or a Qum account.",
-                    "Apple provides Location Services when you use automatic location or a typed city, and delivers the local notifications you have enabled. Buying or downloading Qum on the Mac App Store is handled by Apple. Qum does not receive your Apple Account or payment details.",
-                    "hayyaqum.com does not set cookies, run analytics, or show advertising. You can read this page without an account. The computers that serve it may keep ordinary web-server logs — IP address, time, and the page requested — as part of delivering the site.",
-                    "A Mac App Store listing, when it exists, is Apple’s; Qum does not receive that visit.",
-                ],
+                "heading": "Apple, this website and support",
+                "paragraphs": [
+                    "The app has no Qum account or developer-operated backend for prayer history, analytics or crash reporting. Apple provides location and Maps services and handles Mac App Store purchases or downloads. Qum does not receive your Apple Account credentials or payment details.",
+                    "This website does not set cookies, run analytics or show advertising. Its display code uses browser local storage for a theme preference (ui-theme); language controls, when available, may store a language preference (qum.lang). You can clear these through your browser’s website-data controls.",
+                    "The infrastructure serving hayyaqum.com receives ordinary web requests, including an IP address, request time and requested page, and may retain server logs. Third-party sites you open, including Apple and recording-license pages, handle those visits under their own policies. The site’s styles also reference Google Fonts for Arabic typography. If your browser loads that service, Google receives the font request and associated connection data under the Google Privacy Policy.",
+                    "If you email hello@hayyaqum.com, the support inbox and email providers receive your email address, message and any attachments you choose to send. Do not send prayer history, precise location or other sensitive details unless needed for your request. Support email is separate from the app’s local prayer store; it is not an account or a cloud backup of that store."
+                ]
             },
             {
-                heading: "Tracking",
-                paragraphs: ["Qum does not track you across apps or websites, does not show ads, and does not sell data. It does not use Apple’s tracking permission, because there is nothing to ask for."],
+                "heading": "Tracking",
+                "paragraphs": [
+                    "Qum does not track you across apps or websites, show ads or sell data. It does not request Apple’s tracking permission. Local prayer history is not uploaded by Qum."
+                ]
             },
             {
-                heading: "Keeping and deleting",
-                paragraphs: [
-                    "There is no Qum account, so there is no cloud copy to export and no delete-my-account button on a server.",
-                    "You can use a typed city and never grant Location Services. You can leave reminders off. Completions are visible in Qum on this Mac; unmark a prayer to remove it.",
-                    "To stop using this Mac’s position, switch to a typed city or revoke Location Services in System Settings. To delete everything Qum stored here — the log, settings, cached coordinate, and calibration — uninstall Qum.",
-                    "A place-name request Apple has already received is kept under Apple’s own policy, which Qum does not control.",
-                ],
+                "heading": "Keeping and deleting",
+                "paragraphs": [
+                    "There is no Qum account or developer-hosted copy of your prayer history. The current app does not provide an erase-all-local-data control. Local history may include completion state, missed or made-up status, scheduled times and check-in timestamps. It has no automatic expiry.",
+                    "Unmarking a prayer changes its completion status; it does not necessarily erase the underlying record or related timestamps. Switching to a typed city or revoking Location Services stops new automatic fixes but does not necessarily erase cached coordinates, saved places or calibration.",
+                    "Deleting the Qum app does not guarantee that its local data container, preferences or backup copies are removed. To remove local data, quit Qum and remove its associated data separately; if you need help identifying those files, contact hello@hayyaqum.com. Do not send us the files or your prayer history. Copies in backups must be managed separately using your backup system.",
+                    "You can clear website preferences in your browser and contact hello@hayyaqum.com about support-email data. These actions do not delete requests already received by Apple or records controlled by hosting and email providers; their policies and applicable obligations govern those records."
+                ]
             },
             {
-                heading: "Security",
-                paragraphs: ["What Qum stores stays in the macOS app sandbox on this Mac. Treat the prayer log like any other local file: a lost, stolen, or backed-up Mac still has it."],
+                "heading": "Security",
+                "paragraphs": [
+                    "Qum stores its app data in its macOS sandbox. The sandbox is an access boundary, not a promise that a lost, compromised or backed-up Mac has no readable copy. Protect your Mac and its backups. Website hosting and support email are separate from local app storage."
+                ]
             },
             {
-                heading: "Children",
-                paragraphs: ["Qum is not made for children and is not in Apple’s Kids Category. It has no accounts and does not collect a child’s data."],
+                "heading": "Children",
+                "paragraphs": [
+                    "Qum is not designed for children and is not in Apple’s Kids Category. It has no account-registration or advertising system. The location, local-storage, website and support practices described here still apply when the app or site is used; the absence of an account is not a guarantee that no data about a child can be processed."
+                ]
             },
             {
-                heading: "Changes",
-                paragraphs: [
-                    `This policy took effect on ${PRIVACY_EFFECTIVE_DATE_EN}. If what Qum does with data changes, this page and Settings › About › Privacy Policy will say so. Qum cannot email you about a change, because it has no account.`,
-                    `Questions: write to ${SUPPORT_EMAIL}.`,
-                ],
-            },
-        ],
+                "heading": "Changes and contact",
+                "paragraphs": [
+                    "This policy originally took effect on 28 October 2026 and was last updated on 13 November 2026. The current notice is available on this page and through Settings › About › Privacy Policy. Changes to these practices will be reflected here. Qum has no account email list for notices.",
+                    "Questions about privacy or local-data removal: write to hello@hayyaqum.com."
+                ]
+            }
+        ]
     },
     terms: {
         title: "Terms of Use",
@@ -432,17 +490,17 @@ const en: SiteCopy = {
                 heading: "3. Location Services",
                 paragraphs: [
                     "Location is used only for prayer-time calculation and Qibla direction for the place in use. That use is directly relevant to the App’s features.",
-                    "Prayer-time and Qibla maths run on this Mac. A coordinate or typed city name may be sent to Apple Location Services only to name or resolve a place. Location is not used for advertising, analytics, or tracking across apps or websites.",
-                    "Qum asks for Location Services when you choose automatic location — not for marketing. If you decline, Qum does not read this Mac’s position. Type a city instead. You can change or revoke access later in System Settings › Privacy & Security.",
-                    `Location purpose string used in the App: “Qum uses your location to calculate prayer times and Qibla direction for where this Mac is.”`,
+                    "Prayer-time and Qibla calculations run on your Mac. Search fragments go to Apple MapKit as you type; selecting a result resolves its coordinate and time zone. Automatic coordinates may go to Apple for place names. Qum does not use location for advertising or tracking. Stopping automatic location does not erase previously saved places or coordinates.",
+                    "On first setup, Qum asks for Location Services when you choose automatic location. With an existing grant, launch and periodic refreshes can request updated fixes. Declining or revoking permission stops new automatic fixes; a previously saved place or coordinate may remain. You can select a city in Settings › Prayer times; a new search requires internet access.",
+                    `The app explains that location is used to calculate prayer times and Qibla direction.`,
                     "Data practices for location are also described in the Privacy Policy.",
                 ],
             },
             {
                 heading: "4. Notifications and related permissions",
                 paragraphs: [
-                    "Local reminders, if enabled, are for prayer-time alerts you chose. They are not marketing messages. You can leave reminders off; the App still works.",
-                    "If Stay silent in meetings (or a similar setting) is enabled, Qum may check whether another app is already using an audio input. It does not record the microphone and does not request microphone access for that check.",
+                    "Prayer notifications and advance reminders are enabled by default. Qum may request notification permission when a prayer approaches or arrives, or when you enable notifications in Settings › Sounds. Denying OS notifications does not disable the notch or in-app panels. Adhan has a separate control and requires the app to be running. You can disable reminders; these are not marketing messages.",
+                    "When Stay silent in meetings is enabled, local audio-input activity is used to suppress adhan sound. Prayer check-ins also use that activity to defer interruptions, independently of the adhan setting. Qum may read process and bundle identifiers locally, but does not record microphone audio or upload or retain the queried identifiers and activity.",
                 ],
             },
             {
@@ -457,7 +515,7 @@ const en: SiteCopy = {
             },
             {
                 heading: "7. Third-party services",
-                paragraphs: ["Qum has no servers of its own for accounts or analytics. Apple may provide Location Services, deliver local notifications you enable, and handle Mac App Store purchase or download. Apple’s terms and privacy practices apply to those services. Qum does not receive your Apple Account or payment details."],
+                paragraphs: ["Qum has no developer-hosted account or prayer-history service. Apple provides location and MapKit search and handles Mac App Store purchases; macOS manages local notifications. Apple’s terms and privacy practices apply to its services. Website hosting and support email process requests and messages separately, as described in the Privacy Policy. Qum does not receive Apple Account credentials or payment details."],
             },
             {
                 heading: "8. Disclaimer of warranties",
@@ -493,7 +551,7 @@ const en: SiteCopy = {
         whatItDoes: { heading: "What it does …" },
         prayerTimes: {
             heading: "Prayer times",
-            body1: "Prayer times are calculated on this Mac. A coordinate or a city name may go to Apple Location Services so Qum can name or resolve a place; that is the only data that leaves this Mac.",
+            body1: "Prayer times are calculated on your Mac. Search fragments go to Apple MapKit as you type, and selected places and automatic coordinates may be sent to Apple for resolution or place names. Website requests and support messages are described separately in the Privacy Policy.",
             methodsLabel: (methods) => `Calculation methods: ${methods}.`,
             asrLabel: (asr) => `Asr can be ${asr}.`,
         },
@@ -633,81 +691,139 @@ const ar: SiteCopy = {
         notchQibla: "القبلة °114",
     },
     privacy: {
-        title: "سياسة الخصوصية",
-        sub: "ما يحفظه Qum، إلى أين يذهب، وكيف تزيله.",
-        lastUpdated: "آخر تحديث",
-        lastUpdatedDate: PRIVACY_LAST_UPDATED_AR,
-        tableHeaders: { data: "نوع البيانات", why: "السبب …؟", shared: "يُشارَك مع …", kept: "يُحفَظ" },
-        tableCaption: "ما يحفظه Qum، ولماذا، ومن يستلمه، وإلى متى يُحفَظ",
-        summary: [
-            "Qum تطبيق Mac لا يتطلّب حساباً. أوقات الصلاة والقبلة وسجلّك وإعداداتك تبقى على هذا الـ Mac. قد يُرسَل إحداثي أو اسم مدينة إلى خدمات موقع Apple لتسمية مكان أو تحديده — وهذه هي البيانات الوحيدة التي تغادر هذا الـ Mac.",
-            "لا يُجري Qum تحليلات، ولا يعرض إعلانات، ولا يتعقّبك، ولا يضع هذا الموقع ملفّات ارتباط (cookies).",
+        "title": "سياسة الخصوصية",
+        "sub": "بيانات التطبيق المحلّية وخدمات Apple والموقع الإلكتروني وخياراتك.",
+        "lastUpdated": "آخر تحديث",
+        "lastUpdatedDate": PRIVACY_LAST_UPDATED_AR,
+        "tableHeaders": {
+            "data": "نوع البيانات",
+            "why": "السبب …؟",
+            "shared": "يُشارَك مع …",
+            "kept": "مدة الحفظ"
+        },
+        "tableCaption": "البيانات التي يستخدمها Qum، والغرض منها، ومن يتلقّاها، ومدة حفظها",
+        "summary": [
+            "لا يتطلّب Qum حساباً. تجري حسابات أوقات الصلاة والقبلة على جهاز Mac، ويُحفَظ سجلّ الصلاة والإعدادات والأماكن المختارة ومعايرة القبلة محلّياً. تعالج خدمات Apple طلبات الموقع التلقائي والبحث عن الأماكن. وللموقع الإلكتروني وبريد الدعم تدفّقات بيانات منفصلة موضّحة أدناه.",
+            "لا يُجري Qum تحليلات، ولا يعرض إعلانات، ولا يتعقّبك بين التطبيقات والمواقع. لا يضع هذا الموقع ملفات ارتباط ولا يُجري تحليلات؛ ونوضّح أدناه تفضيلات المتصفّح وسجلات الاستضافة المعتادة."
         ],
-        sections: [
+        "sections": [
             {
-                heading: "ما يحفظه Qum …",
-                paragraphs: ["لا يطلب Qum اسماً ولا بريداً ولا تفاصيل دفع. يستخدم فقط ما يرد في الجدول، ولكل صفّ سببُه المذكور فيه."],
-                table: [
-                    { data: "الموقع (اختياري)", why: "أوقات الصلاة والقبلة على هذا الـ Mac", sharedWith: "Apple، حين يطلب Qum اسم المدينة", retention: "حتى تنتقل إلى مدينة مكتوبة، أو تُلغي خدمات الموقع، أو تُلغي التثبيت" },
-                    { data: "مدينة تكتبها (اختياري)", why: "أوقات الصلاة والقبلة دون خدمات الموقع", sharedWith: "Apple، لتحويل الاسم إلى إحداثي", retention: "حتى تُغيّر المدينة أو تُلغي التثبيت" },
-                    { data: "سجلّ الصلاة", why: "«صلّيت» والسلسلة على هذا الـ Mac", sharedWith: "لا أحد", retention: "حتى تُلغي علامة الصلاة أو تُلغي التثبيت" },
-                    { data: "الإعدادات", why: "طريقة الحساب والمظهر وشدّة الصوت ومعايرة القبلة", sharedWith: "لا أحد", retention: "حتى تُغيّرها أو تُلغي التثبيت" },
-                    { data: "التذكيرات", why: "تنبيهات محلّية عند وقت الصلاة", sharedWith: "Apple، لتسليم التنبيه", retention: "حتى تُطفئ التذكيرات أو تُلغي التثبيت" },
+                "heading": "البيانات التي يستخدمها Qum …",
+                "paragraphs": [
+                    "لا يطلب التطبيق التسجيل أو تقديم تفاصيل الدفع. يميّز الجدول بين سجلات التطبيق المحلّية وطلبات Apple وزيارات الموقع والرسائل التي تختار إرسالها إلى الدعم."
                 ],
+                "table": [
+                    {
+                        "data": "الموقع التلقائي (اختياري)",
+                        "why": "أوقات الصلاة والقبلة وأسماء الأماكن",
+                        "sharedWith": "خدمات موقع Apple؛ وقد تُرسَل الإحداثيات للحصول على اسم المكان",
+                        "retention": "قد تبقى نسخة محلّية بعد اختيار مدينة مكتوبة أو إلغاء الإذن، إلى أن تُستبدَل أو تُحذَف بيانات التطبيق المحلّية"
+                    },
+                    {
+                        "data": "البحث عن الأماكن والمدينة المختارة (اختياري)",
+                        "why": "اقتراحات أثناء الكتابة وتحديد إحداثيات المكان المختار ومنطقته الزمنية",
+                        "sharedWith": "خدمات البحث في Apple MapKit",
+                        "retention": "يُحفَظ نص البحث في الذاكرة؛ ويُحفَظ المكان المختار محلّياً حتى يُستبدَل أو تُحذَف بيانات التطبيق. تعالج Apple الطلبات وفق سياستها"
+                    },
+                    {
+                        "data": "سجلّ الصلاة",
+                        "why": "الصلوات المؤدّاة والفائتة والمقضية والسلسلة والمتابعة وإيقاف التذكيرات المتعلّقة بالصلاة",
+                        "sharedWith": "لا يرفعه Qum",
+                        "retention": "يُحفَظ محلّياً دون انتهاء تلقائي. إلغاء علامة الأداء لا يحذف بالضرورة السجلّ أو توقيتاته المرتبطة"
+                    },
+                    {
+                        "data": "الإعدادات والمعايرة",
+                        "why": "طريقة الحساب والمظهر والصوت والتذكيرات واتجاه المكتب",
+                        "sharedWith": "لا يرفعها Qum",
+                        "retention": "تُحفَظ محلّياً حتى تُغيَّر أو تُحذَف بيانات التطبيق. قد تبقى المعايرة محفوظة بعد أن تصبح قديمة"
+                    },
+                    {
+                        "data": "نشاط مُدخل الصوت",
+                        "why": "كتم الأذان في الاجتماعات عند تفعيل الخيار، وتأجيل المتابعة أثناء استخدام تطبيق آخر لمُدخل الصوت",
+                        "sharedWith": "لا يرفعه Qum",
+                        "retention": "يُستعلَم عنه محلّياً؛ ولا يحتفظ Qum بمعرّفات العمليات أو حالة مُدخل الصوت الناتجة عن الاستعلام"
+                    },
+                    {
+                        "data": "الإشعارات المحلّية",
+                        "why": "تنبيهات الصلاة وتذكيرات السلسلة",
+                        "sharedWith": "نظام الإشعارات في macOS",
+                        "retention": "تُدار التنبيهات المنتظرة محلّياً وتُلغى أو تُستبدَل عند تغيّر الخطة؛ وقد تبقى التنبيهات المسلّمة في مركز الإشعارات"
+                    },
+                    {
+                        "data": "تفضيلات الموقع وطلباته",
+                        "why": "عرض الموقع وتذكّر تفضيلات العرض المتاحة",
+                        "sharedWith": "تخزين المتصفّح على جهازك؛ وتتلقّى بنية الاستضافة الطلبات؛ وGoogle عند تحميل خدمة خطوطها",
+                        "retention": "تبقى تفضيلات المتصفّح حتى تُمسَح أو تُغيَّر. تعتمد مدة حفظ سجلات الاستضافة على المزوّد"
+                    },
+                    {
+                        "data": "رسائل الدعم (اختيارية)",
+                        "why": "الرد على الأسئلة المرسلة إلى hello@hayyaqum.com",
+                        "sharedWith": "صندوق بريد الدعم ومزوّدو البريد الإلكتروني",
+                        "retention": "قد تبقى الرسائل والمرفقات في سجلات البريد والنسخ الاحتياطية. تواصل مع الدعم بشأن الحفظ أو الحذف"
+                    }
+                ]
             },
             {
-                heading: "الموقع",
-                paragraphs: [
-                    "يستخدم Qum الموقع لحساب أوقات الصلاة واتجاه القبلة للمكان المستخدم. خدمات الموقع التلقائية هي الوسيلة للحصول على أوقات دقيقة لمكان هذا الـ Mac، لأنّ الأوقات تختلف بين الأماكن. تبقى خدمات الموقع اختيارية: يطلبها Qum حين تختار الموقع التلقائي — لا عند الإقلاع، ولا لأغراض إعلانية.",
-                    "إن رفضت الإذن، لن يقرأ Qum موقع هذا الـ Mac. اكتب مدينة بدلاً من ذلك. يمكنك إيقاف خدمات الموقع لـ Qum لاحقاً من إعدادات النظام ‹ الخصوصية والأمان.",
-                    "لعرض اسم مدينة، قد يُرسِل Qum إحداثياً إلى خدمات موقع Apple. إن كتبت مدينة، قد يُرسِل Qum الاسم إلى Apple لتحويله إلى إحداثي. أمّا حسابات الأوقات والقبلة فتجري على هذا الـ Mac. قد تعالج Apple طلبات تسمية الأماكن على أنظمتها، بما في ذلك خارج بلدك.",
-                ],
+                "heading": "الموقع والبحث عن الأماكن",
+                "paragraphs": [
+                    "خدمات الموقع التلقائية اختيارية وتُستخدم لأوقات الصلاة والقبلة. عند الإعداد الأول، يطلب Qum إذن الموقع حين تختار الموقع التلقائي. وإذا سبق أن منحته الإذن، فقد تطلب عمليات التشغيل والتحديثات الدورية اللاحقة موقعاً محدّثاً.",
+                    "إذا رفضت الإذن أو ألغيته، فلن يحصل Qum على مواقع تلقائية جديدة. وقد تبقى الإحداثيات أو الأماكن المحفوظة سابقاً على جهازك. يمكنك اختيار مدينة بدلاً من ذلك من إعدادات ‹ أوقات الصلاة. يتطلّب البحث عن مدينة جديدة اتصالاً بالإنترنت.",
+                    "عند الكتابة في حقل المدينة، يرسل Qum أجزاء نص البحث إلى Apple MapKit للحصول على اقتراحات قبل اختيار نتيجة. وعند اختيار نتيجة، يُرسَل طلب آخر لتحديد إحداثياتها ومنطقتها الزمنية. وقد يُرسِل Qum إحداثياً تلقائياً إلى Apple للحصول على اسم المكان. لا يستخدم Qum هذه الطلبات للإعلانات أو التعقّب.",
+                    "تعالج Apple هذه الطلبات على أنظمتها، وربما خارج بلدك، وفق سياسة خصوصية Apple وإشعارات خدمات الموقع والخرائط. لا يتحكّم Qum في مدة حفظ Apple للطلبات التي تلقّتها."
+                ]
             },
             {
-                heading: "الإشعارات والميكروفون",
-                paragraphs: [
-                    "إن فعّلت التذكيرات، يطلب Qum إظهار تنبيه محلّي وتشغيل صوت. Apple تسلّم ذلك التنبيه. لا يُرسِل Qum إشعارات تسويقية. إن رفضت الإذن، يبقى التطبيق يعمل؛ ولا تظهر التذكيرات. أطفئها من Qum ‹ الأصوات، أو من إعدادات النظام.",
-                    "إن فعّلت «اكتم الصوت في الاجتماعات»، يتحقّق Qum ممّا إذا كان تطبيق آخر يستخدم مُدخَل صوت. لا يُسجّل الميكروفون، ولا يطلب الإذن باستخدامه.",
-                ],
+                "heading": "الإشعارات ونشاط مُدخل الصوت",
+                "paragraphs": [
+                    "إشعارات الصلاة والتذكيرات المسبقة مفعّلة افتراضياً في التطبيق الحالي. إذا لم تكن قد قرّرت إذن الإشعارات، فقد يطلبه Qum عند اقتراب صلاة أو حلول وقتها، أو عند تفعيل الإشعارات من إعدادات ‹ الأصوات. يمكنك إيقافها في Qum أو رفض الإذن أو إلغاؤه من إعدادات النظام.",
+                    "هذه إشعارات محلّية، وليست رسائل تسويقية أو إشعارات يرسلها خادم Qum. يمنع رفض الإذن إشعارات النظام؛ لكن عرض الحزّ ولوحات الصلاة داخل التطبيق قد تستمر في العمل. لتشغيل الأذان إعداد مستقل، ويلزم أن يبقى Qum قيد التشغيل.",
+                    "عند تفعيل «اكتم الصوت في الاجتماعات»، يتحقّق Qum ممّا إذا كانت عملية أخرى تستخدم مُدخل الصوت ليقرّر كتم الأذان. وتستعلم متابعة الصلاة أيضاً عن نشاط مُدخل الصوت لتجنّب مقاطعتك، بصورة مستقلة عن إعداد كتم الأذان. قد يقرأ هذا التحقّق معرّفات العمليات والحزم محلّياً. لا يسجّل Qum صوت الميكروفون، ولا يطلب إذن الميكروفون لهذا التحقّق، ولا يرفع أو يحتفظ بالمعرّفات والنشاط الناتجين عنه."
+                ]
             },
             {
-                heading: "Apple وهذا الموقع",
-                paragraphs: [
-                    "ليست لـ Qum خوادم خاصّة. لا يُشغّل تحليلات، ولا تقارير أعطال، ولا إعلانات، ولا حساب Qum.",
-                    "توفّر Apple خدمات الموقع حين تستخدم الموقع التلقائي أو مدينة مكتوبة، وتسلّم الإشعارات المحلّية التي فعّلتها. وشراء Qum أو تنزيله من متجر تطبيقات Mac تتولاه Apple. لا يستلم Qum حساب Apple ولا تفاصيل الدفع.",
-                    "لا يضع hayyaqum.com ملفّات ارتباط، ولا يُجري تحليلات، ولا يعرض إعلانات. يمكنك قراءة هذه الصفحة دون حساب. قد تحتفظ حواسيب التقديم بسجلّات ويب اعتيادية — عنوان IP ووقت الطلب والصفحة المطلوبة — كجزء من تقديم الموقع.",
-                    "صفحة Qum على متجر تطبيقات Mac، حين تُنشَأ، هي ملك Apple؛ لا يستلم Qum تلك الزيارة.",
-                ],
+                "heading": "Apple والموقع الإلكتروني والدعم",
+                "paragraphs": [
+                    "لا يحتوي التطبيق على حساب Qum أو خدمة خلفية يديرها المطوّر لسجلّ الصلاة أو التحليلات أو تقارير الأعطال. توفّر Apple خدمات الموقع والخرائط وتتولّى الشراء أو التنزيل من متجر تطبيقات Mac. لا يتلقّى Qum بيانات دخول حساب Apple أو تفاصيل الدفع.",
+                    "لا يضع هذا الموقع ملفات ارتباط، ولا يُجري تحليلات، ولا يعرض إعلانات. تستخدم شيفرة العرض التخزين المحلّي للمتصفّح لتفضيل المظهر (ui-theme)؛ وقد تحفظ أدوات اللغة، عند إتاحتها، تفضيلاً للغة (qum.lang). يمكنك مسحها من أدوات بيانات المواقع في متصفّحك.",
+                    "تتلقّى البنية التي تستضيف hayyaqum.com طلبات الويب المعتادة، ومنها عنوان IP ووقت الطلب والصفحة المطلوبة، وقد تحتفظ بسجلات الخادم. وتعالج المواقع الخارجية التي تفتحها، بما فيها Apple وصفحات تراخيص التسجيلات، زياراتك وفق سياساتها. وتشير أنماط الموقع أيضاً إلى Google Fonts للخط العربي. إذا حمّل متصفّحك هذه الخدمة، تتلقّى Google طلب الخط وبيانات الاتصال المرتبطة به وفق سياسة خصوصية Google.",
+                    "إذا راسلت hello@hayyaqum.com، يتلقّى صندوق الدعم ومزوّدو البريد عنوان بريدك ورسالتك والمرفقات التي تختار إرسالها. لا ترسل سجلّ الصلاة أو موقعاً دقيقاً أو تفاصيل حسّاسة أخرى ما لم تلزم لطلبك. بريد الدعم منفصل عن سجلّ التطبيق المحلّي؛ وليس حساباً أو نسخة سحابية من السجلّ."
+                ]
             },
             {
-                heading: "التعقّب",
-                paragraphs: ["لا يتعقّبك Qum عبر التطبيقات أو المواقع، ولا يعرض إعلانات، ولا يبيع بيانات. ولا يستخدم إذن التعقّب في Apple، لأنّه ليس لديه ما يسأل عنه."],
+                "heading": "التعقّب",
+                "paragraphs": [
+                    "لا يتعقّبك Qum بين التطبيقات والمواقع، ولا يعرض إعلانات أو يبيع البيانات. ولا يطلب إذن التعقّب من Apple. لا يرفع Qum سجلّ الصلاة المحلّي."
+                ]
             },
             {
-                heading: "الحفظ والحذف",
-                paragraphs: [
-                    "لا يوجد حساب Qum، فلا توجد نسخة سحابية تُصدَّر، ولا زرّ «احذف حسابي» على خادم.",
-                    "يمكنك استخدام مدينة مكتوبة وعدم منح خدمات الموقع أبداً. يمكنك ترك التذكيرات مطفأة. تظهر الصلوات المؤدّاة في Qum على هذا الـ Mac؛ ألغِ علامة الصلاة لإزالتها.",
-                    "لإيقاف استخدام موقع هذا الـ Mac، انتقل إلى مدينة مكتوبة أو ألغِ خدمات الموقع من إعدادات النظام. ولحذف كلّ ما حفظه Qum هنا — السجلّ والإعدادات والإحداثي المخزّن والمعايرة — ألغِ تثبيت Qum.",
-                    "ما استلمته Apple من طلبات تسمية الأماكن يُحفَظ وفق سياسة Apple نفسها، وهو خارج سيطرة Qum.",
-                ],
+                "heading": "الاحتفاظ والحذف",
+                "paragraphs": [
+                    "لا يوجد حساب Qum أو نسخة من سجلّ الصلاة يستضيفها المطوّر. لا يوفّر التطبيق الحالي أداة لحذف جميع البيانات المحلّية. قد يتضمّن السجلّ حالة الأداء والصلوات الفائتة أو المقضية والأوقات المجدولة وتوقيتات المتابعة، وليس له انتهاء تلقائي.",
+                    "إلغاء علامة أداء صلاة يغيّر حالتها؛ ولا يمحو بالضرورة السجلّ الأساسي أو توقيتاته المرتبطة. إيقاف الموقع التلقائي أو إلغاء إذنه يمنع الحصول على مواقع جديدة، لكنه لا يمحو بالضرورة الإحداثيات المخزّنة أو الأماكن المحفوظة أو المعايرة.",
+                    "حذف تطبيق Qum لا يضمن إزالة حاوية بياناته المحلّية أو تفضيلاته أو نسخه الاحتياطية. لإزالة البيانات المحلّية، أغلق Qum وأزل بياناته المرتبطة بصورة منفصلة؛ وإن احتجت المساعدة في تحديد تلك الملفات، راسل hello@hayyaqum.com. لا ترسل إلينا الملفات أو سجلّ الصلاة. وتُدار نسخ البيانات الاحتياطية بصورة منفصلة في نظام النسخ الاحتياطي لديك.",
+                    "يمكنك مسح تفضيلات الموقع من المتصفّح والتواصل مع hello@hayyaqum.com بشأن بيانات بريد الدعم. لا تحذف هذه الإجراءات الطلبات التي تلقّتها Apple أو السجلات التي يتحكّم فيها مزوّدو الاستضافة والبريد؛ فتخضع تلك السجلات لسياساتهم والتزاماتهم المطبّقة."
+                ]
             },
             {
-                heading: "الأمان",
-                paragraphs: ["ما يحفظه Qum يبقى داخل الـ sandbox الخاص بـ macOS على هذا الـ Mac. تعامَل مع سجلّ الصلاة كأيّ ملفّ محلّي: Mac مفقود أو مسروق أو منسوخ احتياطياً لا يزال يحتوي السجلّ."],
+                "heading": "الأمان",
+                "paragraphs": [
+                    "يحفظ Qum بيانات التطبيق داخل حاويته المعزولة في macOS. هذه الحماية حدّ للوصول وليست ضماناً لعدم وجود نسخة مقروءة على جهاز مفقود أو مخترق أو منسوخ احتياطياً. احمِ جهاز Mac ونسخه الاحتياطية. استضافة الموقع وبريد الدعم منفصلان عن التخزين المحلّي للتطبيق."
+                ]
             },
             {
-                heading: "الأطفال",
-                paragraphs: ["Qum ليس مصنوعاً للأطفال وليس ضمن فئة الأطفال لدى Apple. لا توجد فيه حسابات ولا يجمع بيانات طفل."],
+                "heading": "الأطفال",
+                "paragraphs": [
+                    "لم يُصمَّم Qum للأطفال، وليس ضمن فئة الأطفال لدى Apple، ولا يحتوي على تسجيل حسابات أو نظام إعلانات. تظل ممارسات الموقع والتخزين المحلّي والموقع الإلكتروني والدعم الموضّحة هنا منطبقة عند الاستخدام؛ فغياب الحساب لا يضمن عدم معالجة أي بيانات تتعلّق بطفل."
+                ]
             },
             {
-                heading: "التغييرات",
-                paragraphs: [
-                    `بدأ العمل بهذه السياسة في ${PRIVACY_EFFECTIVE_DATE_AR}. إن تغيّر ما يفعله Qum بالبيانات، فستُذكَر التغييرات في هذه الصفحة وفي إعدادات ‹ عن ‹ سياسة الخصوصية. لا يمكن لـ Qum أن يُرسِل إليك بريداً بشأن التغيير، لأنّه ليس لديه حساب.`,
-                    `للأسئلة: اكتب إلى ${SUPPORT_EMAIL}.`,
-                ],
-            },
-        ],
+                "heading": "التغييرات والتواصل",
+                "paragraphs": [
+                    "بدأ العمل بهذه السياسة في 28 أكتوبر 2026، وكان آخر تحديث لها في 13 نوفمبر 2026. تتاح النسخة الحالية في هذه الصفحة ومن إعدادات ‹ عن ‹ سياسة الخصوصية. ستنعكس التغييرات على الممارسات هنا. لا يملك Qum قائمة بريدية للحسابات لإرسال الإشعارات.",
+                    "لأسئلة الخصوصية أو إزالة البيانات المحلّية: راسل hello@hayyaqum.com."
+                ]
+            }
+        ]
     },
     terms: {
         title: "شروط الاستخدام",
@@ -740,17 +856,17 @@ const ar: SiteCopy = {
                 heading: "3. خدمات الموقع",
                 paragraphs: [
                     "يُستخدم الموقع فقط لحساب أوقات الصلاة واتجاه القبلة للمكان المستخدم. هذا الاستخدام ذو صلة مباشرة بوظائف التطبيق.",
-                    "حسابات الأوقات والقبلة تجري على هذا الـ Mac. قد يُرسَل إحداثي أو اسم مدينة مكتوبة إلى خدمات موقع Apple فقط لتسمية المكان أو تحديده. لا يُستخدم الموقع للإعلانات ولا للتحليلات ولا للتعقّب بين التطبيقات والمواقع.",
-                    "يطلب Qum خدمات الموقع حين تختار الموقع التلقائي — لا للتسويق. إن رفضت، لن يقرأ Qum موقع هذا الـ Mac. اكتب مدينة بدلاً من ذلك. يمكنك تغيير الإذن أو إلغاؤه لاحقاً من إعدادات النظام ‹ الخصوصية والأمان.",
-                    `نصّ غرض الموقع المستخدَم في التطبيق: «يستخدم Qum موقعك لحساب أوقات الصلاة واتجاه القبلة لمكان هذا الـ Mac.»`,
+                    "تجري حسابات الأوقات والقبلة على جهاز Mac. تُرسَل أجزاء البحث إلى Apple MapKit أثناء الكتابة، ويُرسَل طلب لتحديد إحداثيات النتيجة المختارة ومنطقتها الزمنية. وقد تُرسَل الإحداثيات التلقائية إلى Apple للحصول على اسم المكان. لا يستخدم Qum الموقع للإعلانات أو التعقّب. إيقاف الموقع التلقائي لا يمحو الأماكن أو الإحداثيات المحفوظة سابقاً.",
+                    "عند الإعداد الأول، يطلب Qum إذن الموقع حين تختار الموقع التلقائي. وإذا سبق منح الإذن، فقد تطلب عمليات التشغيل والتحديثات الدورية مواقع محدّثة. الرفض أو إلغاء الإذن يمنع المواقع التلقائية الجديدة؛ وقد يبقى مكان أو إحداثي محفوظ سابقاً. يمكنك اختيار مدينة من إعدادات ‹ أوقات الصلاة؛ ويتطلّب البحث الجديد اتصالاً بالإنترنت.",
+                    `يوضّح التطبيق أنّ الموقع يُستخدم لحساب أوقات الصلاة واتجاه القبلة.`,
                     "ممارسات بيانات الموقع موصوفة أيضاً في سياسة الخصوصية.",
                 ],
             },
             {
                 heading: "4. الإشعارات والأذونات ذات الصلة",
                 paragraphs: [
-                    "التذكيرات المحلّية، عند تفعيلها، هي لتنبيهات أوقات الصلاة التي اخترتها. وليست رسائل تسويقية. يمكنك ترك التذكيرات مطفأة؛ ويبقى التطبيق يعمل.",
-                    "إن فُعِّل «اكتم الصوت في الاجتماعات» (أو إعداد مشابه)، قد يتحقّق Qum ممّا إذا كان تطبيق آخر يستخدم مُدخَل صوت. لا يُسجّل الميكروفون ولا يطلب إذن الميكروفون لهذا التحقّق.",
+                    "إشعارات الصلاة والتذكيرات المسبقة مفعّلة افتراضياً. قد يطلب Qum إذن الإشعارات عند اقتراب صلاة أو حلول وقتها، أو عند تفعيلها من إعدادات ‹ الأصوات. رفض إشعارات النظام لا يعطّل الحزّ أو اللوحات داخل التطبيق. للأذان إعداد مستقل، ويلزم أن يبقى التطبيق قيد التشغيل. يمكنك إيقاف التذكيرات؛ وهي ليست رسائل تسويقية.",
+                    "عند تفعيل «اكتم الصوت في الاجتماعات»، يُستخدم نشاط مُدخل الصوت محلّياً لكتم الأذان. وتستخدم متابعة الصلاة هذا النشاط أيضاً لتأجيل المقاطعات، بصورة مستقلة عن إعداد الأذان. قد يقرأ Qum معرّفات العمليات والحزم محلّياً، لكنه لا يسجّل صوت الميكروفون ولا يرفع أو يحتفظ بالمعرّفات والنشاط الناتجين عن الاستعلام.",
                 ],
             },
             {
@@ -763,7 +879,7 @@ const ar: SiteCopy = {
             },
             {
                 heading: "7. خدمات الطرف الثالث",
-                paragraphs: ["ليست لـ Qum خوادم خاصّة للحسابات أو التحليلات. قد توفّر Apple خدمات الموقع، وتسلّم الإشعارات المحلّية التي تفعّلها، وتتولّى الشراء أو التنزيل من متجر تطبيقات Mac. تطبّق شروط Apple وممارساتها الخصوصية على تلك الخدمات. لا يستلم Qum حساب Apple ولا تفاصيل الدفع."],
+                paragraphs: ["لا يوفّر Qum حساباً أو خدمة لسجلّ الصلاة يستضيفها المطوّر. توفّر Apple خدمات الموقع والبحث في MapKit وتتولّى مشتريات متجر تطبيقات Mac؛ ويدير macOS الإشعارات المحلّية. تطبّق شروط Apple وممارساتها الخصوصية على خدماتها. تعالج الاستضافة وبريد الدعم الطلبات والرسائل بصورة منفصلة كما توضّح سياسة الخصوصية. لا يتلقّى Qum بيانات دخول حساب Apple أو تفاصيل الدفع."],
             },
             {
                 heading: "8. إخلاء الضمانات",
@@ -799,7 +915,7 @@ const ar: SiteCopy = {
         whatItDoes: { heading: "ما الذي يفعله …" },
         prayerTimes: {
             heading: "أوقات الصلاة",
-            body1: "تُحسَب أوقات الصلاة على هذا الـ Mac. قد يُرسَل إحداثي أو اسم مدينة إلى خدمات موقع Apple لتسمية مكان أو تحديده؛ وهذه هي البيانات الوحيدة التي تغادر هذا الـ Mac.",
+            body1: "تجري حسابات أوقات الصلاة على جهاز Mac. تُرسَل أجزاء البحث إلى Apple MapKit أثناء الكتابة، ويُحدَّد موقع النتيجة المختارة ومنطقتها الزمنية. وقد تُرسَل الإحداثيات التلقائية إلى Apple للحصول على اسم المكان. يوضّح إشعار الخصوصية تدفّقات الموقع الإلكتروني وبريد الدعم بصورة منفصلة.",
             methodsLabel: (methods) => `طرق الحساب: ${methods}.`,
             asrLabel: (asr) => `العصر يمكن أن يكون ${asr}.`,
         },

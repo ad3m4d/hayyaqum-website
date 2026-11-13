@@ -1,0 +1,43 @@
+# Website legal review — 13 November 2026
+
+Scope: Privacy Policy, related Terms passages, About disclosures, privacy metadata and the legacy legal-data exports. This is a source and local-preview review. These changes have not been deployed to hayyaqum.com. App behavior and App Store Connect were not modified.
+
+## Implemented corrections
+
+- Corrected the retention table and deletion section: unmarking changes completion state; saved rows/timestamps may remain; disabling automatic location or revoking permission does not erase its cache; deleting the app does not guarantee erasure of its container, preferences or backups.
+- Disclosed the absence of an erase-all control without inventing one or claiming support can remotely delete a local prayer store. Users can contact support for help identifying local files without sending their history.
+- Disclosed MapKit search fragments sent while typing, selected-place resolution, reverse geocoding, connectivity requirements and subsequent automatic refreshes after permission has been granted.
+- Corrected notification timing and defaults, distinguished OS notifications from in-app panels, and explained the separate adhan control.
+- Disclosed local process/input-activity queries for prayer check-ins independently of the adhan meeting-silence toggle, including queried identifiers and the absence of recording/upload/persistence in the inspected implementation.
+- Separated local app storage from hosting logs, browser local storage, optional support messages and third-party visits. Disclosed the conditional Google Fonts reference found in the stylesheet.
+- Removed the absolute “only data that leaves this Mac” claim from English and Arabic About text and policy summaries. Corrected the privacy search/social description.
+- Updated English and Arabic privacy and related Terms copy; set Last Updated to 13 November 2026 and preserved the original privacy effective date.
+- Replaced duplicate English legal documents in `site.ts` with exports from the canonical translated copy. Fixed Arabic legal link recognition and enabled Terms' Privacy Policy links; Apple and Google privacy references now link to the appropriate external policies.
+
+## Remaining improvements, in priority order
+
+| Priority | Finding / evidence | Improvement needed |
+|---|---|---|
+| High | The pages identify Qum as the product/publisher but do not clearly identify the legal operator/data controller. The earlier Connect inspection showed FlareDock LLC, while app copyright and other materials use different names. | Confirm the contracting entity and controller, jurisdiction and required business/contact details, then identify them consistently. Do not substitute an assumed entity or residential address. |
+| High | Hosting and email providers, actual retention periods, processing locations and deletion processes are not established by the repo. The revised policy is deliberately explicit about those unknown boundaries rather than inventing a period. | Inventory the actual hosting/CDN/email processors and settings, establish retention schedules and support-deletion practice, and publish concrete periods or defensible criteria. Include transfer safeguards and user-rights/complaint routes where applicable to the actual markets and legal bases. This needs operational facts and jurisdiction-specific review. |
+| High | The app still has no erase-all control, and local history does not expire automatically. Policy correction alone does not erase data. | Implement and verify local erasure, or publish a tested, precise removal guide for supported macOS versions, including backups and notification cleanup. Update the policy only once that route is real. |
+| High | Terms introduce a broad agreement on use/download, while Connect currently selects Apple's Standard EULA. | Clarify that the App Store app license is governed by the selected EULA and define the website terms' scope and precedence. Do not quietly create a conflicting custom EULA on a web page. [Apple Standard EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/) |
+| High | Terms' reverse-engineering/IP clauses do not explicitly preserve permissions under bundled open-source and Creative Commons licenses. Audio credits exist; the audit did not find the `adhan-swift` MIT notice in the app or hosted credits. | Add the full MIT notice and other required notices to the distributed app, then mirror them on the site. Preserve third-party license permissions explicitly; verify audio attribution and distribution conditions. Hosting a notice alone does not repair a missing bundled notice. |
+| Medium | Terms do not explain the paid upfront model, Apple-managed refunds or non-excludable consumer rights beyond generic “maximum extent permitted” wording. | Describe the verified purchase model without hard-coded territorial prices; link Apple's relevant purchase/refund information; have the warranty/liability wording reviewed against applicable consumer protections. Do not promise refunds the developer cannot issue. |
+| Medium | Terms' accuracy section omits daylight calibration, movement/rotation invalidation and the requirement to remain running for adhan/panels. | Add a concise explanation of those actual limitations; distinguish geometric bearing from desk orientation and personal logging from proof of prayer observance. A disclaimer does not cure inaccurate marketing or territorial permit requirements. |
+| Medium | Support is discoverable mainly through legal text and is not a prominent help destination. | Add a visible Help/contact entry and a useful support page with local-data removal, permissions, city-search and calibration troubleshooting. Test inbox delivery. |
+| Medium | Arabic data is maintained but the public language toggle remains disabled. The acknowledgements heading and explanatory text in `terms-screen.tsx` are hard-coded in English. | Obtain a fluent Arabic legal-language review, translate surrounding acknowledgements UI while preserving proper author/license names, and test Arabic rendering/RTL before enabling it. This change did not enable the language toggle. |
+| Medium | `globals.css` references Google Fonts externally; the build reports that its `@import` appears after other rules. Actual external requests depend on build/browser handling. | Prefer a properly licensed self-hosted Arabic font, or correct the import and verify the resulting network behavior and disclosure. The stylesheet warning was left unchanged because font delivery is outside the requested policy correction. |
+| Low | The current change notices point to a current page but do not provide a policy history or a method for highlighting material revisions. | Keep dated versions/changelog and define how material changes are surfaced to existing users. Preserve original effective dates separately from revision dates. |
+| Low | Legal text describes site storage accurately from source, but no production network/cookie trace or hosting-configuration audit was completed in this task. | Verify the deployed site with extensions disabled and check cookies/storage, third-party requests, redirect behavior, TLS and legal-page reachability after deployment. |
+
+Apple requires an accessible privacy policy with clear retention/deletion explanations; accuracy remains the basis for these edits. See [App Review Guidelines 5.1.1](https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage). The improvements above distinguish observed document gaps from obligations that depend on the operator's actual jurisdiction and processing.
+
+## Verification and limits
+
+- `npm run build`: TypeScript, client build, SSR build and all prerender routes completed successfully after correcting an initial TS2741 error caused by omitted required privacy `sub` fields.
+- Production prerenders regenerated for `/privacy`, `/privacy.html`, `/terms`, `/about` and `/about.html` as part of the normal build.
+- English Privacy and Terms inspected in a local browser. The retention text, table, revision date and Apple/Google/privacy/email links render; Terms' privacy cross-links are present.
+- English/Arabic object structure and correction coverage checked from source. Arabic was not activated or visually tested through the production language provider because its toggle is disabled.
+- No claim is made that these copy changes establish GDPR/other statutory compliance, resolve App Store privacy labels, fix app erasure behavior, satisfy mainland China permits or complete third-party licensing.
+- Existing stylesheet warning remains: `@import rules must precede all rules aside from @charset and @layer statements` for Google Fonts.
