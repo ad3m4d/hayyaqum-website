@@ -3,7 +3,6 @@ import { LegalParagraph } from "@/components/marketing/legal-copy";
 import { PageMeta } from "@/components/marketing/page-meta";
 import { SiteLayout } from "@/components/marketing/site-layout";
 import { pageMeta } from "@/data/seo";
-import { acknowledgments } from "@/data/acknowledgments";
 import { useLang } from "@/providers/language-provider";
 
 /**
@@ -81,25 +80,7 @@ export function TermsScreen() {
                 </section>
 
                 {/* numbered sections */}
-                {t.sections.slice(0, -1).map(renderSection)}
-                <section id="acknowledgments" className="flex w-full max-w-[768px] scroll-mt-32 flex-col items-start gap-4 px-8 max-sm:px-0">
-                    <h2 className="text-[24px] font-semibold leading-[32px]" style={{ color: colorHeadline }}>12. Acknowledgments</h2>
-                    <div lang="en" className="flex min-w-0 flex-col gap-4 text-lg font-normal leading-7" style={{ color: colorBody }}>
-                        <p>The adhan you hear in Qum was recorded and shared by other people. These are their credits and terms.</p>
-                        {acknowledgments.entries.map((entry) => (
-                            <div key={entry.id}>
-                                <p>{entry.reciter} · {entry.place}</p>
-                                <p className="flex flex-wrap items-baseline gap-x-1">
-                                    <a href={entry.licenceURL} className="font-semibold text-[#1c6b7d] underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#258ea6]">{entry.licence}</a>
-                                    <span aria-hidden>·</span>
-                                    <a href={entry.sourceURL} aria-label={`Original recording: ${entry.reciter} · ${entry.place}`} className="font-semibold text-[#1c6b7d] underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#258ea6]">Original recording</a>
-                                </p>
-                            </div>
-                        ))}
-                        <p>{acknowledgments.modificationNotice}</p>
-                    </div>
-                </section>
-                {t.sections.slice(-1).map(renderSection)}
+                {t.sections.map(renderSection)}
             </div>
         </SiteLayout>
     );
