@@ -1,13 +1,13 @@
 import { PageMeta } from "@/components/marketing/page-meta";
 import { QumBrand } from "@/components/marketing/qum-brand";
 import { SiteLayout } from "@/components/marketing/site-layout";
-import { APP_STORE_URL } from "@/data/site";
 import { pageMeta } from "@/data/seo";
+import { useLang } from "@/providers/language-provider";
 
 /** Figma 874:38554 (desktop), 922:57468 (tablet). */
 export function NotFound() {
+    const { copy } = useLang();
     const buttonClassName = "inline-flex h-[52px] items-center justify-center gap-2.5 rounded-full bg-[#258ea6] px-8 text-lg font-semibold leading-7 text-[#fbfcfc] shadow-[0_1px_2px_#0000000d,inset_0_-2px_0_#0000000d,inset_0_0_0_1px_#0000002e] hover:bg-[#1e7285] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#258ea6]";
-    const buttonContent = <><img src="/assets/figma/apple-primary.svg" alt="" className="size-6" /><span>Go to Mac App Store</span></>;
     return (
         <SiteLayout footer="legal" background="plain">
             <PageMeta {...pageMeta.notFound} />
@@ -24,14 +24,14 @@ export function NotFound() {
                     <QumBrand size={96} className="max-sm:size-16" />
                     <div className="flex w-full flex-col items-center gap-4 px-8 max-sm:px-0">
                         <h1 className="w-full max-w-[600px] text-[48px] font-bold leading-[60px] tracking-[-0.96px] text-[#232b32] max-sm:text-[36px] max-sm:leading-[44px] max-sm:font-semibold max-sm:tracking-[-0.72px]">
-                            Oops! Looks like you've hit a dead end!
+                            {copy.notFound.title}
                         </h1>
                         <p className="w-full max-w-[600px] text-[24px] font-normal leading-[32px] text-[#808988] max-sm:text-[20px] max-sm:leading-[30px]">
-                            The page you were searching for has vanished into thin air. Why not click below and head over to the Mac App Store? It's just a click away!
+                            {copy.notFound.body}
                         </p>
                     </div>
                     <div className="flex h-[68px] items-end justify-center max-sm:w-full max-sm:[&>*]:w-full">
-                        {APP_STORE_URL ? <a href={APP_STORE_URL} className={buttonClassName}>{buttonContent}</a> : <span role="status" className={buttonClassName}>{buttonContent}</span>}
+                        <a href="/" className={buttonClassName}>{copy.notFound.action}</a>
                     </div>
                 </div>
             </section>

@@ -10,15 +10,18 @@
  * in from the left (scale-x 0 → 1) over 300ms ease-out.
  */
 type Props = {
-    href: string;
+    href?: string;
     children: React.ReactNode;
 };
 
 export function FooterLink({ href, children }: Props) {
+    const Element = href ? "a" : "button";
     return (
-        <a
+        <Element
             href={href}
-            className="group relative inline-flex items-center gap-4 text-sm leading-5 text-[#a1acaa] transition-colors duration-300 ease-out outline-brand hover:font-medium hover:text-[#258ea6] focus-visible:outline-2 focus-visible:outline-offset-2"
+            type={href ? undefined : "button"}
+            aria-disabled={href ? undefined : true}
+            className="group relative inline-flex cursor-pointer items-center gap-4 text-sm leading-5 text-[#a1acaa] transition-colors duration-300 ease-out outline-brand hover:font-medium hover:text-[#258ea6] focus-visible:outline-2 focus-visible:outline-offset-2"
         >
             <span className="relative inline-flex max-h-5 shrink-0 items-center gap-1.5">
                 {children}
@@ -27,6 +30,6 @@ export function FooterLink({ href, children }: Props) {
                     className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#218095] transition-transform duration-300 ease-out group-hover:scale-x-100"
                 />
             </span>
-        </a>
+        </Element>
     );
 }

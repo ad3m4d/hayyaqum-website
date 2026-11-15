@@ -10,12 +10,17 @@ export const pageMeta = {
     home: {
         path: "/",
         title: "Qum · Prayer times in the MacBook notch",
-        description: "Qum is a Mac app that puts the next prayer, the Qibla, and the adhan in the MacBook notch. No account, no ads, no tracking. Requires a MacBook with a notch.",
+        description: "Prayer times, Qibla direction, silent reminders, and a private prayer log in your MacBook notch. Designed for MacBooks with a notched built-in display.",
     },
     about: {
         path: "/about",
         title: "What Qum is · Qum",
-        description: "Qum is a prayer-times Mac app for notched MacBooks. It is not an iPhone app and not a menu-bar timer. Prayer times and Qibla stay on this Mac.",
+        description: "Learn about Qum’s prayer times, sun-calibrated Qibla direction, local prayer log, and supported MacBook models.",
+    },
+    faqs: {
+        path: "/faqs",
+        title: "Frequently asked questions · Qum",
+        description: "Answers about Qum’s silent prayer reminders, check-ins, qada, Qibla, supported Macs, location, privacy, and local prayer history.",
     },
     privacy: {
         path: "/privacy",
@@ -25,16 +30,16 @@ export const pageMeta = {
     terms: {
         path: "/terms",
         title: "Terms of Use · Qum",
-        description: "Qum is a personal Mac utility for prayer times and Qibla. It is not a religious authority. Location is used to calculate times for where this Mac is.",
+        description: "Read the terms for using Qum, including calculation accuracy, optional Location Services, third-party services, and privacy.",
     },
     notFound: {
         path: "/404",
-        title: "This page isn’t here · Qum",
-        description: "There’s nothing at this address on Qum’s site.",
+        title: "Page not found · Qum",
+        description: "We can’t find this page. Return to the Qum homepage.",
     },
 } as const satisfies Record<string, PageMeta>;
 
-export const prerenderPaths = ["/", "/about", "/privacy", "/privacy.html", "/terms"] as const;
+export const prerenderPaths = ["/", "/about", "/faqs", "/privacy", "/privacy.html", "/terms"] as const;
 
 export function canonicalUrl(path: string) {
     if (path === "/privacy.html") return `${SITE_ORIGIN}/privacy`;
@@ -44,6 +49,7 @@ export function canonicalUrl(path: string) {
 
 export function metaForPath(path: string): PageMeta {
     if (path === "/about") return pageMeta.about;
+    if (path === "/faqs") return pageMeta.faqs;
     if (path === "/privacy" || path === "/privacy.html") return pageMeta.privacy;
     if (path === "/terms") return pageMeta.terms;
     if (path === "/404") return pageMeta.notFound;

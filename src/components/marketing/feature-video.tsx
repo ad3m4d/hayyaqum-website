@@ -24,7 +24,7 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
         video.current?.pause();
         setLoading(false);
     };
-    const play = useCallback(() => {
+    const play = useCallback((): void => {
         const el = video.current;
         if (!el) return;
         window.dispatchEvent(new CustomEvent(PLAY_EVENT, { detail: el }));
@@ -50,10 +50,11 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
             // pause() can reject a pending play() during hover/visibility changes.
             // That cancellation is expected, including a quick leave/re-enter.
             if (reason instanceof DOMException && reason.name === "AbortError") {
-                wanted.current = false;
+                // A newer visibility/play request may already want playback again.
+                // Preserve that intent; finally retries once this request settles.
                 return;
             }
-            // Safari may disable hover autoplay in its per-site settings.
+            // Safari may disable autoplay in its per-site settings.
             // Keep the explicit play button usable instead of showing a media error.
             if (reason instanceof DOMException && reason.name === "NotAllowedError") {
                 wanted.current = false;
@@ -67,6 +68,9 @@ function Demo({ id, label, lang }: Props & { lang: string }) {
         }).finally(() => {
             pending.current = false;
             setLoading(false);
+            // A quick scroll out and back in can pause a still-pending play().
+            // The re-entry request cannot start until that promise settles.
+            if (wanted.current && el.paused && !document.hidden) play();
         });
     }, [id, lang]);
 

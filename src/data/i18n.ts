@@ -59,7 +59,7 @@ export type PrivacySection = LegalSection & {
     table?: readonly PrivacyTableRow[];
 };
 
-export type FeatureV2Id = "expand" | "streak" | "qibla" | "adhan" | "reminder";
+export type FeatureV2Id = "expand" | "streak" | "qibla" | "adhan" | "reminder" | "qada";
 export type FeatureV2Copy = {
     id: FeatureV2Id;
     headline: string;
@@ -201,6 +201,7 @@ export type SiteCopy = {
         logo: string;
         primaryNav: string;
     };
+    notFound: { title: string; body: string; action: string };
 };
 
 /* ---------------- ENGLISH ---------------- */
@@ -229,10 +230,10 @@ const en: SiteCopy = {
     home: {
         beta: "Currently in beta",
         downloadCTA: "Download for Mac",
-        hero: { headlineA: "Prayer times.", headlineB: "In the notch.", sub: "Qum puts the next prayer, the Qibla, and the adhan in the MacBook notch. Quietly, five times a day." },
+        hero: { headlineA: "Prayer times.", headlineB: "In the notch.", sub: "Qum puts prayer times, Qibla direction, and silent prayer reminders in the MacBook notch. Quietly, five times a day." },
         always: { headlineA: "The next prayer,", headlineB: "always visible.", sub: "A countdown to Maghrib while you work. Jumuʿah on Friday. Sunrise and sunset in the same breath." },
         qibla: { headlineA: "Qibla,", headlineB: "from your Mac.", sub: "Mac has no compass. Qum solves the bearing as geometry — calibrate once and the direction stays." },
-        adhan: { headlineA: "Adhan at the", headlineB: "right second.", sub: "Pick a reciter you know. The notch plays it the moment Maghrib enters, then steps aside." },
+        adhan: { headlineA: "Prayer reminders at the", headlineB: "right second.", sub: "A silent panel appears when prayer begins. Choose Confirm prayer to acknowledge the reminder; the later check-in records completion." },
         quietly: { headlineA: "Quietly", headlineB: "in your day.", sub: "Nothing on your Dock, no banners. Qum reads a busy microphone and waits." },
         bookend: { headline: "Prayer times. In the notch." },
         demoAriaLabel: "Interactive demo",
@@ -244,17 +245,18 @@ const en: SiteCopy = {
         hero: {
             headlineA: "Hayya Qum,",
             headlineB: "five times a day, get on your feet.",
-            sub: "Qum puts the next prayer, the Qibla, and the adhan in the MacBook notch, so the workday still has salah in it.",
+            sub: "Prayer times, Qibla direction, and gentle reminders. Right in your MacBook notch.",
             requirement: "Requires a MacBook with a notch:\nPro (2021+) or Air (2022+).",
         },
         downloadCTA: "Download on the Mac App Store",
         downloadCTAShort: "Download for Mac",
         sections: [
-            { id: "expand",   headline: "Give it a click, I’ll open the day.",         sub: "When you want more than a glance, give me a hover and the whole day unfolds under the notch." },
-            { id: "streak",   headline: "Keep the hours, I’ll keep the count.",       sub: "I’ve been quietly counting since Monday. Four prayers on time, four small acts of good deeds." },
-            { id: "qibla",    headline: "Wherever you land, I’ll already know.",      sub: "You boarded in Doha and you’ll land in London; the prayer times, the Qibla, will be ready for you." },
-            { id: "adhan",    headline: "When the hour comes, I’ll call it.",         sub: "The same words that have called people to prayer for fourteen centuries, arriving now beside your keyboard." },
-            { id: "reminder", headline: "Ten minutes out, I’ll lean in and whisper.", sub: "People once watched the sun for this quarter-hour. Now a reminder before each prayer lives on your notch." },
+            { id: "expand", headline: "Give it a click, I’ll open the day.", sub: "A glance for the next prayer. A hover for the whole day. I’ll keep the times just under your notch." },
+            { id: "qibla", headline: "Wherever you land, I’ll already know.", sub: "From Doha to London, wherever you are, find the direction of the Kaaba using the sun." },
+            { id: "streak", headline: "Keep the hours, I’ll keep the count.", sub: "You make time for prayer. I’ll keep the count. Record each one, and watch the days of small, steady steps gather." },
+            { id: "reminder", headline: "Ten minutes out, I’ll lean in and whisper.", sub: "People once watched the sun for the approaching prayer. Now a quiet reminder lives in your notch, as early as you choose." },
+            { id: "adhan", headline: "When the hour comes, I’ll call it.", sub: "When the hour comes, a quiet invitation appears beside your work. A moment to pause, before the day carries on." },
+            { id: "qada", headline: "When there’s one to make up, I’ll remind you.", sub: "Some prayers are still on your list. Come back when you’re ready, record each one you make up, and I’ll keep your place." },
         ],
         bookend: {
             wordmark: "Hayya Qum · هَيَّا قُمْ",
@@ -269,11 +271,10 @@ const en: SiteCopy = {
         },
     },
     features: [
-        { id: "reminder", label: "A reminder before each prayer", caption: "Before each prayer, Qum reminds you in the notch. At prayer time, the adhan plays.", overlayTitle: "Prayer times that live in the notch" },
-        { id: "adhan", label: "The adhan, played on your Mac", caption: "When it’s time, the notch plays the adhan. Confirm with I Prayed." },
-        { id: "streak", label: "A prayer streak on your Mac", caption: "Mark each prayer with I Prayed. Your streak stays on this Mac." },
-        { id: "qibla", label: "Qibla direction from your desk", caption: "Qum shows Qibla direction from your desk. Calibrate once, and the direction stays in the notch." },
-        { id: "theme", label: "A theme that follows each prayer", caption: "The notch follows the day. Fajr does not look like Maghrib." },
+        { id: "reminder", label: "A reminder before each prayer", caption: "Set reminders before each prayer. A silent panel appears in the notch when prayer time begins.", overlayTitle: "Prayer times that live in the notch" },
+        { id: "streak", label: "A prayer streak on your Mac", caption: "Record completed prayers and follow your progress toward a daily goal. Your history stays on your Mac." },
+        { id: "qibla", label: "Qibla direction from your desk", caption: "Find the Qibla for your location. Calibrate with the sun and recalibrate whenever you move or rotate your Mac." },
+        { id: "theme", label: "A theme that follows each prayer", caption: "The notch changes its appearance for each prayer, from Fajr to Isha." },
     ],
     player: {
         play: (name) => `Play ${name}`,
@@ -326,25 +327,25 @@ const en: SiteCopy = {
     },
     privacy: {
         "title": "Privacy Policy",
-        "sub": "Local app data, Apple services, this website and your choices.",
-        "lastUpdated": "Last Updated",
+        "sub": "How Qum uses data and the choices you have.",
+        "lastUpdated": "Last updated",
         "lastUpdatedDate": PRIVACY_LAST_UPDATED_EN,
         "tableHeaders": {
             "data": "Data type",
-            "why": "Why …?",
-            "shared": "Shared with …",
-            "kept": "Kept"
+            "why": "Purpose",
+            "shared": "Recipients",
+            "kept": "Retention"
         },
         "tableCaption": "What Qum uses, why, who receives it, and how long it is kept",
         "summary": [
-            "Qum does not require an account. Prayer-time and Qibla calculations run on your Mac. Prayer history, settings, selected places and Qibla calibration are stored locally. Apple services process automatic-location and place-search requests; the website and support email have separate data flows described below.",
-            "Qum does not run analytics, show ads or track you across apps or websites. This website does not set cookies or run analytics; browser preferences and ordinary hosting logs are described below."
+            "Qum does not require an account. It calculates prayer times and Qibla direction on your Mac. Prayer history, settings, selected places, and calibration are stored locally. Apple processes location and place-search requests. Website and support-email data are described separately below.",
+            "Qum does not run analytics, show ads, or track you across apps or websites. This website does not set cookies or run analytics. Browser preferences and hosting logs are explained below."
         ],
         "sections": [
             {
-                "heading": "What Qum uses …",
+                "heading": "Data Qum uses",
                 "paragraphs": [
-                    "The app does not ask you to register or provide payment details. The table distinguishes local app records from requests to Apple, visits to this website and messages you choose to send to support."
+                    "Qum does not ask you to register or enter payment details. The table below covers local app data, requests to Apple, website visits, and messages you send to support."
                 ],
                 "table": [
                     {
@@ -355,7 +356,7 @@ const en: SiteCopy = {
                     },
                     {
                         "data": "Place searches and selected city (optional)",
-                        "why": "Suggestions as you type; resolve a selected place to a coordinate and time zone",
+                        "why": "Suggest places as you type and find a selected place’s coordinates and time zone",
                         "sharedWith": "Apple MapKit search services",
                         "retention": "Search text is held in memory; the selected place is stored locally until replaced or local app data is removed. Apple handles requests under its own policy"
                     },
@@ -367,13 +368,13 @@ const en: SiteCopy = {
                     },
                     {
                         "data": "Settings and calibration",
-                        "why": "Calculation method, theme, volume, reminders and the orientation of your desk",
+                        "why": "Calculation method, theme, reminders and the orientation of your desk",
                         "sharedWith": "No upload by Qum",
                         "retention": "Stored locally until changed or local app data is removed. Calibration can remain stored after it becomes stale"
                     },
                     {
                         "data": "Audio-input activity",
-                        "why": "Keep adhan silent during meetings when enabled; defer prayer check-ins while another app uses audio input",
+                        "why": "Defer prayer check-ins while another app uses audio input",
                         "sharedWith": "No upload by Qum",
                         "retention": "Queried locally; Qum does not store the queried process identifiers or audio-input state"
                     },
@@ -409,9 +410,9 @@ const en: SiteCopy = {
             {
                 "heading": "Notifications and audio-input activity",
                 "paragraphs": [
-                    "Prayer notifications and advance reminders are enabled by default in the current app. If notification permission has not yet been decided, Qum may ask when a prayer approaches or arrives, or when you enable notifications in Settings › Sounds. You can turn them off in Qum or deny or revoke notification permission in System Settings.",
-                    "These are local notifications, not marketing messages or notifications sent through a Qum server. Denying notification permission prevents OS notifications; the notch display and in-app prayer panels can still operate. Adhan playback has its own setting and requires Qum to be running.",
-                    "When Stay silent in meetings is enabled, Qum checks whether another process is using audio input to decide whether to suppress adhan sound. Prayer check-ins also consult audio-input activity to avoid interrupting you, independently of that adhan setting. The check can read process identifiers and bundle identifiers locally. Qum does not record microphone audio, request microphone access for this check, or upload or retain the queried identifiers and activity."
+                    "Prayer notifications and advance reminders are enabled by default. If you have not chosen whether to allow notifications, Qum may ask as a prayer approaches or begins, or when you enable notifications in Settings › Sounds. You can turn them off in Qum or change notification permission in System Settings.",
+                    "Notifications are scheduled locally. They are not marketing messages and do not come from a Qum server. If you deny permission, macOS notifications stop, but the notch and in-app prayer panels can still work. Qum must be running to show the silent prayer panel. Version 1 does not play adhan recordings.",
+                    "Prayer check-ins consult audio-input activity to avoid interrupting you. The check can read process identifiers and bundle identifiers locally. Qum does not record microphone audio, request microphone access for this check, or upload or retain the queried identifiers and activity."
                 ]
             },
             {
@@ -430,7 +431,7 @@ const en: SiteCopy = {
                 ]
             },
             {
-                "heading": "Keeping and deleting",
+                "heading": "Data retention and deletion",
                 "paragraphs": [
                     "There is no Qum account or developer-hosted copy of your prayer history. The current app does not provide an erase-all-local-data control. Local history may include completion state, missed or made-up status, scheduled times and check-in timestamps. It has no automatic expiry.",
                     "Unmarking a prayer changes its completion status; it does not necessarily erase the underlying record or related timestamps. Switching to a typed city or revoking Location Services stops new automatic fixes but does not necessarily erase cached coordinates, saved places or calibration.",
@@ -441,7 +442,7 @@ const en: SiteCopy = {
             {
                 "heading": "Security",
                 "paragraphs": [
-                    "Qum stores its app data in its macOS sandbox. The sandbox is an access boundary, not a promise that a lost, compromised or backed-up Mac has no readable copy. Protect your Mac and its backups. Website hosting and support email are separate from local app storage."
+                    "Qum stores app data in its macOS sandbox, which limits access between apps. It does not guarantee that data on a lost or compromised Mac, or in a backup, cannot be read. Protect your Mac and its backups. Website hosting and support email are separate from local app storage."
                 ]
             },
             {
@@ -453,23 +454,23 @@ const en: SiteCopy = {
             {
                 "heading": "Changes and contact",
                 "paragraphs": [
-                    "This policy took effect on 13 November 2026. The current notice is available on this page and through Settings › About › Privacy Policy. Changes to these practices will be reflected here. Qum has no account email list for notices.",
-                    "Questions about privacy or local-data removal: write to hello@hayyaqum.com."
+                    "This policy took effect on 13 November 2026. You can find the current policy here or in Settings › About › Privacy Policy. Updates to our data practices will appear on this page. Qum has no account email list for sending notices.",
+                    "For questions about privacy or removing local data, email hello@hayyaqum.com."
                 ]
             }
         ]
     },
     terms: {
         title: "Terms of Use",
-        sub: "What Qum is, what it isn't, and the rules that come with it.",
-        lastUpdated: "Last Updated",
+        sub: "Terms for using Qum and its website.",
+        lastUpdated: "Last updated",
         lastUpdatedDate: TERMS_LAST_UPDATED_EN,
         intro: ['These Terms of Use (“Terms”) govern use of the Qum Mac app (the “App”) and related information on hayyaqum.com. By downloading, installing, or using Qum, you agree to these Terms. If you do not agree, stop using the App and uninstall it.'],
-        disclaimerLabel: "Utility & Location Disclaimer:",
+        disclaimerLabel: "About calculations and location",
         disclaimerAria: "Utility and location disclaimer",
         disclaimerParagraphs: [
-            "Qum is a personal Mac utility for prayer times, Qibla direction, and local reminders for people who already keep salah in the day. It is NOT a religious authority, preaching app, fatwa service, or source of religious instruction.",
-            "Automatic Location Services are how Qum gets precise prayer times and Qibla for where this Mac is, because those times differ from place to place; if you decline Location, you can type a city instead. Calculated times depend on the method you choose and are not a guarantee that they match every mosque or scholarly timetable — follow a local authority when that is what you intend.",
+            "Qum is a personal Mac utility for prayer times, Qibla direction, and local reminders. It is not a religious authority, preaching app, fatwa service, or source of religious instruction.",
+            "Qum uses your location to calculate local prayer times and Qibla direction. You can select a city instead of using Location Services. Calculated times depend on your settings and may differ from mosque or scholarly timetables. If you follow a local authority, use its published times.",
         ],
         sections: [
             {
@@ -482,14 +483,14 @@ const en: SiteCopy = {
             {
                 heading: "2. Accuracy of prayer times and Qibla",
                 paragraphs: [
-                    "Prayer times and Qibla are astronomical and geographic calculations that run on this Mac. They depend on the place used (automatic Location Services, or a city you type), the calculation method and conventions you choose in Settings, and the date together with this Mac’s clock and time zone.",
-                    "Times differ by location. Automatic location exists so times and Qibla can follow where this Mac is. Qum does not guarantee that a calculated time matches every mosque schedule or every regional practice. Where a local authority publishes different times, follow that authority if that is what you intend.",
+                    "Qum calculates prayer times and Qibla direction on your Mac using astronomy and geography. Results depend on the selected location, calculation method and conventions, date, and your Mac’s clock and time zone.",
+                    "Prayer times vary by location. Automatic location lets Qum update its calculations as your Mac moves. Calculated times may not match every mosque schedule or regional practice. If you follow a local authority, use its published times.",
                 ],
             },
             {
                 heading: "3. Location Services",
                 paragraphs: [
-                    "Location is used only for prayer-time calculation and Qibla direction for the place in use. That use is directly relevant to the App’s features.",
+                    "Qum uses location to calculate prayer times and Qibla direction for the selected place.",
                     "Prayer-time and Qibla calculations run on your Mac. Search fragments go to Apple MapKit as you type; selecting a result resolves its coordinate and time zone. Automatic coordinates may go to Apple for place names. Qum does not use location for advertising or tracking. Stopping automatic location does not erase previously saved places or coordinates.",
                     "On first setup, Qum asks for Location Services when you choose automatic location. With an existing grant, launch and periodic refreshes can request updated fixes. Declining or revoking permission stops new automatic fixes; a previously saved place or coordinate may remain. You can select a city in Settings › Prayer times; a new search requires internet access.",
                     `The app explains that location is used to calculate prayer times and Qibla direction.`,
@@ -499,8 +500,8 @@ const en: SiteCopy = {
             {
                 heading: "4. Notifications and related permissions",
                 paragraphs: [
-                    "Prayer notifications and advance reminders are enabled by default. Qum may request notification permission when a prayer approaches or arrives, or when you enable notifications in Settings › Sounds. Denying OS notifications does not disable the notch or in-app panels. Adhan has a separate control and requires the app to be running. You can disable reminders; these are not marketing messages.",
-                    "When Stay silent in meetings is enabled, local audio-input activity is used to suppress adhan sound. Prayer check-ins also use that activity to defer interruptions, independently of the adhan setting. Qum may read process and bundle identifiers locally, but does not record microphone audio or upload or retain the queried identifiers and activity.",
+                    "Prayer notifications and advance reminders are enabled by default. Qum may request notification permission when a prayer approaches or arrives, or when you enable notifications in Settings › Sounds. Denying OS notifications does not disable the notch or in-app panels. The silent prayer panel requires the app to be running. Version 1 does not play adhan recordings. You can disable reminders; these are not marketing messages.",
+                    "Prayer check-ins use local audio-input activity to defer interruptions. Qum may read process and bundle identifiers locally, but does not record microphone audio or upload or retain the queried identifiers and activity.",
                 ],
             },
             {
@@ -542,25 +543,30 @@ const en: SiteCopy = {
     about: {
         kicker: "Qum",
         title: "What Qum is",
-        lede: "Qum is a Mac app that puts the next prayer, the Qibla, and the adhan in the MacBook notch, so the workday still has salah in it. It does not require an account.",
+        lede: "Qum brings prayer times, Qibla direction, and silent reminders to your MacBook notch. Your prayer history stays on your Mac. No account required.",
         whatItIs: {
-            heading: "What Qum is …",
-            body: "Qum is a Mac app that puts the next prayer, the Qibla, and the adhan in the MacBook notch, so the workday still has salah in it. It does not require an account.",
+            heading: "About Qum",
+            body: "Qum brings prayer times, Qibla direction, and silent reminders to your MacBook notch. Your prayer history stays on your Mac. No account required.",
         },
-        whoFor: { heading: "Who it is for …", body: "A MacBook with a notch: MacBook Pro (2021 or later) or MacBook Air (2022 or later). Other Macs have no notch for Qum to sit in." },
-        whatItDoes: { heading: "What it does …" },
+        whoFor: { heading: "Supported Macs", body: "Qum is designed for MacBook Pro models introduced in 2021 or later and MacBook Air models introduced in 2022 or later, with a notched built-in display." },
+        whatItDoes: { heading: "Features" },
         prayerTimes: {
             heading: "Prayer times",
-            body1: "Prayer times are calculated on your Mac. Search fragments go to Apple MapKit as you type, and selected places and automatic coordinates may be sent to Apple for resolution or place names. Website requests and support messages are described separately in the Privacy Policy.",
+            body1: "Prayer times are calculated on your Mac using your selected location and calculation settings. Apple MapKit processes search text as you type and resolves selected places. Automatic coordinates may be sent to Apple to find a place name. See the Privacy Policy for details, including website and support data.",
             methodsLabel: (methods) => `Calculation methods: ${methods}.`,
-            asrLabel: (asr) => `Asr can be ${asr}.`,
+            asrLabel: (asr) => `Asr conventions: ${asr}.`,
         },
-        qiblaSection: { heading: "Qibla on a Mac", body: "No Mac can measure heading. There is no magnetometer. Qum solves the bearing as geometry and shows Qibla direction from the desk after a one-time calibration. The direction stays in the notch." },
+        qiblaSection: { heading: "Qibla on a Mac", body: "Qum calculates the bearing to the Kaaba for your location. Macs do not have a compass sensor, so use the sun to calibrate the direction at your desk. Calibration requires daylight. Recalibrate whenever you move or rotate your Mac." },
         whatItIsNot: {
-            heading: "What it is not",
-            body1: "Qum is not an iPhone or iPad app. It is not a menu-bar countdown that runs on every Mac. Menu-bar prayer apps keep a timer in the status bar; Qum uses the notch on notched MacBooks, plays the adhan there, and keeps the streak on this Mac. If the Mac has no notch, Qum is the wrong app.",
-            body2: "Qum does not run analytics, show ads, or track you. The prayer log stays on this Mac. Location is optional.",
+            heading: "Before you start",
+            body1: "Qum is a Mac app designed around the built-in notch. It is not available for iPhone or iPad, and Macs without a notch are not supported. Keep Qum running to see in-app prayer panels.",
+            body2: "Qum has no ads or analytics and does not track you across apps or websites. Your prayer log stays on your Mac. Location Services are optional; you can select a city instead.",
         },
+    },
+    notFound: {
+        title: "Page not found",
+        body: "We can’t find a page at this address. Check the link or return to the homepage.",
+        action: "Back to home",
     },
     aria: {
         skipToContent: "Skip to content",
@@ -595,10 +601,10 @@ const ar: SiteCopy = {
     home: {
         beta: "في مرحلة التجربة حالياً",
         downloadCTA: "تنزيل لـ Mac",
-        hero: { headlineA: "أوقات الصلاة.", headlineB: "في الحزّ.", sub: "يضع Qum الصلاة التالية والقبلة والأذان في حزّ الـ MacBook. بهدوء، خمس مرّات في اليوم." },
+        hero: { headlineA: "أوقات الصلاة.", headlineB: "في الحزّ.", sub: "يضع Qum أوقات الصلاة والقبلة وتذكيرات الصلاة الصامتة في حزّ الـ MacBook. بهدوء، خمس مرّات في اليوم." },
         always: { headlineA: "الصلاة التالية،", headlineB: "ظاهرة دائماً.", sub: "عدّ تنازلي حتى المغرب وأنت تعمل. الجمعة يوم الجمعة. الشروق والغروب في نَفَس واحد." },
         qibla: { headlineA: "القبلة،", headlineB: "من Mac الخاص بك.", sub: "لا يحتوي Mac على بوصلة. يحسب Qum الاتجاه هندسياً — عايِر مرّة واحدة ويبقى الاتجاه ثابتاً." },
-        adhan: { headlineA: "الأذان في", headlineB: "اللحظة الصحيحة.", sub: "اختَر قارئاً تعرفه. يشغّله الحزّ في لحظة دخول المغرب، ثم يتنحّى جانباً." },
+        adhan: { headlineA: "تذكير الصلاة في", headlineB: "اللحظة الصحيحة.", sub: "تظهر لوحة صامتة عند دخول وقت الصلاة. اختر «تأكيد الصلاة» للإقرار بالتذكير؛ تُسجَّل الصلاة من المتابعة اللاحقة." },
         quietly: { headlineA: "بهدوء", headlineB: "في يومك.", sub: "لا شيء في الـ Dock، ولا إشعارات مزعجة. يقرأ Qum حال الميكروفون وينتظر." },
         bookend: { headline: "أوقات الصلاة. في الحزّ." },
         demoAriaLabel: "عرض تفاعلي",
@@ -610,17 +616,18 @@ const ar: SiteCopy = {
         hero: {
             headlineA: "هيّا قم،",
             headlineB: "خمس مرّاتٍ في اليوم، قف على قدميك.",
-            sub: "يضع Qum الصلاةَ التالية والقبلة والأذان في حزّ الـ MacBook، حتى يبقى في يوم عملك صلاة.",
+            sub: "أوقات الصلاة واتجاه القبلة وتذكيرات لطيفة. في حزّ MacBook مباشرةً.",
             requirement: "يتطلّب MacBook به حزّ:\nPro (2021 فأحدث) أو Air (2022 فأحدث).",
         },
         downloadCTA: "تنزيل من Mac App Store",
         downloadCTAShort: "تنزيل لـ Mac",
         sections: [
-            { id: "expand",   headline: "انقر عليَّ، لأفتح لك اليوم كلّه.",            sub: "حين تريد أكثر من لمحة، مرّر فوقي وسيُفتح لك اليوم كلّه تحت الحزّ." },
-            { id: "streak",   headline: "احفظ الأوقات، وأنا أحفظ لك العدَّ.",          sub: "أعدّ لك بهدوء منذ الاثنين. أربعُ صلواتٍ في وقتها، أربعُ خطواتٍ صغيرة من البرّ." },
-            { id: "qibla",    headline: "أينما حللت، سأكون قد عرفت.",                   sub: "أقلعتَ من الدوحة وستهبط في لندن؛ أوقات الصلاة والقبلة ستكون في انتظارك." },
-            { id: "adhan",    headline: "حين يحين الوقت، أُنادي.",                     sub: "الكلماتُ ذاتها التي نادت للصلاة أربعةَ عشر قرناً، تصلك الآن بجوار لوحة مفاتيحك." },
-            { id: "reminder", headline: "قبلها بعشرِ دقائق، أهمسُ في أذنك.",           sub: "كان الناسُ قديماً يراقبون الشمس لهذا الرُّبع. اليوم يسكن تذكيرٌ قبل كلّ صلاةٍ في حزّك." },
+            { id: "expand", headline: "انقر عليَّ، لأفتح لك اليوم كلّه.", sub: "افتح الحزّ للاطّلاع على أوقات صلاة اليوم والعدّ التنازلي للصلاة القادمة." },
+            { id: "qibla", headline: "أينما حللت، سأكون قد عرفت.", sub: "اعرف اتجاه القبلة لموقعك المختار. عاير الاتجاه باستخدام الشمس، وأعد المعايرة عند تحريك جهاز Mac." },
+            { id: "streak", headline: "احفظ الأوقات، وأنا أحفظ لك العدَّ.", sub: "سجّل صلواتك، واختر هدفاً يومياً، وتابع تقدّمك. يبقى سجلّ الصلاة على جهاز Mac." },
+            { id: "reminder", headline: "قبلها بعشرِ دقائق، أهمسُ في أذنك.", sub: "اختر موعد التذكير قبل كلّ صلاة. يظهر التذكير في الحزّ، مع إشعارات macOS اختيارية." },
+            { id: "adhan", headline: "حين يحين الوقت، أناديك للصلاة.", sub: "تظهر لوحة صلاة عند دخول وقت الصلاة القادمة. يجب أن يبقى Qum قيد التشغيل لعرضها." },
+            { id: "qada", headline: "إن بقيت صلاةٌ تقضيها، أذكّرك بها.", sub: "تابع صلواتك الفائتة وسجّل قضاءها حين تكون مستعداً. يساعدك التذكير على العودة إلى قائمتك." },
         ],
         bookend: {
             wordmark: "Hayya Qum · هَيَّا قُمْ",
@@ -635,11 +642,10 @@ const ar: SiteCopy = {
         },
     },
     features: [
-        { id: "reminder", label: "تذكير قبل كلّ صلاة", caption: "قبل كلّ صلاة، يذكّرك Qum في الحزّ. وعند الوقت، يُرفع الأذان.", overlayTitle: "أوقات الصلاة التي تسكن في الحزّ" },
-        { id: "adhan", label: "الأذان، يُرفع على Mac", caption: "حين يحين الوقت، يُرفع الأذان من الحزّ. أكّد بـ «صلّيت»." },
-        { id: "streak", label: "سلسلة صلاة على Mac", caption: "علّم كلّ صلاة بـ «صلّيت». سلسلتك تبقى على هذا الـ Mac." },
-        { id: "qibla", label: "اتجاه القبلة من مكتبك", caption: "يعرض Qum اتجاه القبلة من مكتبك. عايِر مرّة واحدة، ويبقى الاتجاه في الحزّ." },
-        { id: "theme", label: "مظهر يتبع كلّ صلاة", caption: "يتبع الحزّ تبدّل اليوم. الفجر لا يشبه المغرب." },
+        { id: "reminder", label: "تذكير قبل كلّ صلاة", caption: "اضبط التذكيرات قبل كلّ صلاة. تظهر لوحة صامتة في الحزّ عند دخول وقت الصلاة.", overlayTitle: "أوقات الصلاة التي تسكن في الحزّ" },
+        { id: "streak", label: "سلسلة صلاة على Mac", caption: "سجّل الصلوات التي أدّيتها وتابع تقدّمك نحو هدف يومي. يبقى سجلّك على جهاز Mac." },
+        { id: "qibla", label: "اتجاه القبلة من مكتبك", caption: "اعرف اتجاه القبلة لموقعك. عاير باستخدام الشمس، وأعد المعايرة كلّما حرّكت جهاز Mac أو أدرته." },
+        { id: "theme", label: "مظهر يتبع كلّ صلاة", caption: "يتغيّر مظهر الحزّ مع كلّ صلاة، من الفجر إلى العشاء." },
     ],
     player: {
         play: (name) => `تشغيل ${name}`,
@@ -692,13 +698,13 @@ const ar: SiteCopy = {
     },
     privacy: {
         "title": "سياسة الخصوصية",
-        "sub": "بيانات التطبيق المحلّية وخدمات Apple والموقع الإلكتروني وخياراتك.",
+        "sub": "كيف يستخدم Qum البيانات، والخيارات المتاحة لك.",
         "lastUpdated": "آخر تحديث",
         "lastUpdatedDate": PRIVACY_LAST_UPDATED_AR,
         "tableHeaders": {
             "data": "نوع البيانات",
-            "why": "السبب …؟",
-            "shared": "يُشارَك مع …",
+            "why": "الغرض",
+            "shared": "الجهات المستلمة",
             "kept": "مدة الحفظ"
         },
         "tableCaption": "البيانات التي يستخدمها Qum، والغرض منها، ومن يتلقّاها، ومدة حفظها",
@@ -708,7 +714,7 @@ const ar: SiteCopy = {
         ],
         "sections": [
             {
-                "heading": "البيانات التي يستخدمها Qum …",
+                "heading": "البيانات التي يستخدمها Qum",
                 "paragraphs": [
                     "لا يطلب التطبيق التسجيل أو تقديم تفاصيل الدفع. يميّز الجدول بين سجلات التطبيق المحلّية وطلبات Apple وزيارات الموقع والرسائل التي تختار إرسالها إلى الدعم."
                 ],
@@ -733,13 +739,13 @@ const ar: SiteCopy = {
                     },
                     {
                         "data": "الإعدادات والمعايرة",
-                        "why": "طريقة الحساب والمظهر والصوت والتذكيرات واتجاه المكتب",
+                        "why": "طريقة الحساب والمظهر والتذكيرات واتجاه المكتب",
                         "sharedWith": "لا يرفعها Qum",
                         "retention": "تُحفَظ محلّياً حتى تُغيَّر أو تُحذَف بيانات التطبيق. قد تبقى المعايرة محفوظة بعد أن تصبح قديمة"
                     },
                     {
                         "data": "نشاط مُدخل الصوت",
-                        "why": "كتم الأذان في الاجتماعات عند تفعيل الخيار، وتأجيل المتابعة أثناء استخدام تطبيق آخر لمُدخل الصوت",
+                        "why": "تأجيل المتابعة أثناء استخدام تطبيق آخر لمُدخل الصوت",
                         "sharedWith": "لا يرفعه Qum",
                         "retention": "يُستعلَم عنه محلّياً؛ ولا يحتفظ Qum بمعرّفات العمليات أو حالة مُدخل الصوت الناتجة عن الاستعلام"
                     },
@@ -776,8 +782,8 @@ const ar: SiteCopy = {
                 "heading": "الإشعارات ونشاط مُدخل الصوت",
                 "paragraphs": [
                     "إشعارات الصلاة والتذكيرات المسبقة مفعّلة افتراضياً في التطبيق الحالي. إذا لم تكن قد قرّرت إذن الإشعارات، فقد يطلبه Qum عند اقتراب صلاة أو حلول وقتها، أو عند تفعيل الإشعارات من إعدادات ‹ الأصوات. يمكنك إيقافها في Qum أو رفض الإذن أو إلغاؤه من إعدادات النظام.",
-                    "هذه إشعارات محلّية، وليست رسائل تسويقية أو إشعارات يرسلها خادم Qum. يمنع رفض الإذن إشعارات النظام؛ لكن عرض الحزّ ولوحات الصلاة داخل التطبيق قد تستمر في العمل. لتشغيل الأذان إعداد مستقل، ويلزم أن يبقى Qum قيد التشغيل.",
-                    "عند تفعيل «اكتم الصوت في الاجتماعات»، يتحقّق Qum ممّا إذا كانت عملية أخرى تستخدم مُدخل الصوت ليقرّر كتم الأذان. وتستعلم متابعة الصلاة أيضاً عن نشاط مُدخل الصوت لتجنّب مقاطعتك، بصورة مستقلة عن إعداد كتم الأذان. قد يقرأ هذا التحقّق معرّفات العمليات والحزم محلّياً. لا يسجّل Qum صوت الميكروفون، ولا يطلب إذن الميكروفون لهذا التحقّق، ولا يرفع أو يحتفظ بالمعرّفات والنشاط الناتجين عنه."
+                    "هذه إشعارات محلّية، وليست رسائل تسويقية أو إشعارات يرسلها خادم Qum. يمنع رفض الإذن إشعارات النظام؛ لكن عرض الحزّ ولوحات الصلاة داخل التطبيق قد تستمر في العمل. تتطلب لوحة الصلاة الصامتة بقاء Qum قيد التشغيل. لا يشغّل الإصدار الأول تسجيلات الأذان.",
+                    "تستعلم متابعة الصلاة عن نشاط مُدخل الصوت لتجنّب مقاطعتك. قد يقرأ هذا التحقّق معرّفات العمليات والحزم محلّياً. لا يسجّل Qum صوت الميكروفون، ولا يطلب إذن الميكروفون لهذا التحقّق، ولا يرفع أو يحتفظ بالمعرّفات والنشاط الناتجين عنه."
                 ]
             },
             {
@@ -827,15 +833,15 @@ const ar: SiteCopy = {
     },
     terms: {
         title: "شروط الاستخدام",
-        sub: "ما هو Qum، وما ليس به، والقواعد التي تصحبه.",
+        sub: "شروط استخدام Qum وموقعه الإلكتروني.",
         lastUpdated: "آخر تحديث",
         lastUpdatedDate: TERMS_LAST_UPDATED_AR,
         intro: ['تحكم شروط الاستخدام هذه (ويُشار إليها بـ «الشروط») استخدامَ تطبيق Qum على Mac (ويُشار إليه بـ «التطبيق») والمعلومات المتعلّقة به على hayyaqum.com. بتنزيل التطبيق أو تثبيته أو استخدامه، فإنّك توافق على هذه الشروط. وإن لم توافق، توقّف عن استخدام التطبيق وألغِ تثبيته.'],
-        disclaimerLabel: "إخلاء مسؤولية الأداة والموقع:",
+        disclaimerLabel: "حول الحسابات والموقع",
         disclaimerAria: "إخلاء مسؤولية الأداة والموقع",
         disclaimerParagraphs: [
-            "Qum أداة Mac شخصية لأوقات الصلاة واتجاه القبلة والتذكيرات المحلّية لمن يحفظون الصلاة في يومهم. ليس سلطةً دينية، ولا تطبيق دعوة، ولا خدمة فتوى، ولا مصدر تعليم ديني.",
-            "خدمات الموقع التلقائية هي الوسيلة للحصول على أوقات صلاة وقبلة دقيقة لمكان هذا الـ Mac، لأنّ هذه الأوقات تختلف بين الأماكن؛ وإن رفضت الموقع، فيمكنك كتابة مدينة بدلاً من ذلك. تعتمد الأوقات المحسوبة على الطريقة التي تختارها، وليست ضماناً لمطابقة كلّ مسجد أو جدول علمي — اتّبع السلطة المحلّية إن كان ذلك مرادك.",
+            "Qum أداة شخصية على Mac لأوقات الصلاة واتجاه القبلة والتذكيرات المحلّية. ليس مرجعاً دينياً أو تطبيق دعوة أو خدمة فتوى أو مصدراً للتعليم الديني.",
+            "يستخدم Qum موقعك لحساب أوقات الصلاة واتجاه القبلة. يمكنك اختيار مدينة بدلاً من استخدام خدمات الموقع. تعتمد الأوقات المحسوبة على إعداداتك، وقد تختلف عن جداول المساجد أو الجهات العلمية. إذا كنت تتّبع مرجعاً محلّياً، فاعتمد أوقاته المنشورة.",
         ],
         sections: [
             {
@@ -865,8 +871,8 @@ const ar: SiteCopy = {
             {
                 heading: "4. الإشعارات والأذونات ذات الصلة",
                 paragraphs: [
-                    "إشعارات الصلاة والتذكيرات المسبقة مفعّلة افتراضياً. قد يطلب Qum إذن الإشعارات عند اقتراب صلاة أو حلول وقتها، أو عند تفعيلها من إعدادات ‹ الأصوات. رفض إشعارات النظام لا يعطّل الحزّ أو اللوحات داخل التطبيق. للأذان إعداد مستقل، ويلزم أن يبقى التطبيق قيد التشغيل. يمكنك إيقاف التذكيرات؛ وهي ليست رسائل تسويقية.",
-                    "عند تفعيل «اكتم الصوت في الاجتماعات»، يُستخدم نشاط مُدخل الصوت محلّياً لكتم الأذان. وتستخدم متابعة الصلاة هذا النشاط أيضاً لتأجيل المقاطعات، بصورة مستقلة عن إعداد الأذان. قد يقرأ Qum معرّفات العمليات والحزم محلّياً، لكنه لا يسجّل صوت الميكروفون ولا يرفع أو يحتفظ بالمعرّفات والنشاط الناتجين عن الاستعلام.",
+                    "إشعارات الصلاة والتذكيرات المسبقة مفعّلة افتراضياً. قد يطلب Qum إذن الإشعارات عند اقتراب صلاة أو حلول وقتها، أو عند تفعيلها من إعدادات ‹ الأصوات. رفض إشعارات النظام لا يعطّل الحزّ أو اللوحات داخل التطبيق. تتطلب لوحة الصلاة الصامتة بقاء التطبيق قيد التشغيل. لا يشغّل الإصدار الأول تسجيلات الأذان. يمكنك إيقاف التذكيرات؛ وهي ليست رسائل تسويقية.",
+                    "تستخدم متابعة الصلاة نشاط مُدخل الصوت محلّياً لتأجيل المقاطعات. قد يقرأ Qum معرّفات العمليات والحزم محلّياً، لكنه لا يسجّل صوت الميكروفون ولا يرفع أو يحتفظ بالمعرّفات والنشاط الناتجين عن الاستعلام.",
                 ],
             },
             {
@@ -906,25 +912,30 @@ const ar: SiteCopy = {
     about: {
         kicker: "Qum",
         title: "ما هو Qum",
-        lede: "Qum تطبيق Mac يضع الصلاة التالية والقبلة والأذان في حزّ الـ MacBook، لتبقى الصلاة حاضرة في يوم العمل. لا يتطلّب حساباً.",
+        lede: "يضع Qum أوقات الصلاة واتجاه القبلة والتذكيرات الصامتة في حزّ MacBook. يبقى سجلّ الصلاة على جهازك. لا يتطلّب حساباً.",
         whatItIs: {
-            heading: "ما هو Qum …",
-            body: "Qum تطبيق Mac يضع الصلاة التالية والقبلة والأذان في حزّ الـ MacBook، لتبقى الصلاة حاضرة في يوم العمل. لا يتطلّب حساباً.",
+            heading: "عن Qum",
+            body: "يضع Qum أوقات الصلاة واتجاه القبلة والتذكيرات الصامتة في حزّ MacBook. يبقى سجلّ الصلاة على جهازك. لا يتطلّب حساباً.",
         },
-        whoFor: { heading: "لمن هو …", body: "MacBook به حزّ: MacBook Pro (2021 أو أحدث) أو MacBook Air (2022 أو أحدث). الأجهزة الأخرى من Mac ليس فيها حزّ ليستقرّ فيه Qum." },
-        whatItDoes: { heading: "ما الذي يفعله …" },
+        whoFor: { heading: "أجهزة Mac المدعومة", body: "صُمّم Qum لأجهزة MacBook Pro المطروحة في 2021 أو بعده وأجهزة MacBook Air المطروحة في 2022 أو بعده، بشاشة مدمجة ذات حزّ." },
+        whatItDoes: { heading: "الميزات" },
         prayerTimes: {
             heading: "أوقات الصلاة",
             body1: "تجري حسابات أوقات الصلاة على جهاز Mac. تُرسَل أجزاء البحث إلى Apple MapKit أثناء الكتابة، ويُحدَّد موقع النتيجة المختارة ومنطقتها الزمنية. وقد تُرسَل الإحداثيات التلقائية إلى Apple للحصول على اسم المكان. يوضّح إشعار الخصوصية تدفّقات الموقع الإلكتروني وبريد الدعم بصورة منفصلة.",
             methodsLabel: (methods) => `طرق الحساب: ${methods}.`,
-            asrLabel: (asr) => `العصر يمكن أن يكون ${asr}.`,
+            asrLabel: (asr) => `طرق حساب العصر: ${asr}.`,
         },
-        qiblaSection: { heading: "القبلة على Mac", body: "لا يستطيع أيّ Mac قياس الاتجاه. لا يوجد مقياس مغناطيسي. يحلّ Qum الاتجاه هندسياً ويُظهر القبلة من المكتب بعد معايرة لمرّة واحدة. ويبقى الاتجاه في الحزّ." },
+        qiblaSection: { heading: "القبلة على Mac", body: "يحسب Qum اتجاه الكعبة لموقعك. لا تحتوي أجهزة Mac على مستشعر بوصلة، لذا عاير الاتجاه في مكتبك باستخدام الشمس نهاراً. أعد المعايرة كلّما حرّكت الجهاز أو أدرته." },
         whatItIsNot: {
-            heading: "ما ليس به",
-            body1: "Qum ليس تطبيق iPhone أو iPad. وليس عدّاداً في شريط القوائم يعمل على كلّ Mac. تطبيقات الصلاة في شريط القوائم تُبقي مؤقّتاً في الشريط؛ أمّا Qum فيستخدم الحزّ في أجهزة MacBook ذات الحزّ، ويرفع الأذان من هناك، ويحفظ السلسلة على هذا الـ Mac. إن لم يكن في الـ Mac حزّ، فـ Qum هو التطبيق غير المناسب.",
-            body2: "لا يُجري Qum تحليلات، ولا يعرض إعلانات، ولا يتعقّبك. سجلّ الصلاة يبقى على هذا الـ Mac. والموقع اختياري.",
+            heading: "قبل البدء",
+            body1: "صُمّم Qum لجهاز Mac بشاشة مدمجة ذات حزّ. لا يتوفّر على iPhone أو iPad، ولا يدعم أجهزة Mac دون حزّ. أبقِ Qum قيد التشغيل لعرض لوحات الصلاة داخل التطبيق.",
+            body2: "لا يعرض Qum إعلانات ولا يُجري تحليلات ولا يتعقّبك بين التطبيقات والمواقع. يبقى سجلّ الصلاة على جهازك. خدمات الموقع اختيارية؛ يمكنك اختيار مدينة بدلاً منها.",
         },
+    },
+    notFound: {
+        title: "تعذّر العثور على الصفحة",
+        body: "لم نعثر على صفحة بهذا العنوان. تحقّق من الرابط أو عُد إلى الصفحة الرئيسية.",
+        action: "العودة إلى الرئيسية",
     },
     aria: {
         skipToContent: "تخطَّ إلى المحتوى",

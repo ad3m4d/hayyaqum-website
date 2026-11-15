@@ -35,17 +35,10 @@ function FillInOverlay() {
     );
 }
 
-/**
- * Language toggle is hidden while the AR translation pass is still in review.
- * Flip this to true (and `LANGUAGE_TOGGLE_ENABLED` in language-provider.tsx)
- * to bring it back.
- */
-const LANGUAGE_TOGGLE_ENABLED = false;
-
-export function SiteNav({ plain = false }: { plain?: boolean }) {
+// The updated homepage includes the language control; other page layouts
+// keep their existing navigation presentation.
+export function SiteNav({ plain = false, showLanguageToggle = false }: { plain?: boolean; showLanguageToggle?: boolean }) {
     const { copy, toggle, lang } = useLang();
-    void toggle;
-    void lang;
 
     return (
         <header className="sticky top-0 z-50 flex w-full justify-center pt-6 pb-0">
@@ -75,7 +68,7 @@ export function SiteNav({ plain = false }: { plain?: boolean }) {
                     </span>
                 </a>
                 <div className="flex items-center gap-4">
-                    {LANGUAGE_TOGGLE_ENABLED ? (
+                    {showLanguageToggle ? (
                         <button
                             type="button"
                             onClick={toggle}

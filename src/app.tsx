@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router";
+import { FaqsScreen } from "@/pages/faqs-screen";
 import { AboutScreen } from "@/pages/about-screen";
 import { HomeScreen } from "@/pages/home-screen";
 import { NotFound } from "@/pages/not-found";
@@ -19,6 +20,7 @@ export function App() {
                 <Routes>
                     <Route path="/" element={<HomeScreen />} />
                     <Route path="/about" element={<AboutScreen />} />
+                    <Route path="/faqs" element={<FaqsScreen />} />
                     <Route path="/privacy" element={<PrivacyScreen />} />
                     <Route path="/privacy.html" element={<PrivacyScreen />} />
                     <Route path="/terms" element={<TermsScreen />} />

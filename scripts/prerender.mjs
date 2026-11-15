@@ -13,6 +13,7 @@ const routes = [
     { url: "/", file: "index.html" },
     { url: "/about", file: "about/index.html" },
     { url: "/about", file: "about.html" },
+    { url: "/faqs", file: "faqs/index.html" },
     { url: "/privacy", file: "privacy/index.html" },
     { url: "/privacy.html", file: "privacy.html" },
     { url: "/terms", file: "terms/index.html" },

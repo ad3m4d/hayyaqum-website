@@ -1,4 +1,4 @@
-import { FooterLink } from "@/components/marketing/footer-link";
+import { FooterLinks } from "@/components/marketing/footer-links";
 import { useLang } from "@/providers/language-provider";
 
 export type SiteFooterVariant = "full" | "legal" | "minimal" | "none";
@@ -25,13 +25,7 @@ export function SiteFooter(_props: { variant?: SiteFooterVariant }) {
                 style={{ color: "#a1acaa" }}
             >
                 <p>{v2.copyright}</p>
-                <nav aria-label={copy.footer.legalAria} className="flex items-center gap-2">
-                    <FooterLink href="/about">{v2.about}</FooterLink>
-                    <img src="/assets/figma/dot.svg" alt="" className="size-1" aria-hidden />
-                    <FooterLink href="/privacy">{v2.privacy}</FooterLink>
-                    <img src="/assets/figma/dot.svg" alt="" className="size-1" aria-hidden />
-                    <FooterLink href="/terms">{v2.terms}</FooterLink>
-                </nav>
+                <FooterLinks />
             </div>
         </footer>
     );

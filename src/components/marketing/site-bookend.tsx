@@ -1,4 +1,4 @@
-import { FooterLink } from "@/components/marketing/footer-link";
+import { FooterLinks } from "@/components/marketing/footer-links";
 import { ParallaxDrift } from "@/components/marketing/parallax";
 import { QumBrand } from "@/components/marketing/qum-brand";
 import { APP_STORE_URL } from "@/data/site";
@@ -45,15 +45,17 @@ function PrimaryDownload({ label, mobileLabel, fullWidthMobile = false }: { labe
     );
 }
 
-export function SiteBookend({ fullWidthMobileCTA = false }: { fullWidthMobileCTA?: boolean }) {
+export function SiteBookend({ fullWidthMobileCTA = false, home = false }: { fullWidthMobileCTA?: boolean; home?: boolean }) {
     const { copy } = useLang();
     const v2 = copy.homeV2;
     return (
         <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-10 max-sm:pb-5 max-sm:px-8 max-sm:pt-10">
             <div className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-sm:px-0">
-                <ParallaxDrift speed={-0.08}>
-                    <QumBrand size={96} className="max-sm:size-16" />
-                </ParallaxDrift>
+                {home ? <QumBrand size={96} className="max-sm:size-16" /> : (
+                    <ParallaxDrift speed={-0.08}>
+                        <QumBrand size={96} className="max-sm:size-16" />
+                    </ParallaxDrift>
+                )}
                 <div className="flex w-full flex-col gap-6 max-sm:gap-4">
                     <h3
                         className="text-[48px] font-semibold leading-[60px] tracking-[-0.96px] max-sm:text-[36px] max-sm:leading-[44px]"
@@ -80,13 +82,7 @@ export function SiteBookend({ fullWidthMobileCTA = false }: { fullWidthMobileCTA
                 style={{ color: colorMuted }}
             >
                 <p>{v2.footer.copyright}</p>
-                <nav aria-label={copy.footer.legalAria} className="flex items-center gap-2">
-                    <FooterLink href="/about">{v2.footer.about}</FooterLink>
-                    <img src="/assets/figma/dot.svg" alt="" className="size-1" aria-hidden />
-                    <FooterLink href="/privacy">{v2.footer.privacy}</FooterLink>
-                    <img src="/assets/figma/dot.svg" alt="" className="size-1" aria-hidden />
-                    <FooterLink href="/terms">{v2.footer.terms}</FooterLink>
-                </nav>
+                <FooterLinks />
             </div>
         </section>
     );

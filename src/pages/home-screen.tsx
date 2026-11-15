@@ -1,5 +1,5 @@
 import { FeatureVideo } from "@/components/marketing/feature-video";
-import { ParallaxDrift, RiseIn } from "@/components/marketing/parallax";
+import { RiseIn } from "@/components/marketing/parallax";
 import { QumBrand } from "@/components/marketing/qum-brand";
 import { PageMeta } from "@/components/marketing/page-meta";
 import { SiteBookend } from "@/components/marketing/site-bookend";
@@ -8,27 +8,8 @@ import { APP_STORE_URL } from "@/data/site";
 import { pageMeta } from "@/data/seo";
 import { useLang } from "@/providers/language-provider";
 import type { FeatureV2Id } from "@/data/i18n";
-import featExpand from "@/components/foundations/featured-icon/features_Icon.svg?url";
-import featStreak from "@/components/foundations/featured-icon/features_Icon-1.svg?url";
-import featQibla from "@/components/foundations/featured-icon/features_Icon-2.svg?url";
-import featAdhan from "@/components/foundations/featured-icon/features_Icon-3.svg?url";
-import featReminder from "@/components/foundations/featured-icon/features_Icon-4.svg?url";
-
-/*
- * Pixel-perfect home per Figma 822:3841 (qum-website · home).
- *
- * Layout invariants lifted from the design tokens:
- *   - every content column is w=768px with px=32  → effective text width 704px
- *   - everything inside that column is items-start (LEFT-aligned on desktop)
- *   - hero section: p-80, gap-64 between content and bottom edge
- *   - feature section: pt-80 pb-128 px-80, gap-64 between content and video
- *   - video card: 1024×480, border 2px rgba(15,19,22,0.05), rounded-24, shadow-xl
- *                 + 64px play-button overlay + 00:00/-08:24 progress bar
- *   - type: hero headline 48/60 bold -0.96; hero sub 30/38 regular;
- *           feature headline 36/44 bold -0.72; feature sub 24/32 regular;
- *           bookend headline same as hero.
- *   - font: SF Pro (Figma). Site ships Inter; sizes/weights/tracking match.
- */
+// Layout and feature assets from Figma 822:3841. Reuse the shared brand,
+// buttons and video player; keep the responsive layout in normal document flow.
 
 const brandTeal = "#1e7285";
 const brandDeep = "#258ea6";
@@ -96,11 +77,12 @@ function SecondaryDownload({ label }: { label: string }) {
 }
 
 const FEAT_ASSET: Record<FeatureV2Id, string> = {
-    expand: featExpand,
-    streak: featStreak,
-    qibla: featQibla,
-    adhan: featAdhan,
-    reminder: featReminder,
+    expand: "/assets/figma/feature-expand.svg",
+    qibla: "/assets/figma/feature-qibla.svg",
+    streak: "/assets/figma/feature-streak.svg",
+    reminder: "/assets/figma/feature-reminder.svg",
+    adhan: "/assets/figma/feature-adhan.svg",
+    qada: "/assets/figma/feature-qada.svg",
 };
 
 function VideoCard({ id, label }: { id: FeatureV2Id; label: string }) {
@@ -124,15 +106,13 @@ export const HomeScreen = () => {
     const v2 = copy.homeV2;
 
     return (
-        <SiteLayout footer="none">
+        <SiteLayout footer="none" background="plain" homeNavigation>
             <PageMeta {...pageMeta.home} />
 
             {/* ----------------------- hero (822:3849) ----------------------- */}
             <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 py-20 min-sm:max-lg:py-24 max-sm:px-8 max-sm:py-16">
-                <div className="flex w-full max-w-[768px] flex-col items-start gap-10 px-8 max-sm:px-0">
-                    <ParallaxDrift speed={0.18}>
-                        <Logomark96 />
-                    </ParallaxDrift>
+                <div className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-sm:px-0">
+                    <Logomark96 />
                     <div className="flex w-full flex-col gap-6 max-sm:gap-4">
                         <h1
                             className="text-[48px] font-bold leading-[60px] tracking-[-0.96px] max-sm:text-[36px] max-sm:leading-[44px] max-sm:font-semibold"
@@ -158,7 +138,7 @@ export const HomeScreen = () => {
                 </div>
             </section>
 
-            {/* ----------------- 5 feature sections (829:...) ---------------- */}
+            {/* ----------------- 6 feature sections (829:...) ---------------- */}
             {v2.sections.map((section) => (
                 <section
                     key={section.id}
@@ -190,7 +170,7 @@ export const HomeScreen = () => {
             ))}
 
             {/* --------------------- bookend / footer (822:3861) -------------------- */}
-            <SiteBookend fullWidthMobileCTA />
+            <SiteBookend fullWidthMobileCTA home />
         </SiteLayout>
     );
 };

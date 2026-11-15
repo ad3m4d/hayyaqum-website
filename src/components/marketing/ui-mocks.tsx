@@ -192,46 +192,6 @@ export function MapInset({ className }: { className?: string }) {
     );
 }
 
-export function AudioPicker({ className }: { className?: string }) {
-    const { copy } = useLang();
-    const reciters = [
-        { name: "Abdul Basit", place: "Egypt", on: true },
-        { name: "Mishary Rashid", place: "Kuwait" },
-        { name: "Hani ar-Rifai", place: "Saudi Arabia" },
-        { name: "Mahmoud Khalil al-Husary", place: "Egypt" },
-    ];
-    return (
-        <Card className={cx("w-[300px] p-5", className)}>
-            <div className="flex items-center justify-between pb-3">
-                <p className="text-sm font-semibold text-primary">{copy.ui.adhan}</p>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2 py-0.5 text-xs font-medium text-brand-700">
-                    <span className="size-1.5 rounded-full bg-brand-solid" /> {copy.ui.playing}
-                </span>
-            </div>
-            <ul className="divide-y divide-black/5">
-                {reciters.map((r) => (
-                    <li key={r.name} className="flex items-center gap-3 py-2.5">
-                        <span className={cx("inline-flex size-4 items-center justify-center rounded-full border", r.on ? "border-brand-solid" : "border-black/15")}>
-                            {r.on ? <span className="size-2 rounded-full bg-brand-solid" /> : null}
-                        </span>
-                        <div className="flex-1">
-                            <p className="text-sm font-medium text-primary">{r.name}</p>
-                            <p className="text-xs text-tertiary">{r.place}</p>
-                        </div>
-                        {r.on ? (
-                            <div className="flex items-end gap-0.5" aria-hidden>
-                                {[0, 1, 2, 3].map((i) => (
-                                    <span key={i} className="w-0.5 rounded-full bg-brand-solid" style={{ height: `${6 + (i % 3) * 5}px` }} />
-                                ))}
-                            </div>
-                        ) : null}
-                    </li>
-                ))}
-            </ul>
-        </Card>
-    );
-}
-
 export function NotificationPreview({ className }: { className?: string }) {
     const { copy } = useLang();
     return (
