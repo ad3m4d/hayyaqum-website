@@ -466,7 +466,7 @@ const en: SiteCopy = {
         lastUpdated: "Last updated",
         lastUpdatedDate: TERMS_LAST_UPDATED_EN,
         intro: ['These Terms of Use (“Terms”) govern use of the Qum Mac app (the “App”) and related information on hayyaqum.com. By downloading, installing, or using Qum, you agree to these Terms. If you do not agree, stop using the App and uninstall it.'],
-        disclaimerLabel: "About calculations and location",
+        disclaimerLabel: "Utility & Location Disclaimer:",
         disclaimerAria: "Utility and location disclaimer",
         disclaimerParagraphs: [
             "Qum is a personal Mac utility for prayer times, Qibla direction, and local reminders. It is not a religious authority, preaching app, fatwa service, or source of religious instruction.",
