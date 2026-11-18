@@ -3,7 +3,7 @@ import { SiteFooter, type SiteFooterVariant } from "@/components/marketing/site-
 import { SiteNav } from "@/components/marketing/site-nav";
 import { useLang } from "@/providers/language-provider";
 
-export function SiteLayout({ children, footer = "full", background = "gradient", homeNavigation = false }: PropsWithChildren<{ footer?: SiteFooterVariant; background?: "gradient" | "plain"; homeNavigation?: boolean }>) {
+export function SiteLayout({ children, footer = "full", background = "gradient", homeNavigation = false, homepage = false }: PropsWithChildren<{ footer?: SiteFooterVariant; background?: "gradient" | "plain"; homeNavigation?: boolean; homepage?: boolean }>) {
     const { copy } = useLang();
     return (
         <div
@@ -40,7 +40,7 @@ export function SiteLayout({ children, footer = "full", background = "gradient",
             >
                 {copy.aria.skipToContent}
             </a>
-            <SiteNav plain={background === "plain" && !homeNavigation} />
+            <SiteNav plain={background === "plain" && !homeNavigation} homepage={homepage} />
             <main id="main" className="flex w-full min-w-0 flex-1 flex-col">
                 {children}
             </main>

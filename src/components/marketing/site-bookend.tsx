@@ -1,40 +1,23 @@
 import { FooterLinks } from "@/components/marketing/footer-links";
-import { ParallaxDrift } from "@/components/marketing/parallax";
-import { QumBrand } from "@/components/marketing/qum-brand";
 import { APP_STORE_URL } from "@/data/site";
 import { useLang } from "@/providers/language-provider";
 
-/**
- * Bookend section used at the bottom of the home page (Figma 822:3861) and at
- * the bottom of the about / privacy / terms pages (Figma 845:30576 et al.).
- *
- *   96px logomark (QumBrand, bookend drift)
- *   "Hayya Qum · هَيَّا قُمْ" display-lg
- *   "Made for workdays that still have salah in them." display-sm
- *   Primary teal download pill (same fill-in hover as hero)
- *   Italic requirement text (no account / requires a notch)
- *   Copyright © … · About Qum · dot · Privacy · dot · Terms
- *
- * Replaces the per-page copy/legal row.
- */
+/** Shared footer CTA and legal links for the marketing pages. */
 
-const brandDeep = "#258ea6";
 const colorHeadline = "#232b32";
 const colorBody = "#808988";
 const colorMuted = "#a1acaa";
 
-function PrimaryDownload({ label, mobileLabel, fullWidthMobile = false }: { label: string; mobileLabel: string; fullWidthMobile?: boolean }) {
-    const base =
-        "group relative inline-flex shrink-0 items-center gap-2.5 overflow-clip rounded-full pl-4 pr-5 py-3 text-lg font-semibold leading-7 text-[#fbfcfc] outline-brand focus-visible:outline-2 focus-visible:outline-offset-2" +
-        (fullWidthMobile ? " max-sm:w-[311px] max-sm:max-w-full max-sm:justify-center" : "");
-    const style = { backgroundColor: brandDeep };
+function FooterDownload({ label, mobileLabel }: { label: string; mobileLabel: string }) {
+    const base = "group relative inline-flex shrink-0 items-center gap-2.5 overflow-clip rounded-full pl-4 pr-5 py-3 text-lg font-semibold leading-7 max-sm:w-full max-sm:justify-center outline-brand focus-visible:outline-2 focus-visible:outline-offset-2";
+    const style = { backgroundColor: "#eaf4f6", color: "#1e7285" };
     const content = (
         <>
             <span
                 aria-hidden
-                className="pointer-events-none absolute inset-0 origin-left scale-x-0 rounded-full bg-[#1E7285] transition-transform duration-300 ease-out group-hover:scale-x-100"
+                className="pointer-events-none absolute inset-0 origin-left scale-x-0 rounded-full bg-[#bbdce3] transition-transform duration-300 ease-out group-hover:scale-x-100"
             />
-            <img src="/assets/figma/apple-primary.svg" alt="" className="relative size-6" />
+            <img src="/assets/figma/apple-secondary.svg" alt="" className="relative size-6" />
             <span className="relative hidden sm:inline">{label}</span><span className="relative sm:hidden">{mobileLabel}</span>
         </>
     );
@@ -45,40 +28,35 @@ function PrimaryDownload({ label, mobileLabel, fullWidthMobile = false }: { labe
     );
 }
 
-export function SiteBookend({ fullWidthMobileCTA = false, home = false }: { fullWidthMobileCTA?: boolean; home?: boolean }) {
-    const { copy } = useLang();
+export function SiteBookend() {
+    const { copy, lang } = useLang();
     const v2 = copy.homeV2;
     return (
-        <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-10 max-sm:pb-5 max-sm:px-8 max-sm:pt-10">
+        <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-10 max-sm:pt-10 max-sm:pb-8 max-sm:px-6">
             <div className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-sm:px-0">
-                {home ? <QumBrand size={96} className="max-sm:size-16" /> : (
-                    <ParallaxDrift speed={-0.08}>
-                        <QumBrand size={96} className="max-sm:size-16" />
-                    </ParallaxDrift>
-                )}
                 <div className="flex w-full flex-col gap-6 max-sm:gap-4">
                     <h3
                         className="text-[48px] font-semibold leading-[60px] tracking-[-0.96px] max-sm:text-[36px] max-sm:leading-[44px]"
                         style={{ color: colorHeadline }}
-                        lang="en"
+                        lang={lang}
                     >
-                        {v2.bookend.wordmark}
+                        {v2.bookend.homeHeadline}
                     </h3>
                     <p
-                        className="text-[30px] font-normal leading-[38px] max-sm:text-[24px] max-sm:leading-[32px]"
+                        className="text-[30px] font-normal leading-[38px] max-sm:text-[20px] max-sm:leading-[30px]"
                         style={{ color: colorBody }}
                     >
-                        {v2.bookend.sub}
+                        {v2.bookend.homeSub}
                     </p>
                 </div>
-                <PrimaryDownload label={v2.downloadCTA} mobileLabel={v2.downloadCTAShort} fullWidthMobile={fullWidthMobileCTA} />
-                <p className="whitespace-pre-line text-base italic leading-6" style={{ color: colorBody }}>
-                    {v2.bookend.fine}
-                </p>
+                <FooterDownload label={v2.downloadCTA} mobileLabel={v2.downloadCTAShort} />
+                <div className="flex flex-col text-base italic leading-6 max-sm:gap-4" style={{ color: colorBody }}>
+                    {v2.bookend.fine.split("\n").map((line) => <p key={line}>{line}</p>)}
+                </div>
             </div>
 
             <div
-                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-start max-sm:gap-8 max-sm:px-0"
+                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-start max-sm:px-0 max-sm:gap-6"
                 style={{ color: colorMuted }}
             >
                 <p>{v2.footer.copyright}</p>

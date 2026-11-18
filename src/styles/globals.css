@@ -136,6 +136,53 @@ input[type="search"]::-webkit-search-cancel-button {
     opacity: 0.15;
 }
 
+/* Homepage feature carousel: Figma 1078:23563. */
+.home-features { display: flex; justify-content: center; width: 100%; padding: 80px; }
+.feature-carousel { width: 100%; max-width: 1024px; min-width: 0; }
+.feature-labels {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 32px;
+    height: 40px;
+    margin-bottom: 24px;
+    overflow: clip;
+    mask: url('/assets/figma/feature-mask-desktop.svg') center / 100% 100% no-repeat;
+}
+.feature-label-slot { display: flex; min-width: 0; }
+.feature-label-previous { justify-content: flex-end; }
+.feature-label-next { justify-content: flex-start; }
+.feature-label { display: flex; flex-shrink: 0; align-items: center; gap: 12px; white-space: nowrap; font-size: 20px; line-height: 30px; font-weight: 500; color: #7bbac8; }
+button.feature-label { cursor: pointer; outline-offset: -2px; }
+button.feature-label:focus-visible { outline: 2px solid #258ea6; border-radius: 4px; }
+button.feature-label:hover { color: #1e7285; }
+.feature-label-current, .feature-label-current > .feature-label { color: #2c363f; font-weight: 600; }
+.feature-label-icon { display: block; flex-shrink: 0; width: 40px; height: 40px; }
+.feature-label-icon img { max-width: none; }
+.feature-demo { touch-action: pan-y; }
+.feature-demo-content { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+.feature-video-card {
+    position: relative; isolation: isolate; width: 100%; aspect-ratio: 1024 / 480;
+    overflow: hidden; border: 2px solid rgb(15 19 22 / 5%); border-radius: 24px;
+    box-shadow: 0 20px 24px -4px rgb(0 0 0 / 8%), 0 8px 8px -4px rgb(0 0 0 / 3%), 0 3px 3px -1.5px rgb(0 0 0 / 4%);
+    -webkit-mask-image: radial-gradient(white, black);
+}
+.feature-caption { width: 100%; max-width: 768px; color: #808988; font-size: 24px; line-height: 32px; font-style: italic; text-align: center; }
+@media (min-width: 640px) and (max-width: 1023px) {
+    .home-features { padding-inline: 32px; }
+    .feature-video-card { aspect-ratio: 704 / 360; }
+    .feature-labels { mask-image: url('/assets/figma/feature-mask-tablet.svg'); }
+}
+@media (max-width: 639px) {
+    .home-features { padding: 40px 0 64px; }
+    .feature-labels { height: 20px; gap: 24px; margin-bottom: 16px; mask-image: url('/assets/figma/feature-mask-mobile.svg'); }
+    .feature-label { gap: 6px; font-size: 12px; line-height: 18px; }
+    .feature-label-icon { width: 20px; height: 20px; }
+    .feature-demo-content { gap: 20px; }
+    .feature-video-card { aspect-ratio: 375 / 192; border-width: 1px; border-radius: 0; box-shadow: 0 8px 9.6px -1.6px rgb(0 0 0 / 8%), 0 3.2px 3.2px -1.6px rgb(0 0 0 / 3%); }
+    .feature-caption { width: calc(100% - 48px); font-size: 16px; line-height: 24px; }
+}
+
 /* Natural-height FAQ transitions. Padding lives inside the clipped grid row so
    collapsed answers have zero height, including long or translated answers. */
 .faq-item {

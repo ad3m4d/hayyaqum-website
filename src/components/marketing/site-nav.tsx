@@ -35,16 +35,18 @@ function FillInOverlay() {
     );
 }
 
-// The updated homepage includes the language control; other page layouts
-// keep their existing navigation presentation.
-export function SiteNav({ plain = false, showLanguageToggle = false }: { plain?: boolean; showLanguageToggle?: boolean }) {
+// Homepage: glass pill with the updated responsive spacing.
+// Other pages retain their existing navigation presentation.
+export function SiteNav({ plain = false, showLanguageToggle = false, homepage = false }: { plain?: boolean; showLanguageToggle?: boolean; homepage?: boolean }) {
     const { copy, toggle, lang } = useLang();
 
     return (
         <header className="sticky top-0 z-50 flex w-full justify-center pt-6 pb-0">
             <div
-                className="mx-auto flex w-full max-w-[768px] items-center justify-between gap-4 rounded-full border border-white/40 bg-white/55 py-3 pl-5 pr-3 shadow-[0_1px_2px_rgba(15,19,22,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-xl backdrop-saturate-150 min-sm:max-lg:pl-8 min-sm:max-lg:pr-8 max-sm:mx-4 max-sm:max-w-none max-sm:border-0 max-sm:pl-5 max-sm:pr-4"
-                style={plain ? {
+                className={homepage
+                    ? "mx-auto flex w-full max-w-[768px] items-center justify-between gap-4 rounded-full border border-white/40 bg-white/55 py-3 pl-5 pr-3 shadow-[0_1px_2px_rgba(15,19,22,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-xl backdrop-saturate-150 max-sm:px-5"
+                    : "mx-auto flex w-full max-w-[768px] items-center justify-between gap-4 rounded-full border border-white/40 bg-white/55 py-3 pl-5 pr-3 shadow-[0_1px_2px_rgba(15,19,22,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-xl backdrop-saturate-150 min-sm:max-lg:pl-8 min-sm:max-lg:pr-8 max-sm:mx-4 max-sm:max-w-none max-sm:border-0 max-sm:pl-5 max-sm:pr-4"}
+                style={plain && !homepage ? {
                     border: 0,
                     background: "transparent",
                     boxShadow: "none",

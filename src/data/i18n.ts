@@ -106,7 +106,7 @@ export type SiteCopy = {
         downloadCTA: string;
         downloadCTAShort: string;
         sections: readonly FeatureV2Copy[];
-        bookend: { wordmark: string; sub: string; fine: string };
+        bookend: { wordmark: string; sub: string; fine: string; homeHeadline: string; homeSub: string };
         footer: {
             copyright: string;
             about: string;
@@ -243,22 +243,24 @@ const en: SiteCopy = {
         wordmarkParenthetical: "(قُمْ)",
         langShort: "EN",
         hero: {
-            headlineA: "Hayya Qum,",
-            headlineB: "five times a day, get on your feet.",
-            sub: "Prayer times, Qibla direction, and gentle reminders. Right in your MacBook notch.",
+            headlineA: "A moment for salah,",
+            headlineB: "in the middle of your day.",
+            sub: "When work gets absorbing, it’s easy to lose track of time. Qum keeps your next prayer time and the Qibla close at hand in your MacBook’s notch, with quiet reminders for salah and gentle check-ins to help you stay on track.",
             requirement: "Requires a MacBook with a notch:\nPro (2021+) or Air (2022+).",
         },
         downloadCTA: "Download on the Mac App Store",
         downloadCTAShort: "Download for Mac",
         sections: [
-            { id: "expand", headline: "Give it a click, I’ll open the day.", sub: "A glance for the next prayer. A hover for the whole day. I’ll keep the times just under your notch." },
-            { id: "qibla", headline: "Wherever you land, I’ll already know.", sub: "From Doha to London, wherever you are, find the direction of the Kaaba using the sun." },
-            { id: "streak", headline: "Keep the hours, I’ll keep the count.", sub: "You make time for prayer. I’ll keep the count. Record each one, and watch the days of small, steady steps gather." },
-            { id: "reminder", headline: "Ten minutes out, I’ll lean in and whisper.", sub: "People once watched the sun for the approaching prayer. Now a quiet reminder lives in your notch, as early as you choose." },
-            { id: "adhan", headline: "When the hour comes, I’ll call it.", sub: "When the hour comes, a quiet invitation appears beside your work. A moment to pause, before the day carries on." },
-            { id: "qada", headline: "When there’s one to make up, I’ll remind you.", sub: "Some prayers are still on your list. Come back when you’re ready, record each one you make up, and I’ll keep your place." },
+            { id: "expand", headline: "Give it a click, I’ll open the day.", sub: "When you need to plan around salah, hover over the notch to see your prayer times for the day." },
+            { id: "qibla", headline: "Wherever you land, I’ll already know.", sub: "From Doha to London, Qum updates your prayer times and Qibla for where you are, helping you settle into a new place." },
+            { id: "streak", headline: "Keep the hours, I’ll keep the count.", sub: "When the week feels like a blur, your prayer history helps you look back at the moments you made time for salah." },
+            { id: "reminder", headline: "Ten minutes out, I’ll lean in and whisper.", sub: "When you’re deep in work, a quiet reminder gives you a little time to wrap up and prepare for prayer." },
+            { id: "adhan", headline: "When the hour comes, I’ll call it.", sub: "When prayer time arrives, a silent reminder in your notch invites you to pause, with a gentle check-in afterwards to log your prayer." },
+            { id: "qada", headline: "When there’s one to make up, I’ll remind you.", sub: "When you have prayers to make up, a daily reminder helps you keep them in view, and you can log each one when you’re ready." },
         ],
         bookend: {
+            homeHeadline: "Make room for salah in your day.",
+            homeSub: "Let Qum keep track of prayer times while you get on with your work.",
             wordmark: "Hayya Qum · هَيَّا قُمْ",
             sub: "Made for workdays that still have salah in them.",
             fine: "No account, no ads, no tracking. Your prayer log stays on your Mac. Location is optional.\nRequires a MacBook with a notch. MacBook Pro (2021 or later) or MacBook Air (2022 or later).",
@@ -630,6 +632,8 @@ const ar: SiteCopy = {
             { id: "qada", headline: "إن بقيت صلاةٌ تقضيها، أذكّرك بها.", sub: "تابع صلواتك الفائتة وسجّل قضاءها حين تكون مستعداً. يساعدك التذكير على العودة إلى قائمتك." },
         ],
         bookend: {
+            homeHeadline: "خلّي للصلاة مكان في يومك.",
+            homeSub: "خلّي Qum يتابع مواعيد الصلاة وإنت بتكمّل شغلك.",
             wordmark: "Hayya Qum · هَيَّا قُمْ",
             sub: "صُنع لأيّام العمل التي ما زالت فيها صلاة.",
             fine: "لا حساب، ولا إعلانات، ولا تتبُّع. سجلّ صلاتك يبقى على جهازك. تحديد الموقع اختياري.\nيتطلّب MacBook به حزّ. MacBook Pro (2021 فأحدث) أو MacBook Air (2022 فأحدث).",
