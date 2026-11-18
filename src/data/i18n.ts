@@ -245,7 +245,7 @@ const en: SiteCopy = {
         hero: {
             headlineA: "A moment for salah,",
             headlineB: "in the middle of your day.",
-            sub: "When work gets absorbing, it’s easy to lose track of time. Qum keeps your next prayer time and the Qibla close at hand in your MacBook’s notch, with quiet reminders for salah and gentle check-ins to help you stay on track.",
+            sub: "When work gets absorbing, it’s easy to lose track of time. Let Qum keep prayer times, Qibla and gentle reminders in your MacBook’s notch, so you know when to pause.",
             requirement: "Requires a MacBook with a notch:\nPro (2021+) or Air (2022+).",
         },
         downloadCTA: "Download on the Mac App Store",
