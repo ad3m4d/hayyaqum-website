@@ -68,7 +68,7 @@ export function jsonLdForPath(path: string): object | null {
         description: pageMeta.home.description,
         url: `${SITE_ORIGIN}/`,
         featureList: features.map((item) => item.label),
-        softwareRequirements: "MacBook Pro (2021 or later) or MacBook Air (2022 or later), with a notch",
+        softwareRequirements: "macOS 14.6 or later and a MacBook with a built-in notch: MacBook Pro (2021 or later) or MacBook Air (2022 or later)",
         creator: { "@id": `${SITE_ORIGIN}/#org` },
     };
 

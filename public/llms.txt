@@ -1,17 +1,20 @@
 # Qum
 
-Qum is a Mac app that puts the next prayer, the Qibla, and the adhan in the MacBook notch.
+Qum is a Mac app that keeps prayer times, Qibla direction, silent reminders, and a personal prayer log in the MacBook notch. It supports English and Arabic.
 
 - Home: https://hayyaqum.com/
 - What Qum is: https://hayyaqum.com/about
+- Frequently asked questions: https://hayyaqum.com/faqs
 - Privacy: https://hayyaqum.com/privacy
 - Terms: https://hayyaqum.com/terms
 - Email: hello@hayyaqum.com
 
-Requires a MacBook with a notch: MacBook Pro (2021 or later) or MacBook Air (2022 or later). Other Macs have no notch for Qum to sit in.
+Requires macOS 14.6 or later and a MacBook with a built-in notch: MacBook Pro models introduced in 2021 or later, or MacBook Air models introduced in 2022 or later. It is not designed for external displays or closed-lid use.
 
-No account, no ads, no tracking. Prayer times, the Qibla, the prayer log, and settings stay on this Mac. A coordinate or a city name may go to Apple Location Services so Qum can name or resolve a place — that is the only data that leaves this Mac.
+The current version displays silent prayer reminders. It does not include adhan recordings or playback controls. Qum must be running to show the prayer panel. Confirm prayer acknowledges the reminder; the later check-in records prayer completion.
 
-Qum is not an iPhone app and not a menu-bar timer. Menu-bar prayer apps keep a countdown in the status bar on any Mac. Qum uses the notch, plays the adhan there, and keeps the streak on this Mac.
+Qum has no developer-hosted account or prayer-history service. Prayer history stays on your Mac. Apple handles location and place-search requests, and macOS manages local notifications. Website hosting and support email process requests and messages separately. Read the Privacy Policy for data handling and retention details.
 
-No Mac can measure heading. Qum shows Qibla direction from the desk after a one-time calibration.
+Qum is not an iPhone app or a menu-bar timer. It uses the MacBook notch.
+
+No Mac can measure heading. Qum calculates the Qibla bearing for your location and uses sun calibration to relate it to your desk. Recalibrate whenever you move or rotate your Mac.
