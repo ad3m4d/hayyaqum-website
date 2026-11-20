@@ -2,7 +2,7 @@ import { FooterLinks } from "@/components/marketing/footer-links";
 import { APP_STORE_URL } from "@/data/site";
 import { useLang } from "@/providers/language-provider";
 
-/** Shared footer CTA and legal links for the marketing pages. */
+/** Shared footer CTA: Figma 822:3861 (desktop), 922:57224 (tablet), 1071:13275 (mobile). */
 
 const colorHeadline = "#232b32";
 const colorBody = "#808988";
@@ -34,16 +34,16 @@ export function SiteBookend() {
     return (
         <section className="flex w-full flex-col items-center gap-16 px-20 min-sm:max-lg:px-0 pt-20 pb-10 max-sm:pt-10 max-sm:pb-8 max-sm:px-6">
             <div className="flex w-full max-w-[768px] flex-col items-start gap-8 px-8 max-sm:px-0">
-                <div className="flex w-full flex-col gap-6 max-sm:gap-4">
+                <div className="flex w-full flex-col gap-4">
                     <h3
-                        className="text-[48px] font-semibold leading-[60px] tracking-[-0.96px] max-sm:text-[36px] max-sm:leading-[44px]"
+                        className="text-[36px] font-semibold leading-[44px] tracking-[-0.72px] max-sm:text-[30px] max-sm:leading-[38px] max-sm:tracking-normal"
                         style={{ color: colorHeadline }}
                         lang={lang}
                     >
                         {v2.bookend.homeHeadline}
                     </h3>
                     <p
-                        className="text-[30px] font-normal leading-[38px] max-sm:text-[20px] max-sm:leading-[30px]"
+                        className="text-[24px] font-normal leading-[32px] max-sm:text-[20px] max-sm:leading-[30px]"
                         style={{ color: colorBody }}
                     >
                         {v2.bookend.homeSub}
@@ -56,7 +56,7 @@ export function SiteBookend() {
             </div>
 
             <div
-                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-start max-sm:px-0 max-sm:gap-6"
+                className="flex w-full max-w-[768px] items-center justify-between gap-6 px-8 min-sm:max-lg:flex-wrap text-sm leading-5 max-sm:flex-col max-sm:items-start max-sm:-mx-1 max-sm:w-[calc(100%+8px)] max-sm:px-0 max-sm:gap-6"
                 style={{ color: colorMuted }}
             >
                 <p>{v2.footer.copyright}</p>
