@@ -566,9 +566,9 @@ const en: SiteCopy = {
         },
     },
     notFound: {
-        title: "Page not found",
-        body: "We can’t find a page at this address. Check the link or return to the homepage.",
-        action: "Back to home",
+        title: "Oops! Looks like you've hit a dead end!",
+        body: "The page you were searching for has vanished into thin air. Why not click below and head over to the Mac App Store? It's just a click away!",
+        action: "Go to Mac App Store",
     },
     aria: {
         skipToContent: "Skip to content",
@@ -937,9 +937,9 @@ const ar: SiteCopy = {
         },
     },
     notFound: {
-        title: "تعذّر العثور على الصفحة",
-        body: "لم نعثر على صفحة بهذا العنوان. تحقّق من الرابط أو عُد إلى الصفحة الرئيسية.",
-        action: "العودة إلى الرئيسية",
+        title: "عفوًا! يبدو أنك وصلت إلى طريق مسدود!",
+        body: "الصفحة التي تبحث عنها اختفت. ما رأيك بالضغط أدناه والتوجه إلى Mac App Store؟ إنه على بُعد نقرة واحدة فقط!",
+        action: "انتقل إلى Mac App Store",
     },
     aria: {
         skipToContent: "تخطَّ إلى المحتوى",
